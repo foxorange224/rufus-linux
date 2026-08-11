@@ -32,7 +32,5 @@ Run the following commands in your terminal:
 mkdir build && cd build
 cmake ..
 cmake --build . -j$(nproc)
-
-mkdir build && cd build
-cmake ..
-cmake --build . -j$(nproc)
+```
+and use it in ./build/src/rufus, or use the GitHub release lol
