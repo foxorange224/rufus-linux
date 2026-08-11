@@ -1,0 +1,128 @@
+{
+	"BUILD_DIR" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/rufus_ui_autogen",
+	"CMAKE_BINARY_DIR" : "/home/foxorange224/Proyectos/rufus-linux",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/foxorange224/Proyectos/rufus-linux/src/ui",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/foxorange224/Proyectos/rufus-linux/src/ui",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : [ "/home/foxorange224/Proyectos/rufus-linux/src/ui/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "/home/foxorange224/Proyectos/rufus-linux",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/rufus_ui_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "rufus_ui_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/foxorange224/Proyectos/rufus-linux/src/ui/AboutDialog.h",
+			"MU",
+			"EWIEGA46WW/moc_AboutDialog.cpp",
+			null
+		],
+		[
+			"/home/foxorange224/Proyectos/rufus-linux/src/ui/LogDialog.h",
+			"MU",
+			"EWIEGA46WW/moc_LogDialog.cpp",
+			null
+		],
+		[
+			"/home/foxorange224/Proyectos/rufus-linux/src/ui/MainWindow.h",
+			"MU",
+			"EWIEGA46WW/moc_MainWindow.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/rufus_ui_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/rufus_ui_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CONCURRENT_LIB",
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_WIDGETS_LIB"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/foxorange224/Proyectos/rufus-linux/src/ui",
+		"/home/foxorange224/Proyectos/rufus-linux/src",
+		"/home/foxorange224/Proyectos/rufus-linux/src/core",
+		"/home/foxorange224/Proyectos/rufus-linux/src/worker",
+		"/home/foxorange224/Proyectos/rufus-linux/src",
+		"/home/foxorange224/Proyectos/rufus-linux/src/backend",
+		"/home/foxorange224/Proyectos/rufus-linux/src",
+		"/usr/include/qt6/QtCore",
+		"/usr/include/qt6",
+		"/usr/lib/qt6/mkspecs/linux-g++",
+		"/usr/include/qt6/QtWidgets",
+		"/usr/include/qt6/QtGui",
+		"/usr/include/qt6/QtConcurrent",
+		"/usr/include",
+		"/usr/include/c++/16",
+		"/usr/include/c++/16/x86_64-pc-linux-gnu",
+		"/usr/include/c++/16/backward",
+		"/usr/lib/gcc/x86_64-pc-linux-gnu/16/include",
+		"/usr/local/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=gnu++17",
+		"-w",
+		"-dM",
+		"-E",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/rufus_ui_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 2,
+	"PARSE_CACHE_FILE" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/CMakeFiles/rufus_ui_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt6/moc",
+	"QT_UIC_EXECUTABLE" : "/usr/lib/qt6/uic",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 11,
+	"SETTINGS_FILE" : "/home/foxorange224/Proyectos/rufus-linux/src/ui/CMakeFiles/rufus_ui_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/foxorange224/Proyectos/rufus-linux/src/ui/AboutDialog.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/foxorange224/Proyectos/rufus-linux/src/ui/LogDialog.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/foxorange224/Proyectos/rufus-linux/src/ui/MainWindow.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

@@ -1,0 +1,2 @@
+/usr/bin/ar qc librufus_utils.a CMakeFiles/rufus_utils.dir/rufus_utils_autogen/mocs_compilation.cpp.o CMakeFiles/rufus_utils.dir/Localization.cpp.o CMakeFiles/rufus_utils.dir/Logger.cpp.o CMakeFiles/rufus_utils.dir/MsgBox.cpp.o CMakeFiles/rufus_utils.dir/Settings.cpp.o
+/usr/bin/ranlib librufus_utils.a

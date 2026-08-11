@@ -1,0 +1,2 @@
+/usr/bin/ar qc librufus_ui.a CMakeFiles/rufus_ui.dir/rufus_ui_autogen/mocs_compilation.cpp.o CMakeFiles/rufus_ui.dir/MainWindow.cpp.o CMakeFiles/rufus_ui.dir/AboutDialog.cpp.o CMakeFiles/rufus_ui.dir/LogDialog.cpp.o
+/usr/bin/ranlib librufus_ui.a

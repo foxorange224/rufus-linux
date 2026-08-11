@@ -1,0 +1,2 @@
+/usr/bin/ar qc librufus_core.a CMakeFiles/rufus_core.dir/rufus_core_autogen/mocs_compilation.cpp.o CMakeFiles/rufus_core.dir/ImageHandler.cpp.o CMakeFiles/rufus_core.dir/Hash.cpp.o CMakeFiles/rufus_core.dir/BadBlocks.cpp.o
+/usr/bin/ranlib librufus_core.a
