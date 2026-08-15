@@ -56,7 +56,7 @@ private slots:
     void onRefreshDevices();
     void onDeviceChanged(int index);
     void onImageChanged(const QString &path);
-    void onFormatFinished(bool success, const QString &message);
+    void onFormatFinished(bool success, const QString &message, bool fakeFlash = false);
     void onProgressChanged(int percent);
     void onDeviceProgress(qint64 current, qint64 total);
     void onLogMessage(const QString &message, int type);

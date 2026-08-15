@@ -30,6 +30,7 @@
 #include <QStyleFactory>
 #include <QFileInfo>
 #include <QProcess>
+#include <QStandardPaths>
 #include <QRadioButton>
 #include <QStackedWidget>
 #include <QDialogButtonBox>
@@ -208,6 +209,25 @@ static QString selectedImagePath() { return g_selectedImagePath; }
 static void setSelectedImagePath(const QString &p) { g_selectedImagePath = p; }
 static QString archivePath() { return g_archivePath; }
 static void setArchivePath(const QString &p) { g_archivePath = p; }
+
+// Mirrors FormatWorker::resolveDataFile(): data files (grldr,
+// uefi-ntfs.img, ...) are searched next to the binary and in the
+// standard share directories, so the pre-flight checks can tell whether
+// a download would be needed for grub4dos/UEFI:NTFS.
+static QString findDataFile(const QString &name) {
+    const QStringList dirs = {
+        QCoreApplication::applicationDirPath(),
+        QCoreApplication::applicationDirPath() + QStringLiteral("/../share/rufus"),
+        QStringLiteral("/usr/local/share/rufus"),
+        QStringLiteral("/usr/share/rufus"),
+    };
+    for (const QString &d : dirs) {
+        const QString p = d + QLatin1Char('/') + name;
+        if (QFileInfo::exists(p))
+            return p;
+    }
+    return {};
+}
 
 // ─── Section header widget (title + horizontal divider line) ────────
 // Mirrors the original Rufus look: a bold title followed by a line that
@@ -1321,6 +1341,83 @@ bool MainWindow::runBootChecks() {
         }
     }
 
+    // Check: the device is about to be overwritten — if it is still in
+    // use (open files, mounted partitions), ask the user before continuing.
+    if (DeviceManager::isDeviceBusy(dev.path)) {
+        QMessageBox::StandardButton ret = MsgBox::warning(this, tr("Warning"),
+            tr("The target device is in use by another application.\n"
+               "Continuing may fail or corrupt data.\n\n"
+               "Continue anyway?"),
+            QMessageBox::Yes | QMessageBox::No);
+        if (ret != QMessageBox::Yes) return false;
+    }
+
+    // Pre-flight: verify that the external tools required by the selected
+    // options are installed, so the operation fails with a clear message
+    // before touching the device instead of midway with a cryptic one.
+    if (fmtApplicable) {
+        FileSystem fs = static_cast<FileSystem>(m_fsCombo->currentData().toInt());
+        QString tool;
+        switch (fs) {
+        case FileSystem::FAT16:
+        case FileSystem::FAT32: tool = QStringLiteral("mkfs.fat"); break;
+        case FileSystem::NTFS:  tool = QStringLiteral("mkfs.ntfs"); break;
+        case FileSystem::exFAT: tool = QStringLiteral("mkfs.exfat"); break;
+        case FileSystem::ext2:  tool = QStringLiteral("mkfs.ext2"); break;
+        case FileSystem::ext3:  tool = QStringLiteral("mkfs.ext3"); break;
+        case FileSystem::ext4:  tool = QStringLiteral("mkfs.ext4"); break;
+        case FileSystem::btrfs: tool = QStringLiteral("mkfs.btrfs"); break;
+        case FileSystem::XFS:   tool = QStringLiteral("mkfs.xfs"); break;
+        case FileSystem::F2FS:  tool = QStringLiteral("mkfs.f2fs"); break;
+        default: break;
+        }
+        if (!tool.isEmpty() && QStandardPaths::findExecutable(tool).isEmpty()) {
+            MsgBox::critical(this, tr("Error"),
+                tr("%1 is not installed on this system.\n"
+                   "Please install the '%2' package and try again.")
+                .arg(tool, tool));
+            return false;
+        }
+        if (!archivePath().isEmpty() &&
+            QStandardPaths::findExecutable(QStringLiteral("7z")).isEmpty()) {
+            MsgBox::critical(this, tr("Error"),
+                tr("7z is not installed on this system.\n"
+                   "It is needed to extract the additional file.\n"
+                   "Please install the 'p7zip' package and try again."));
+            return false;
+        }
+    }
+
+    // Bootloader tools: only when a bootloader is actually installed onto
+    // the drive (raw DD images and plain ISO copies don't need them).
+    if (fmtApplicable && bootType != static_cast<int>(BootType::Image)) {
+        QString bootloader = m_bootloaderCombo->currentData().toString();
+        if (bootType == static_cast<int>(BootType::UefiNtfs))
+            bootloader = QStringLiteral("uefintfs");
+        QString tool;
+        if (bootloader == QStringLiteral("syslinux") ||
+            bootloader == QStringLiteral("freedos")) {
+            tool = QStringLiteral("syslinux");
+        } else if (bootloader == QStringLiteral("grub2")) {
+            tool = QStringLiteral("grub-install");
+        } else if (bootloader == QStringLiteral("grub4dos") ||
+                   bootloader == QStringLiteral("uefintfs")) {
+            // These can download their missing files, but only if wget
+            // exists; otherwise they would fail in the middle of the run.
+            const QString file = (bootloader == QStringLiteral("grub4dos"))
+                ? QStringLiteral("grldr") : QStringLiteral("uefi-ntfs.img");
+            if (findDataFile(file).isEmpty())
+                tool = QStringLiteral("wget");
+        }
+        if (!tool.isEmpty() && QStandardPaths::findExecutable(tool).isEmpty()) {
+            MsgBox::critical(this, tr("Error"),
+                tr("%1 is not installed on this system.\n"
+                   "Please install the '%2' package and try again.")
+                .arg(tool, tool));
+            return false;
+        }
+    }
+
     return true;
 }
 
@@ -1744,7 +1841,7 @@ void MainWindow::onHashFinished() {
     MsgBox::information(this, tr("Image Hashes"), result);
 }
 
-void MainWindow::onFormatFinished(bool success, const QString &message) {
+void MainWindow::onFormatFinished(bool success, const QString &message, bool fakeFlash) {
     m_isRunning = false;
     m_autoRefreshTimer->start();
     setControlsEnabled(true);
@@ -1805,6 +1902,13 @@ void MainWindow::onFormatFinished(bool success, const QString &message) {
         // No success popup and no orphan status message: like original
         // Rufus, success is communicated silently by the filled progress
         // bar showing "PREPARED".
+        if (fakeFlash) {
+            MsgBox::warning(this, tr("Warning"),
+                tr("This device appears to be a fake flash drive:\n"
+                   "it reports more storage capacity than it actually has.\n"
+                   "Data written beyond the real capacity will be lost.\n"
+                   "Use a genuine drive from a reputable brand."));
+        }
     } else if (message.contains("cancelled", Qt::CaseInsensitive)) {
         MsgBox::information(this, tr("Cancelled"), message);
     } else {

@@ -312,6 +312,12 @@ static int cliWrite(const QString &imagePath, const QString &bootOpt,
             "Device '%1' is read only.").arg(dev.path)));
         return 1;
     }
+    if (dev.isSystem) {
+        fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Device '%1' is the system disk and will not be overwritten.")
+            .arg(dev.path)));
+        return 1;
+    }
 
     ImageInfo info = ImageHandler::detect(imagePath);
     const bool rawDiskImage = info.isDDOnly() || info.isRawDiskImage();
@@ -366,8 +372,13 @@ static int cliWrite(const QString &imagePath, const QString &bootOpt,
     FormatWorker worker;
     worker.setConfig(config);
     QObject::connect(&worker, &FormatWorker::logMessage,
-        [](const QString &msg, int) {
-            printf("%s\n", qPrintable(msg));
+        [](const QString &msg, int type) {
+            // Warnings (type 2) go to stderr so scripts can separate
+            // them from the normal progress output on stdout.
+            if (type == 2)
+                fprintf(stderr, "%s\n", qPrintable(msg));
+            else
+                printf("%s\n", qPrintable(msg));
             fflush(stdout);
         });
     QObject::connect(&worker, &FormatWorker::statusChanged,

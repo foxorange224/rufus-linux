@@ -175,7 +175,8 @@ public:
     static bool extractIso(const QString &isoPath, const QString &destPath,
                            std::function<void(int)> percentCallback,
                            std::function<bool()> isCancelled = nullptr,
-                           std::function<void(const QString &)> fileCopied = nullptr);
+                           std::function<void(const QString &)> fileCopied = nullptr,
+                           QStringList *missingTools = nullptr);
     static bool extractCompressed(const QString &archivePath, const QString &destPath,
                                   std::function<void(int)> percentCallback,
                                   std::function<void(const QString &)> fileCopied = nullptr);

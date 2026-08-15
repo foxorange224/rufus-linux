@@ -85,7 +85,7 @@ signals:
     void progressText(const QString &text);
     void logMessage(const QString &message, int type = 0);
     void deviceProgress(qint64 current, qint64 total);
-    void finished(bool success, const QString &message);
+    void finished(bool success, const QString &message, bool fakeFlash = false);
     void statusChanged(const QString &status);
     // Detail line rendered in the window status bar while the operation
     // runs ("Usando la imagen: arch.iso", "Extrayendo: <ruta>/<archivo>",
@@ -107,7 +107,7 @@ private:
     bool createRufusPartitions();
     bool formatMainPartition();
     bool formatPersistencePartition();
-    bool mountAndCopyFiles();
+    bool mountAndCopyFiles(QString *failureReason = nullptr);
     bool verifyWrite();
     bool applyUnattendCustomization(const QString &mountPoint);
     bool writeSbr();
@@ -131,6 +131,9 @@ private:
     int m_totalSteps = 10;
     int m_lastProgress = 0;
     bool m_hasImage = false;
+    // Set when the fake-flash (speed) check flags the device; the GUI
+    // shows a warning dialog when the operation finishes.
+    bool m_fakeFlashDetected = false;
     // Progress window occupied by the ISO extraction phase (computed in
     // run(), used by mountAndCopyFiles()).
     int m_copyStart = 55;

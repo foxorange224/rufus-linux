@@ -1209,7 +1209,8 @@ ImageInfo ImageHandler::detect(const QString &path) {
 bool ImageHandler::extractIso(const QString &isoPath, const QString &destPath,
                               std::function<void(int)> percentCallback,
                               std::function<bool()> isCancelled,
-                              std::function<void(const QString &)> fileCopied) {
+                              std::function<void(const QString &)> fileCopied,
+                              QStringList *missingTools) {
     QDir().mkpath(destPath);
 
     // Try fuseiso first
@@ -1290,11 +1291,16 @@ bool ImageHandler::extractIso(const QString &isoPath, const QString &destPath,
                 return false;
             if (rsync.exitStatus() == QProcess::NormalExit && rsync.exitCode() == 0)
                 return true;
+        } else {
+            if (missingTools && !missingToolMessage(rsync, "rsync").isEmpty())
+                missingTools->append(QStringLiteral("rsync"));
         }
         QProcess fusermount;
         fusermount.start("fusermount", {"-u", mp});
         finishProcess(fusermount, 10000);
     }
+    if (missingTools && !missingToolMessage(mountProc, "fuseiso").isEmpty())
+        missingTools->append(QStringLiteral("fuseiso"));
 
     // Try 7z
     {
@@ -1324,6 +1330,8 @@ bool ImageHandler::extractIso(const QString &isoPath, const QString &destPath,
             }
             proc.readAllStandardOutput();
             if (proc.exitCode() == 0) return true;
+        } else if (missingTools && !missingToolMessage(proc, "7z").isEmpty()) {
+            missingTools->append(QStringLiteral("7z"));
         }
     }
 
@@ -1334,6 +1342,8 @@ bool ImageHandler::extractIso(const QString &isoPath, const QString &destPath,
                                 "-extract", "/", destPath});
         if (proc.waitForFinished(120000) && proc.exitCode() == 0)
             return true;
+        if (missingTools && !missingToolMessage(proc, "xorriso").isEmpty())
+            missingTools->append(QStringLiteral("xorriso"));
     }
 
     // Final fallback: mount -o loop
@@ -1351,6 +1361,8 @@ bool ImageHandler::extractIso(const QString &isoPath, const QString &destPath,
             finishProcess(umount, 10000);
             return ok;
         }
+        if (missingTools && !missingToolMessage(sudoMount, "mount").isEmpty())
+            missingTools->append(QStringLiteral("mount"));
     }
 
     return false;

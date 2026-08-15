@@ -25,6 +25,17 @@ inline void finishProcess(QProcess &p, int timeoutMs = 30000) {
     }
 }
 
+// Returns a user-facing message when the process could not be started
+// because the tool is not installed (e.g. "mkfs.fat is not installed on
+// this system"), or an empty string when the process actually ran (even
+// if it failed or timed out). Callers should check this before claiming
+// a timeout, otherwise a missing tool is reported as "timed out".
+inline QString missingToolMessage(const QProcess &p, const QString &toolName) {
+    if (p.error() == QProcess::FailedToStart)
+        return QStringLiteral("%1 is not installed on this system").arg(toolName);
+    return {};
+}
+
 // Same as above, but additionally kills the child as soon as the
 // isCancelled predicate turns true, so long-running steps (mkfs,
 // bootloader installs, downloads, ...) stop promptly when the user

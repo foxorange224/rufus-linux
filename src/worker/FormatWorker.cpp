@@ -16,6 +16,7 @@
 #include <QCoreApplication>
 #include <QCryptographicHash>
 #include <QStandardPaths>
+#include <QRegularExpression>
 
 // Downloadable boot files (grldr, grldr.mbr, uefi-ntfs.img) must never be
 // written next to the binary (e.g. /usr/local/bin is not guaranteed writable
@@ -293,7 +294,7 @@ void FormatWorker::run() {
         message = msg;
         emit logMessage(msg, 1);
         setProgress(100);
-        emit finished(false, msg);
+        emit finished(false, msg, m_fakeFlashDetected);
     };
 
     auto done = [&]() {
@@ -301,7 +302,7 @@ void FormatWorker::run() {
             .arg(totalTimer.elapsed() / 1000.0, 0, 'f', 1);
         emit logMessage(message, 0);
         setProgress(100);
-        emit finished(true, message);
+        emit finished(true, message, m_fakeFlashDetected);
     };
 
     emit logMessage(QStringLiteral("Rufus operation started"), 0);
@@ -325,7 +326,12 @@ void FormatWorker::run() {
 
     // Unmount all partitions on the device
     emit statusChanged(tr("Unmounting partitions..."));
-    DeviceManager::unmountPartitions(m_config.targetDevice.path);
+    if (!DeviceManager::unmountPartitions(m_config.targetDevice.path)) {
+        emit logMessage(QStringLiteral(
+            "WARNING: could not unmount one or more partitions of %1; "
+            "the device may be in use by another application")
+            .arg(m_config.targetDevice.path), 2);
+    }
 
     if (isCancelled()) { fail(QStringLiteral("Operation cancelled by user.")); return; }
 
@@ -349,6 +355,7 @@ void FormatWorker::run() {
             m_config.targetDevice.path, m_config.targetDevice.size,
             [this](int p) { setProgress(m_hasImage ? p / 20 : p / 10); },
             [this]() { return isCancelled(); });
+        m_fakeFlashDetected = fake;
         if (fake)
             emit logMessage(QStringLiteral("WARNING: Device appears to be fake/flash!"), 2);
     }
@@ -468,10 +475,14 @@ void FormatWorker::run() {
     setProgress(kMbr);
 
     // Mount, install bootloader (before file copy), copy files, remount after
-    if (!mountAndCopyFiles()) {
-        if (isCancelled()) { fail(QStringLiteral("Operation cancelled by user.")); return; }
-        fail(QStringLiteral("Failed to copy files"));
-        return;
+    {
+        QString failureReason;
+        if (!mountAndCopyFiles(&failureReason)) {
+            if (isCancelled()) { fail(QStringLiteral("Operation cancelled by user.")); return; }
+            fail(failureReason.isEmpty() ? QStringLiteral("Failed to copy files")
+                                         : failureReason);
+            return;
+        }
     }
     setProgress(m_copyEnd);
 
@@ -694,12 +705,14 @@ bool FormatWorker::formatPersistencePartition() {
 }
 
 // ─── Mount and copy files ──────────────────────────────────────────
-bool FormatWorker::mountAndCopyFiles() {
+bool FormatWorker::mountAndCopyFiles(QString *failureReason) {
     emit statusChanged(tr("Mounting and copying files..."));
 
     QString partPath = mainPartitionPath();
     if (!waitForPartition(partPath, 10000)) {
         emit logMessage(QStringLiteral("Partition not available"), 1);
+        if (failureReason)
+            *failureReason = tr("The partition could not be created or detected.");
         return false;
     }
 
@@ -707,6 +720,8 @@ bool FormatWorker::mountAndCopyFiles() {
     QString mountPoint = Mounter::createTempMountPoint();
     if (mountPoint.isEmpty()) {
         emit logMessage(QStringLiteral("Failed to create mount point"), 1);
+        if (failureReason)
+            *failureReason = tr("Could not create a temporary mount point.");
         return false;
     }
 
@@ -726,6 +741,8 @@ bool FormatWorker::mountAndCopyFiles() {
     if (!Mounter::mount(partPath, mountPoint, fsType)) {
         emit logMessage(QStringLiteral("Failed to mount partition"), 1);
         Mounter::removeMountPoint(mountPoint);
+        if (failureReason)
+            *failureReason = tr("Could not mount the formatted partition.");
         return false;
     }
 
@@ -764,6 +781,8 @@ bool FormatWorker::mountAndCopyFiles() {
             if (!Mounter::mount(partPath, mountPoint, fsType)) {
                 cleanup();
                 emit logMessage(QStringLiteral("Failed to remount partition"), 1);
+                if (failureReason)
+                    *failureReason = tr("Could not remount the partition after installing the bootloader.");
                 return false;
             }
         }
@@ -835,12 +854,20 @@ bool FormatWorker::mountAndCopyFiles() {
                 }
                 loopUnmount(isoMp);
             } else {
+                QStringList missingTools;
                 if (!ImageHandler::extractIso(m_config.imagePath, mountPoint,
                     [&extractPercent](int pct) { extractPercent(pct); },
                     [this]() { return isCancelled(); },
-                    onFile)) {
+                    onFile, &missingTools)) {
                     cleanup();
                     emit logMessage(QStringLiteral("ISO extraction failed"), 1);
+                    if (failureReason) {
+                        if (!missingTools.isEmpty())
+                            *failureReason = tr("Could not extract the ISO: %1 is not installed.")
+                                .arg(missingTools.join(QStringLiteral(", ")));
+                        else
+                            *failureReason = tr("Could not extract the ISO.");
+                    }
                     return false;
                 }
             }
@@ -1003,11 +1030,18 @@ bool FormatWorker::mountAndCopyFiles() {
             emit logMessage(tr("Extracting: %1").arg(rel), 0);
             emit statusBarMessage(tr("Extracting: %1").arg(rel));
         };
-        ImageHandler::extractCompressed(m_config.archivePath, mountPoint,
+if (!ImageHandler::extractCompressed(m_config.archivePath, mountPoint,
             [this](int pct) {
                 setProgress(qBound(85, 85 + 10 * qBound(0, pct, 100) / 100, 95));
             },
-            onFile);
+            onFile)) {
+            cleanup();
+            emit logMessage(QStringLiteral("Additional file extraction failed"), 1);
+            if (failureReason)
+                *failureReason = tr("Could not extract the additional file.\n"
+                                    "Make sure 7z is installed and the archive is valid.");
+            return false;
+        }
     }
 
     cleanup();
@@ -1574,6 +1608,21 @@ bool FormatWorker::matchBootloaderVersion(const QString &mountPoint, const Image
         if (proc.waitForFinished(5000) && proc.exitCode() == 0) {
             QString verStr = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
             emit logMessage(QStringLiteral("System syslinux version: %1").arg(verStr), 0);
+
+            // Warn when the system syslinux is older than the image's:
+            // the image's modules may not be compatible with it.
+            QRegularExpression re(QStringLiteral("(\\d+)\\.(\\d+)"));
+            QRegularExpressionMatch m = re.match(verStr);
+            if (m.hasMatch()) {
+                uint32_t sysVer = (m.captured(1).toUInt() << 8) |
+                                  (m.captured(2).toUInt() & 0xFF);
+                if (sysVer < imgVersion) {
+                    emit logMessage(QStringLiteral(
+                        "WARNING: system syslinux (%1) is older than the image's (%2); "
+                        "the bootloader may not work correctly")
+                        .arg(verStr, m_config.bootloaderVersionStr), 2);
+                }
+            }
         }
     }
 
@@ -1594,11 +1643,19 @@ bool FormatWorker::downloadBootloaderIfNeeded(const QString &mountPoint) {
             const QString dlDir = dataDir();
             wget.start("wget", {"-q", "-O", dlDir + "/grldr.zip",
                                  "https://github.com/chenall/grub4dos/releases/download/v0.4.6a/grub4dos-0.4.6a.zip"});
+            if (!missingToolMessage(wget, "wget").isEmpty()) {
+                emit logMessage(missingToolMessage(wget, "wget"), 1);
+                return false;
+            }
             if (!finishProcess(wget, 30000, [this]() { return isCancelled(); }) &&
                 wget.exitStatus() == QProcess::NormalExit && wget.exitCode() == 0) {
                 QProcess unzip;
                 unzip.start("unzip", {"-o", dlDir + "/grldr.zip",
                                        "grldr", "grldr.mbr", "-d", dlDir});
+                if (!missingToolMessage(unzip, "unzip").isEmpty()) {
+                    emit logMessage(missingToolMessage(unzip, "unzip"), 1);
+                    return false;
+                }
                 if (!finishProcess(unzip, 10000, [this]() { return isCancelled(); }) &&
                     unzip.exitStatus() == QProcess::NormalExit && unzip.exitCode() == 0) {
                     QFile::remove(dlDir + "/grldr.zip");
@@ -1622,11 +1679,19 @@ bool FormatWorker::downloadBootloaderIfNeeded(const QString &mountPoint) {
             const QString dlDir = dataDir();
             wget.start("wget", {"-q", "-O", dlDir + "/uefi-ntfs.zip",
                                  "https://github.com/pbatard/UEFI-NTFS/releases/latest/download/UEFI-NTFS.zip"});
+            if (!missingToolMessage(wget, "wget").isEmpty()) {
+                emit logMessage(missingToolMessage(wget, "wget"), 1);
+                return false;
+            }
             if (!finishProcess(wget, 30000, [this]() { return isCancelled(); }) &&
                 wget.exitStatus() == QProcess::NormalExit && wget.exitCode() == 0) {
                 QProcess unzip;
                 unzip.start("unzip", {"-o", dlDir + "/uefi-ntfs.zip",
                                        "uefi-ntfs.img", "-d", dlDir});
+                if (!missingToolMessage(unzip, "unzip").isEmpty()) {
+                    emit logMessage(missingToolMessage(unzip, "unzip"), 1);
+                    return false;
+                }
                 if (!finishProcess(unzip, 10000, [this]() { return isCancelled(); }) &&
                     unzip.exitStatus() == QProcess::NormalExit && unzip.exitCode() == 0) {
                     QFile::remove(dlDir + "/uefi-ntfs.zip");
@@ -1652,6 +1717,10 @@ bool FormatWorker::ntfsCheckDisk() {
     ntfsfix.start("ntfsfix", {partPath});
     if (finishProcess(ntfsfix, 30000, [this]() { return isCancelled(); })) {
         emit logMessage(QStringLiteral("ntfsfix cancelled"), 2);
+        return false;
+    }
+    if (!missingToolMessage(ntfsfix, "ntfsfix").isEmpty()) {
+        emit logMessage(missingToolMessage(ntfsfix, "ntfsfix"), 1);
         return false;
     }
     if (ntfsfix.exitStatus() != QProcess::NormalExit) {

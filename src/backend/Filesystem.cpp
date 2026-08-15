@@ -150,6 +150,10 @@ FormatResult Filesystem::formatVfat(const QString &partitionPath, FileSystem fs,
         result.cancelled = true;
         return result;
     }
+    if (!missingToolMessage(proc, "mkfs.fat").isEmpty()) {
+        result.errorMessage = missingToolMessage(proc, "mkfs.fat");
+        return result;
+    }
     if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "mkfs.fat timed out";
         return result;
@@ -192,6 +196,10 @@ FormatResult Filesystem::formatExt(const QString &partitionPath, FileSystem fs,
 
     if (finishProcess(proc, 60000, isCancelled)) {
         result.cancelled = true;
+        return result;
+    }
+    if (!missingToolMessage(proc, tool).isEmpty()) {
+        result.errorMessage = missingToolMessage(proc, tool);
         return result;
     }
     if (proc.exitStatus() != QProcess::NormalExit) {
@@ -242,6 +250,10 @@ FormatResult Filesystem::formatNtfs(const QString &partitionPath, const QString 
         result.cancelled = true;
         return result;
     }
+    if (!missingToolMessage(proc, "mkfs.ntfs").isEmpty()) {
+        result.errorMessage = missingToolMessage(proc, "mkfs.ntfs");
+        return result;
+    }
     if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "mkfs.ntfs timed out";
         return result;
@@ -286,6 +298,10 @@ FormatResult Filesystem::formatExfat(const QString &partitionPath, const QString
 
     if (finishProcess(proc, 30000, isCancelled)) {
         result.cancelled = true;
+        return result;
+    }
+    if (!missingToolMessage(proc, "mkfs.exfat").isEmpty()) {
+        result.errorMessage = missingToolMessage(proc, "mkfs.exfat");
         return result;
     }
     if (proc.exitStatus() != QProcess::NormalExit) {

@@ -72,6 +72,10 @@ BootloaderResult BootloaderInstaller::installSyslinux(const QString &devicePath,
     proc.start("syslinux", {"--install", mountPoint});
     if (finishProcess(proc, 30000, isCancelled))
         return result;   // cancelled: failed result, caller checks isCancelled
+    if (!missingToolMessage(proc, "syslinux").isEmpty()) {
+        result.errorMessage = missingToolMessage(proc, "syslinux");
+        return result;
+    }
     if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "syslinux --install timed out";
         return result;
@@ -138,6 +142,10 @@ BootloaderResult BootloaderInstaller::installGrub2(const QString &devicePath,
         proc.start("grub-install", args + QStringList{devicePath});
         if (finishProcess(proc, 60000, isCancelled))
             return result;   // cancelled
+        if (!missingToolMessage(proc, "grub-install").isEmpty()) {
+            result.errorMessage = missingToolMessage(proc, "grub-install");
+            return result;
+        }
         if (proc.exitStatus() != QProcess::NormalExit) {
             result.errorMessage = "grub-install (BIOS) timed out";
             return result;
@@ -170,6 +178,10 @@ BootloaderResult BootloaderInstaller::installGrub2(const QString &devicePath,
                     "--recheck", devicePath});
         if (finishProcess(proc, 60000, isCancelled))
             return result;   // cancelled
+        if (!missingToolMessage(proc, "grub-install").isEmpty()) {
+            result.errorMessage = missingToolMessage(proc, "grub-install");
+            return result;
+        }
         if (proc.exitStatus() != QProcess::NormalExit) {
             result.errorMessage = "grub-install (UEFI) timed out";
             return result;
@@ -389,6 +401,10 @@ BootloaderResult BootloaderInstaller::installFreeDos(const QString &devicePath,
     cp.start("cp", {"-r", freedosDir + "/.", mountPoint});
     if (finishProcess(cp, 30000, isCancelled))
         return result;   // cancelled
+    if (!missingToolMessage(cp, "cp").isEmpty()) {
+        result.errorMessage = missingToolMessage(cp, "cp");
+        return result;
+    }
     if (cp.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "Failed to copy FreeDOS files";
         return result;
