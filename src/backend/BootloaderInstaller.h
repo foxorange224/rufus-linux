@@ -16,10 +16,12 @@ class BootloaderInstaller {
 public:
     static BootloaderResult installSyslinux(const QString &devicePath,
                                             const QString &mountPoint,
-                                            std::function<void(int)> progressCallback = nullptr);
+                                            std::function<void(int)> progressCallback = nullptr,
+                                            std::function<bool()> isCancelled = nullptr);
     static BootloaderResult installGrub2(const QString &devicePath,
                                          const QString &mountPoint,
-                                         std::function<void(int)> progressCallback = nullptr);
+                                         std::function<void(int)> progressCallback = nullptr,
+                                         std::function<bool()> isCancelled = nullptr);
     static BootloaderResult installMbr(const QString &devicePath,
                                         std::function<void(int)> progressCallback = nullptr);
     static BootloaderResult writeMbrForBootType(const QString &devicePath,
@@ -30,7 +32,8 @@ public:
     static BootloaderResult writeGptProtectiveMbr(const QString &devicePath);
     static BootloaderResult installFreeDos(const QString &devicePath,
                                            const QString &mountPoint,
-                                           std::function<void(int)> progressCallback = nullptr);
+                                           std::function<void(int)> progressCallback = nullptr,
+                                           std::function<bool()> isCancelled = nullptr);
     static BootloaderResult installGrub4Dos(const QString &devicePath,
                                             const QString &mountPoint,
                                             std::function<void(int)> progressCallback = nullptr);

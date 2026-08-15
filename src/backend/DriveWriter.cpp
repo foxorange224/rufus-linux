@@ -36,7 +36,8 @@ static int openDeviceForRead(const QString &path) {
 
 WriteResult DriveWriter::writeImage(const QString &imagePath, const QString &devicePath,
                                     bool isCompressed,
-                                    std::function<void(qint64)> progressCallback) {
+                                    std::function<void(qint64)> progressCallback,
+                                    std::function<bool()> isCancelled) {
     if (isCompressed) {
         // Stream through decompressor: zcat/xzcat/etc
         WriteResult result;
@@ -51,7 +52,7 @@ WriteResult DriveWriter::writeImage(const QString &imagePath, const QString &dev
         else if (ext == "lzma")            cmd = {"lzcat", imagePath};
         else {
             // Unknown compression, try DD directly
-            return writeDD(imagePath, devicePath, progressCallback);
+            return writeDD(imagePath, devicePath, progressCallback, isCancelled);
         }
 
         // O_DIRECT requires 512-byte aligned buffers AND lengths. The
@@ -79,6 +80,12 @@ WriteResult DriveWriter::writeImage(const QString &imagePath, const QString &dev
         int writeErrors = 0;
 
         while (!dec.waitForFinished(100)) {
+            if (isCancelled && isCancelled()) {
+                dec.kill();
+                dec.waitForFinished(3000);
+                result.cancelled = true;
+                break;
+            }
             qint64 avail = dec.bytesAvailable();
             if (avail == 0) {
                 if (dec.state() == QProcess::NotRunning) break;
@@ -101,6 +108,17 @@ WriteResult DriveWriter::writeImage(const QString &imagePath, const QString &dev
                 totalWritten += written;
                 if (progressCallback) progressCallback(totalWritten);
             }
+        }
+
+        if (result.cancelled) {
+            // Drain nothing: the stream is being killed, so just make sure
+            // whatever was already written hits the device before closing.
+            std::free(buffer);
+            ::fsync(fd);
+            ::close(fd);
+            result.bytesWritten = totalWritten;
+            result.elapsedSeconds = timer.elapsed() / 1000.0;
+            return result;
         }
 
         // Read any remaining data
@@ -138,7 +156,8 @@ WriteResult DriveWriter::writeImage(const QString &imagePath, const QString &dev
 }
 
 WriteResult DriveWriter::writeDD(const QString &imagePath, const QString &devicePath,
-                                 std::function<void(qint64)> progressCallback) {
+                                 std::function<void(qint64)> progressCallback,
+                                 std::function<bool()> isCancelled) {
     WriteResult result;
 
     QFile image(imagePath);
@@ -183,6 +202,10 @@ WriteResult DriveWriter::writeDD(const QString &imagePath, const QString &device
     int writeErrors = 0;
 
     while (!image.atEnd()) {
+        if (isCancelled && isCancelled()) {
+            result.cancelled = true;
+            break;
+        }
         qint64 n = image.read(buffer, kBufSize);
         if (n <= 0) break;
 
@@ -222,13 +245,15 @@ WriteResult DriveWriter::writeDD(const QString &imagePath, const QString &device
     result.errors = writeErrors;
     if (writeErrors > 0)
         result.errorMessage = QStringLiteral("Write errors: %1").arg(writeErrors);
-    result.success = (writeErrors == 0 && totalWritten == result.totalBytes);
+    result.success = !result.cancelled && (writeErrors == 0 &&
+                                           totalWritten == result.totalBytes);
 
     return result;
 }
 
 WriteResult DriveWriter::writeZeros(const QString &devicePath, qint64 numBytes,
-                                    std::function<void(qint64)> progressCallback) {
+                                    std::function<void(qint64)> progressCallback,
+                                    std::function<bool()> isCancelled) {
     WriteResult result;
 
     int fd = openDeviceForWrite(devicePath);
@@ -251,6 +276,10 @@ WriteResult DriveWriter::writeZeros(const QString &devicePath, qint64 numBytes,
     qint64 totalWritten = 0;
 
     while (totalWritten < numBytes) {
+        if (isCancelled && isCancelled()) {
+            result.cancelled = true;
+            break;
+        }
         qint64 toWrite = qMin(kBufSize, numBytes - totalWritten);
         qint64 w = ::write(fd, buffer, toWrite);
         if (w <= 0) break;

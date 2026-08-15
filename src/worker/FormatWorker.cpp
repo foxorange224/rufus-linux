@@ -70,11 +70,13 @@ bool FormatWorker::waitForPartition(const QString &path, int timeoutMs) {
     QElapsedTimer t;
     t.start();
     while (t.elapsed() < timeoutMs) {
+        if (isCancelled())
+            return false;
         if (QFileInfo::exists(path))
             return true;
         QThread::msleep(100);
     }
-    return QFileInfo::exists(path);
+    return !isCancelled() && QFileInfo::exists(path);
 }
 
 ImageInfo FormatWorker::detectImage() const {
@@ -345,7 +347,8 @@ void FormatWorker::run() {
         emit statusChanged(tr("Checking for fake flash..."));
         bool fake = BadBlocks::detectFakeFlash(
             m_config.targetDevice.path, m_config.targetDevice.size,
-            [this](int p) { setProgress(m_hasImage ? p / 20 : p / 10); });
+            [this](int p) { setProgress(m_hasImage ? p / 20 : p / 10); },
+            [this]() { return isCancelled(); });
         if (fake)
             emit logMessage(QStringLiteral("WARNING: Device appears to be fake/flash!"), 2);
     }
@@ -504,8 +507,14 @@ bool FormatWorker::writeImageDD() {
 
     WriteResult writeResult = DriveWriter::writeImage(
         m_config.imagePath, m_config.targetDevice.path, isCompressed,
-        [this, totalBytes](qint64 n) { emit deviceProgress(n, totalBytes); });
+        [this, totalBytes](qint64 n) { emit deviceProgress(n, totalBytes); },
+        [this]() { return isCancelled(); });
 
+    if (writeResult.cancelled) {
+        emit logMessage(QStringLiteral("Write cancelled - device may be "
+                                       "partially written"), 2);
+        return false;
+    }
     if (!writeResult.success) {
         emit logMessage(QStringLiteral("Write failed: %1").arg(writeResult.errorMessage), 1);
         return false;
@@ -532,7 +541,11 @@ bool FormatWorker::checkBadBlocksPass() {
     BadBlockResult result = BadBlocks::check(
         m_config.targetDevice.path, 0, mode,
         [this](int p) { setProgress(p / 2); },
-        totalPasses);
+        totalPasses,
+        [this]() { return isCancelled(); });
+
+    if (result.cancelled)
+        return false;
 
     emit logMessage(result.summary, result.badSectors > 0 ? 2 : 0);
 
@@ -612,7 +625,13 @@ bool FormatWorker::formatMainPartition() {
 
     FormatResult result = Filesystem::format(partPath, m_config.filesystem,
                                               m_config.volumeLabel, m_config.quickFormat,
-                                              m_config.clusterSizeKB);
+                                              m_config.clusterSizeKB,
+                                              nullptr,
+                                              [this]() { return isCancelled(); });
+    if (result.cancelled) {
+        emit logMessage(QStringLiteral("Format cancelled"), 2);
+        return false;
+    }
     if (!result.success) {
         emit logMessage(QStringLiteral("Format failed: %1").arg(result.errorMessage), 1);
         return false;
@@ -644,7 +663,13 @@ bool FormatWorker::formatPersistencePartition() {
         .arg(persistenceLabel), 0);
 
     FormatResult result = Filesystem::format(partPath, FileSystem::ext4,
-                                              persistenceLabel, m_config.quickFormat);
+                                              persistenceLabel, m_config.quickFormat,
+                                              0, nullptr,
+                                              [this]() { return isCancelled(); });
+    if (result.cancelled) {
+        emit logMessage(QStringLiteral("Persistence format cancelled"), 2);
+        return false;
+    }
     if (!result.success) {
         emit logMessage(QStringLiteral("Persistence format failed: %1").arg(result.errorMessage), 1);
         return false;
@@ -1265,7 +1290,8 @@ bool FormatWorker::installBootloader(const QString &existingMountPoint) {
         // app uses for its NTFS "remount or you don't boot" step.
         Mounter::unmount(mountPoint);
         BootloaderResult r = BootloaderInstaller::installSyslinux(
-            m_config.targetDevice.path, mainPartitionPath(), nullptr);
+            m_config.targetDevice.path, mainPartitionPath(), nullptr,
+            [this]() { return isCancelled(); });
         result = r.success;
         bootMsg = r.errorMessage;
         if (!Mounter::mount(mainPartitionPath(), mountPoint, fsType)) {
@@ -1276,7 +1302,8 @@ bool FormatWorker::installBootloader(const QString &existingMountPoint) {
         }
     } else if (m_config.bootloaderType == "grub2") {
         BootloaderResult r = BootloaderInstaller::installGrub2(
-            m_config.targetDevice.path, mountPoint, nullptr);
+            m_config.targetDevice.path, mountPoint, nullptr,
+            [this]() { return isCancelled(); });
         result = r.success;
         bootMsg = r.errorMessage;
     } else if (m_config.bootloaderType == "mbr") {
@@ -1567,16 +1594,20 @@ bool FormatWorker::downloadBootloaderIfNeeded(const QString &mountPoint) {
             const QString dlDir = dataDir();
             wget.start("wget", {"-q", "-O", dlDir + "/grldr.zip",
                                  "https://github.com/chenall/grub4dos/releases/download/v0.4.6a/grub4dos-0.4.6a.zip"});
-            if (wget.waitForFinished(30000) && wget.exitCode() == 0) {
+            if (!finishProcess(wget, 30000, [this]() { return isCancelled(); }) &&
+                wget.exitStatus() == QProcess::NormalExit && wget.exitCode() == 0) {
                 QProcess unzip;
                 unzip.start("unzip", {"-o", dlDir + "/grldr.zip",
                                        "grldr", "grldr.mbr", "-d", dlDir});
-                if (unzip.waitForFinished(10000) && unzip.exitCode() == 0) {
+                if (!finishProcess(unzip, 10000, [this]() { return isCancelled(); }) &&
+                    unzip.exitStatus() == QProcess::NormalExit && unzip.exitCode() == 0) {
                     QFile::remove(dlDir + "/grldr.zip");
                     emit logMessage(QStringLiteral("GRUB4DOS downloaded successfully"), 0);
                     return true;
                 }
             }
+            if (isCancelled())
+                return false;
             emit logMessage(QStringLiteral("Failed to download GRUB4DOS. Will use bundled files."), 2);
             return false;
         }
@@ -1591,16 +1622,20 @@ bool FormatWorker::downloadBootloaderIfNeeded(const QString &mountPoint) {
             const QString dlDir = dataDir();
             wget.start("wget", {"-q", "-O", dlDir + "/uefi-ntfs.zip",
                                  "https://github.com/pbatard/UEFI-NTFS/releases/latest/download/UEFI-NTFS.zip"});
-            if (wget.waitForFinished(30000) && wget.exitCode() == 0) {
+            if (!finishProcess(wget, 30000, [this]() { return isCancelled(); }) &&
+                wget.exitStatus() == QProcess::NormalExit && wget.exitCode() == 0) {
                 QProcess unzip;
                 unzip.start("unzip", {"-o", dlDir + "/uefi-ntfs.zip",
                                        "uefi-ntfs.img", "-d", dlDir});
-                if (unzip.waitForFinished(10000) && unzip.exitCode() == 0) {
+                if (!finishProcess(unzip, 10000, [this]() { return isCancelled(); }) &&
+                    unzip.exitStatus() == QProcess::NormalExit && unzip.exitCode() == 0) {
                     QFile::remove(dlDir + "/uefi-ntfs.zip");
                     emit logMessage(QStringLiteral("UEFI:NTFS downloaded successfully"), 0);
                     return true;
                 }
             }
+            if (isCancelled())
+                return false;
             emit logMessage(QStringLiteral("Failed to download UEFI:NTFS"), 2);
             return false;
         }
@@ -1615,7 +1650,11 @@ bool FormatWorker::ntfsCheckDisk() {
     emit logMessage(QStringLiteral("Running ntfsfix on %1").arg(partPath), 0);
     QProcess ntfsfix;
     ntfsfix.start("ntfsfix", {partPath});
-    if (!ntfsfix.waitForFinished(30000)) {
+    if (finishProcess(ntfsfix, 30000, [this]() { return isCancelled(); })) {
+        emit logMessage(QStringLiteral("ntfsfix cancelled"), 2);
+        return false;
+    }
+    if (ntfsfix.exitStatus() != QProcess::NormalExit) {
         emit logMessage(QStringLiteral("ntfsfix timed out"), 1);
         return false;
     }

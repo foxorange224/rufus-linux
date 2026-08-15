@@ -56,7 +56,8 @@ static bool writeMbr(const QString &devicePath, const QString &mbrFile) {
 
 BootloaderResult BootloaderInstaller::installSyslinux(const QString &devicePath,
                                                        const QString &mountPoint,
-                                                       std::function<void(int)> progressCallback) {
+                                                       std::function<void(int)> progressCallback,
+                                                       std::function<bool()> isCancelled) {
     BootloaderResult result;
     result.type = "syslinux";
 
@@ -69,7 +70,9 @@ BootloaderResult BootloaderInstaller::installSyslinux(const QString &devicePath,
 
     QProcess proc;
     proc.start("syslinux", {"--install", mountPoint});
-    if (!proc.waitForFinished(30000)) {
+    if (finishProcess(proc, 30000, isCancelled))
+        return result;   // cancelled: failed result, caller checks isCancelled
+    if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "syslinux --install timed out";
         return result;
     }
@@ -103,7 +106,8 @@ BootloaderResult BootloaderInstaller::installSyslinux(const QString &devicePath,
 
 BootloaderResult BootloaderInstaller::installGrub2(const QString &devicePath,
                                                      const QString &mountPoint,
-                                                     std::function<void(int)> progressCallback) {
+                                                     std::function<void(int)> progressCallback,
+                                                     std::function<bool()> isCancelled) {
     BootloaderResult result;
     result.type = "grub2";
 
@@ -132,7 +136,9 @@ BootloaderResult BootloaderInstaller::installGrub2(const QString &devicePath,
 
         QProcess proc;
         proc.start("grub-install", args + QStringList{devicePath});
-        if (!proc.waitForFinished(60000)) {
+        if (finishProcess(proc, 60000, isCancelled))
+            return result;   // cancelled
+        if (proc.exitStatus() != QProcess::NormalExit) {
             result.errorMessage = "grub-install (BIOS) timed out";
             return result;
         }
@@ -142,7 +148,8 @@ BootloaderResult BootloaderInstaller::installGrub2(const QString &devicePath,
             proc.start("grub-install",
                        {"--target=i386-pc", "--boot-directory=" + bootDir,
                         devicePath});
-            proc.waitForFinished(60000);
+            if (finishProcess(proc, 60000, isCancelled))
+                return result;   // cancelled
         }
 
         if (proc.exitCode() != 0) {
@@ -161,7 +168,9 @@ BootloaderResult BootloaderInstaller::installGrub2(const QString &devicePath,
                    {"--target=x86_64-efi", "--efi-directory=" + mountPoint,
                     "--removable", "--boot-directory=" + bootDir,
                     "--recheck", devicePath});
-        if (!proc.waitForFinished(60000)) {
+        if (finishProcess(proc, 60000, isCancelled))
+            return result;   // cancelled
+        if (proc.exitStatus() != QProcess::NormalExit) {
             result.errorMessage = "grub-install (UEFI) timed out";
             return result;
         }
@@ -340,7 +349,8 @@ BootloaderResult BootloaderInstaller::writeMbrForBootType(const QString &deviceP
 
 BootloaderResult BootloaderInstaller::installFreeDos(const QString &devicePath,
                                                       const QString &mountPoint,
-                                                      std::function<void(int)> progressCallback) {
+                                                      std::function<void(int)> progressCallback,
+                                                      std::function<bool()> isCancelled) {
     BootloaderResult result;
     result.type = "freedos";
 
@@ -377,13 +387,15 @@ BootloaderResult BootloaderInstaller::installFreeDos(const QString &devicePath,
     // Copy FreeDOS files
     QProcess cp;
     cp.start("cp", {"-r", freedosDir + "/.", mountPoint});
-    if (!cp.waitForFinished(30000)) {
+    if (finishProcess(cp, 30000, isCancelled))
+        return result;   // cancelled
+    if (cp.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "Failed to copy FreeDOS files";
         return result;
     }
 
     // Install syslinux for boot
-    BootloaderResult syslinuxResult = installSyslinux(devicePath, mountPoint, nullptr);
+    BootloaderResult syslinuxResult = installSyslinux(devicePath, mountPoint, nullptr, isCancelled);
     if (!syslinuxResult.success) {
         result.errorMessage = syslinuxResult.errorMessage;
         return result;

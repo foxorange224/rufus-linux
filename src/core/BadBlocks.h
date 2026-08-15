@@ -12,6 +12,7 @@ struct BadBlockResult {
     qint64 slowSectors = 0;
     QList<qint64> badSectorList;
     bool isFakeFlash = false;
+    bool cancelled = false;
     double elapsedSeconds = 0.0;
     QString summary;
 };
@@ -27,10 +28,12 @@ public:
     static BadBlockResult check(const QString &devicePath, qint64 numSectors = 0,
                                 Mode mode = Mode::Read,
                                 std::function<void(int)> progressCallback = nullptr,
-                                int numPasses = 1);
+                                int numPasses = 1,
+                                std::function<bool()> isCancelled = nullptr);
 
     static bool detectFakeFlash(const QString &devicePath, qint64 reportedSize,
-                                std::function<void(int)> progressCallback = nullptr);
+                                std::function<void(int)> progressCallback = nullptr,
+                                std::function<bool()> isCancelled = nullptr);
 
     static QString formatResult(const BadBlockResult &result);
 };

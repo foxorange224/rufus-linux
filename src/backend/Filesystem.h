@@ -5,6 +5,7 @@
 
 struct FormatResult {
     bool success = false;
+    bool cancelled = false;
     QString fsType;
     QString label;
     double elapsedSeconds = 0.0;
@@ -18,7 +19,8 @@ public:
                                const QString &label = QString(),
                                bool quick = true,
                                int clusterSizeKB = 0,
-                               std::function<void(int)> progressCallback = nullptr);
+                               std::function<void(int)> progressCallback = nullptr,
+                               std::function<bool()> isCancelled = nullptr);
 
     static bool checkFilesystem(const QString &partitionPath, FileSystem fs);
 
@@ -28,11 +30,15 @@ public:
 
 private:
     static FormatResult formatVfat(const QString &partitionPath, FileSystem fs,
-                                   const QString &label, bool quick, int clusterSizeKB);
+                                   const QString &label, bool quick, int clusterSizeKB,
+                                   std::function<bool()> isCancelled = nullptr);
     static FormatResult formatExt(const QString &partitionPath, FileSystem fs,
-                                  const QString &label, bool quick, int clusterSizeKB);
+                                  const QString &label, bool quick, int clusterSizeKB,
+                                  std::function<bool()> isCancelled = nullptr);
     static FormatResult formatNtfs(const QString &partitionPath, const QString &label,
-                                   bool quick, int clusterSizeKB);
+                                   bool quick, int clusterSizeKB,
+                                   std::function<bool()> isCancelled = nullptr);
     static FormatResult formatExfat(const QString &partitionPath, const QString &label,
-                                    bool quick, int clusterSizeKB);
+                                    bool quick, int clusterSizeKB,
+                                    std::function<bool()> isCancelled = nullptr);
 };

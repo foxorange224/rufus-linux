@@ -1,4 +1,5 @@
 #include "Filesystem.h"
+#include "core/QProc.h"
 #include <QProcess>
 #include <QElapsedTimer>
 #include <QFileInfo>
@@ -23,21 +24,22 @@ static qint64 blockDeviceSize(const QString &path) {
 
 FormatResult Filesystem::format(const QString &partitionPath, FileSystem fs,
                                 const QString &label, bool quick, int clusterSizeKB,
-                                std::function<void(int)> progressCallback) {
+                                std::function<void(int)> progressCallback,
+                                std::function<bool()> isCancelled) {
     switch (fs) {
     case FileSystem::FAT16:
     case FileSystem::FAT32:
-        return formatVfat(partitionPath, fs, label, quick, clusterSizeKB);
+        return formatVfat(partitionPath, fs, label, quick, clusterSizeKB, isCancelled);
     case FileSystem::ext2:
     case FileSystem::ext3:
     case FileSystem::ext4:
-        return formatExt(partitionPath, fs, label, quick, clusterSizeKB);
+        return formatExt(partitionPath, fs, label, quick, clusterSizeKB, isCancelled);
     case FileSystem::NTFS:
-        return formatNtfs(partitionPath, label, quick, clusterSizeKB);
+        return formatNtfs(partitionPath, label, quick, clusterSizeKB, isCancelled);
     case FileSystem::exFAT:
-        return formatExfat(partitionPath, label, quick, clusterSizeKB);
+        return formatExfat(partitionPath, label, quick, clusterSizeKB, isCancelled);
     default:
-        return formatVfat(partitionPath, FileSystem::FAT32, label, quick, clusterSizeKB);
+        return formatVfat(partitionPath, FileSystem::FAT32, label, quick, clusterSizeKB, isCancelled);
     }
 }
 
@@ -104,7 +106,8 @@ static QString sanitizeFatLabel(const QString &label) {
 }
 
 FormatResult Filesystem::formatVfat(const QString &partitionPath, FileSystem fs,
-                                    const QString &label, bool quick, int clusterSizeKB) {
+                                    const QString &label, bool quick, int clusterSizeKB,
+                                    std::function<bool()> isCancelled) {
     FormatResult result;
     result.fsType = (fs == FileSystem::FAT16) ? "FAT16" : "FAT32";
 
@@ -143,7 +146,11 @@ FormatResult Filesystem::formatVfat(const QString &partitionPath, FileSystem fs,
     timer.start();
     proc.start("mkfs.fat", args);
 
-    if (!proc.waitForFinished(30000)) {
+    if (finishProcess(proc, 30000, isCancelled)) {
+        result.cancelled = true;
+        return result;
+    }
+    if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "mkfs.fat timed out";
         return result;
     }
@@ -159,7 +166,8 @@ FormatResult Filesystem::formatVfat(const QString &partitionPath, FileSystem fs,
 }
 
 FormatResult Filesystem::formatExt(const QString &partitionPath, FileSystem fs,
-                                   const QString &label, bool quick, int clusterSizeKB) {
+                                   const QString &label, bool quick, int clusterSizeKB,
+                                   std::function<bool()> isCancelled) {
     FormatResult result;
     result.fsType = PartitionManager::fsToString(fs);
 
@@ -182,7 +190,11 @@ FormatResult Filesystem::formatExt(const QString &partitionPath, FileSystem fs,
     timer.start();
     proc.start(tool, args);
 
-    if (!proc.waitForFinished(60000)) {
+    if (finishProcess(proc, 60000, isCancelled)) {
+        result.cancelled = true;
+        return result;
+    }
+    if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = tool + " timed out";
         return result;
     }
@@ -198,7 +210,8 @@ FormatResult Filesystem::formatExt(const QString &partitionPath, FileSystem fs,
 }
 
 FormatResult Filesystem::formatNtfs(const QString &partitionPath, const QString &label,
-                                    bool quick, int clusterSizeKB) {
+                                    bool quick, int clusterSizeKB,
+                                    std::function<bool()> isCancelled) {
     FormatResult result;
     result.fsType = "NTFS";
 
@@ -225,7 +238,11 @@ FormatResult Filesystem::formatNtfs(const QString &partitionPath, const QString 
     timer.start();
     proc.start("mkfs.ntfs", args);
 
-    if (!proc.waitForFinished(60000)) {
+    if (finishProcess(proc, 60000, isCancelled)) {
+        result.cancelled = true;
+        return result;
+    }
+    if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "mkfs.ntfs timed out";
         return result;
     }
@@ -241,7 +258,8 @@ FormatResult Filesystem::formatNtfs(const QString &partitionPath, const QString 
 }
 
 FormatResult Filesystem::formatExfat(const QString &partitionPath, const QString &label,
-                                     bool quick, int clusterSizeKB) {
+                                     bool quick, int clusterSizeKB,
+                                     std::function<bool()> isCancelled) {
     FormatResult result;
     result.fsType = "exFAT";
 
@@ -266,7 +284,11 @@ FormatResult Filesystem::formatExfat(const QString &partitionPath, const QString
     timer.start();
     proc.start("mkfs.exfat", args);
 
-    if (!proc.waitForFinished(30000)) {
+    if (finishProcess(proc, 30000, isCancelled)) {
+        result.cancelled = true;
+        return result;
+    }
+    if (proc.exitStatus() != QProcess::NormalExit) {
         result.errorMessage = "mkfs.exfat timed out";
         return result;
     }

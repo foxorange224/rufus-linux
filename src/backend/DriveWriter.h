@@ -5,6 +5,7 @@
 
 struct WriteResult {
     bool success = false;
+    bool cancelled = false;
     qint64 bytesWritten = 0;
     qint64 totalBytes = 0;
     int errors = 0;
@@ -16,11 +17,14 @@ class DriveWriter {
 public:
     static WriteResult writeImage(const QString &imagePath, const QString &devicePath,
                                   bool isCompressed = false,
-                                  std::function<void(qint64)> progressCallback = nullptr);
+                                  std::function<void(qint64)> progressCallback = nullptr,
+                                  std::function<bool()> isCancelled = nullptr);
     static WriteResult writeDD(const QString &imagePath, const QString &devicePath,
-                               std::function<void(qint64)> progressCallback = nullptr);
+                               std::function<void(qint64)> progressCallback = nullptr,
+                               std::function<bool()> isCancelled = nullptr);
     static WriteResult writeZeros(const QString &devicePath, qint64 numBytes = 0,
-                                  std::function<void(qint64)> progressCallback = nullptr);
+                                  std::function<void(qint64)> progressCallback = nullptr,
+                                  std::function<bool()> isCancelled = nullptr);
     static WriteResult writeSparse(const QString &imagePath, const QString &devicePath,
                                    std::function<void(qint64)> progressCallback = nullptr);
 

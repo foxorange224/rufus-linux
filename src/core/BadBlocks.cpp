@@ -41,7 +41,7 @@ static int patternLength(int totalPasses) {
 
 BadBlockResult BadBlocks::check(const QString &devicePath, qint64 numSectors,
                                 Mode mode, std::function<void(int)> progressCallback,
-                                int numPasses) {
+                                int numPasses, std::function<bool()> isCancelled) {
     BadBlockResult result;
 
     if (numPasses < 1) numPasses = 1;
@@ -86,6 +86,10 @@ BadBlockResult BadBlocks::check(const QString &devicePath, qint64 numSectors,
         const int plen = patternLength(numPasses);
 
         for (qint64 block = 0; block < numBlocks; block++) {
+            if (isCancelled && isCancelled()) {
+                result.cancelled = true;
+                break;
+            }
             if (progressCallback && (block % 8 == 0)) {
                 int pct = static_cast<int>((pass * 100 + block * 100 / numBlocks) / passes);
                 progressCallback(pct);
@@ -138,6 +142,9 @@ BadBlockResult BadBlocks::check(const QString &devicePath, qint64 numSectors,
                 }
             }
         }
+
+        if (result.cancelled)
+            break;
     }
 
     std::free(writeBuf); std::free(readBuf);
@@ -149,7 +156,8 @@ BadBlockResult BadBlocks::check(const QString &devicePath, qint64 numSectors,
 }
 
 bool BadBlocks::detectFakeFlash(const QString &devicePath, qint64 reportedSize,
-                                std::function<void(int)> progressCallback) {
+                                std::function<void(int)> progressCallback,
+                                std::function<bool()> isCancelled) {
     int fd = ::open(devicePath.toUtf8().constData(), O_RDWR | O_SYNC);
     if (fd < 0) return false;
 
@@ -167,6 +175,8 @@ bool BadBlocks::detectFakeFlash(const QString &devicePath, qint64 reportedSize,
     bool isFake = false;
 
     for (int i = 0; i < numSamples; i++) {
+        if (isCancelled && isCancelled())
+            break;
         if (progressCallback)
             progressCallback(i * 100 / numSamples);
 
