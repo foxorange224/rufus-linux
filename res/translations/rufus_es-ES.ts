@@ -4,17 +4,17 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="15"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
         <source>About Rufus</source>
         <translation>Acerca de Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="33"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
         <source>Version %1 (Linux Port)</source>
         <translation>Versión %1 (Port a Linux)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="40"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
@@ -29,17 +29,17 @@ Licencia GNU GPL v3
 Port a Linux con Qt6 y C++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="52"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
         <translation>Port a Linux en GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="61"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
         <translation>Rufus original (Windows) en GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="90"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
@@ -77,57 +77,62 @@ Port a Linux con Qt6 y C++</translation>
         <translation>Ejecutando el checkdisk de NTFS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="546"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="489"/>
+        <source>Writing image in DD mode...</source>
+        <translation>Escribiendo la imagen en modo DD...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="549"/>
         <source>Clearing device...</source>
         <translation>Limpiando el dispositivo...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="552"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="555"/>
         <source>Creating partition table...</source>
         <translation>Creando la tabla de particiones...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="563"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="566"/>
         <source>Creating partitions...</source>
         <translation>Creando las particiones...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="596"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="599"/>
         <source>Formatting main partition...</source>
         <translation>Formateando la partición principal...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="627"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="630"/>
         <source>Formatting persistence partition...</source>
         <translation>Formateando la partición de persistencia...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="670"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="673"/>
         <source>Mounting and copying files...</source>
         <translation>Montando y copiando los archivos...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="721"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="724"/>
         <source>Installing bootloader...</source>
         <translation>Instalando el gestor de arranque...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="731"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="734"/>
         <source>Remounting volume...</source>
         <translation>Volviendo a montar el volumen...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="747"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="750"/>
         <source>Installing MS-DOS...</source>
         <translation>Instalando MS-DOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="754"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="757"/>
         <source>Installing FreeDOS...</source>
         <translation>Instalando FreeDOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="762"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="765"/>
         <source>Extracting ISO files to USB...</source>
         <translation>Extrayendo los archivos ISO a la memoria USB...</translation>
     </message>
@@ -142,41 +147,39 @@ Port a Linux con Qt6 y C++</translation>
         <translation>Usando la imagen: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="781"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="998"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="784"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="978"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="979"/>
         <source>Extracting: %1</source>
         <translation>Extrayendo: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="775"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="786"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="992"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1006"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="780"/>
         <source>Extracting: %1 (%2)</source>
         <translation>Extrayendo: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="857"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="845"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>Instalando el gestor de arranque de ReactOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="837"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="825"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Aplicando la corrección de arranque EFI de Win7...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="983"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="971"/>
         <source>Extracting additional files...</source>
         <translation>Extrayendo archivos adicionales...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1361"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1336"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Aplicando la instalación desatendida de Windows...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1504"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1479"/>
         <source>Writing partition boot record...</source>
         <translation>Escribiendo el registro de arranque de la partición...</translation>
     </message>
@@ -3033,7 +3036,7 @@ Port a Linux con Qt6 y C++</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="319"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1481"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1483"/>
         <source>Confirm</source>
         <translation>Confirmar</translation>
     </message>
@@ -3044,13 +3047,13 @@ Port a Linux con Qt6 y C++</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="331"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1329"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1331"/>
         <source>ESPERE...</source>
         <translation>ESPERE...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="333"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1331"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1333"/>
         <source>Cancelling - Please wait...</source>
         <translation>Cancelando - por favor espere...</translation>
     </message>
@@ -3060,13 +3063,13 @@ Port a Linux con Qt6 y C++</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="420"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2775"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2777"/>
         <source>Drive Properties</source>
         <translation>Propiedades de la unidad</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="431"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2781"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2783"/>
         <source>Select the USB drive to write to.
 Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
@@ -3076,25 +3079,25 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="437"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2903"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2905"/>
         <source>Save current settings to INI file</source>
         <translation>Guardar la configuración actual en un archivo INI</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="441"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2784"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2786"/>
         <source>Refresh devices (F5)</source>
         <translation>Actualizar dispositivos (F5)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="426"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2771"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2773"/>
         <source>Device</source>
         <translation>Dispositivo</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="386"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2768"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2770"/>
         <source>Rufus %1</source>
         <translation>Rufus %1</translation>
     </message>
@@ -3104,13 +3107,13 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="452"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2787"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2789"/>
         <source>Boot selection</source>
         <translation>Elección de arranque</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="455"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2911"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2913"/>
         <source>Select the type of bootable USB to create.
 • Non bootable: Just format the drive
 • Disk or ISO image: Create from an ISO/IMG file
@@ -3124,7 +3127,7 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="472"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2904"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2906"/>
         <source>Compute MD5, SHA-1 and SHA-256 hashes for the selected image</source>
         <translation>Calcular los hash MD5, SHA-1 y SHA-256 de la imagen seleccionada</translation>
     </message>
@@ -3134,13 +3137,13 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="478"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2905"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2907"/>
         <source>SELECT</source>
         <translation>SELECCIONAR</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="483"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2906"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2908"/>
         <source>Select a disk image (ISO, IMG, VHD, etc.)</source>
         <translation>Seleccione una imagen de disco (ISO, IMG, VHD, etc.)</translation>
     </message>
@@ -3150,19 +3153,19 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="499"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2818"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2820"/>
         <source>Image option</source>
         <translation>Opción de imagen</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="502"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2859"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2861"/>
         <source>Standard Windows installation</source>
         <translation>Instalación de Windows estandar</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="503"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2860"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2862"/>
         <source>Windows To Go</source>
         <translation>Windows To Go</translation>
     </message>
@@ -3194,13 +3197,13 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="516"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2810"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2812"/>
         <source>Partition scheme</source>
         <translation>Esquema de partición</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="520"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2916"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2918"/>
         <source>Partition scheme:
 • MBR: Master Boot Record (compatible, BIOS + UEFI-CSM)
 • GPT: GUID Partition Table (modern, native UEFI)</source>
@@ -3210,31 +3213,31 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="530"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2773"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2775"/>
         <source>Target system</source>
         <translation>Sistema de destino</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="532"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2875"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2877"/>
         <source>Click for information about UEFI-CSM (Compatibility Support Module)</source>
         <translation>Haga clic para obtener información sobre UEFI-CSM (Módulo de soporte de compatibilidad)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="537"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2824"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2826"/>
         <source>BIOS (or UEFI-CSM)</source>
         <translation>BIOS (o UEFI-CSM)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="538"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2825"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2827"/>
         <source>UEFI (non CSM)</source>
         <translation>UEFI (no CSM)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="540"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2919"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2921"/>
         <source>Target system type:
 • BIOS/UEFI-CSM: For legacy BIOS or UEFI in CSM mode
 • UEFI (non CSM): For native UEFI boot</source>
@@ -3244,63 +3247,63 @@ Solo se muestran las unidades USB extraíbles por defecto. Pulse Ctrl+F o marque
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="558"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1946"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2700"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2849"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1948"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2702"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2851"/>
         <source>Show advanced drive properties</source>
         <translation>Mostrar propiedades avanzadas de la unidad</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="565"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2892"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2894"/>
         <source>List USB Hard Drives</source>
         <translation>Listar los discos duros USB</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="566"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2922"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2924"/>
         <source>Also list USB hard drives (not just removable flash drives)</source>
         <translation>Listar también discos duros USB (no solo unidades flash extraíbles)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="570"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2894"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2896"/>
         <source>Add fixes for old BIOSes (extra partition, align, etc.)</source>
         <translation>Agrega correcciones para BIOS viejos (partición extra, alineación, etc.)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="571"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2923"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2925"/>
         <source>Add an extra alignment partition and other fixes for old BIOS</source>
         <translation>Añadir una partición de alineación extra y otras correcciones para BIOS antiguas</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="575"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2896"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2898"/>
         <source>Enable runtime UEFI media validation</source>
         <translation>Habilitar la validación de medios UEFI en tiempo de ejecución</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="576"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2924"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2926"/>
         <source>Validate UEFI boot media at runtime (may affect compatibility)</source>
         <translation>Validar el medio de arranque UEFI en tiempo de ejecución (puede afectar a la compatibilidad)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="583"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2777"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2779"/>
         <source>Format Options</source>
         <translation>Opciones de formateo</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="587"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2816"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2818"/>
         <source>Volume label</source>
         <translation>Etiqueta de volumen</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="592"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2925"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2927"/>
         <source>Volume label (up to 11 characters for FAT/FAT32,
 up to 32 characters for NTFS/exFAT)</source>
         <translation>Etiqueta de volumen (hasta 11 caracteres para FAT/FAT32,
@@ -3308,13 +3311,13 @@ hasta 32 caracteres para NTFS/exFAT)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="599"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2812"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2814"/>
         <source>File system</source>
         <translation>Sistema de archivos</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="601"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2927"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2929"/>
         <source>File system type for the USB drive.
 FAT32 is recommended for maximum compatibility.
 NTFS is required for files larger than 4GB.
@@ -3328,33 +3331,33 @@ ext2/3/4 son sistemas de archivos nativos de Linux.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="613"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2814"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2816"/>
         <source>Cluster size</source>
         <translation>Tamaño del clúster</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="615"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2930"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2932"/>
         <source>Allocation unit size. Default is recommended.</source>
         <translation>Tamaño de unidad de asignación. Se recomienda el predeterminado.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="625"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1929"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2676"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2844"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1931"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2678"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2846"/>
         <source>Show advanced format options</source>
         <translation>Mostrar opciones de formato avanzadas</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="632"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2853"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2855"/>
         <source>Quick format</source>
         <translation>Formateo rápido</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="634"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2931"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2933"/>
         <source>Quick format (just writes filesystem structures).
 Uncheck for full format (wipes all data)</source>
         <translation>Formato rápido (solo escribe las estructuras del sistema de archivos).
@@ -3362,25 +3365,25 @@ Desmarque para un formato completo (borra todos los datos)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="639"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2854"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2856"/>
         <source>Create extended label and icon files</source>
         <translation>Añadir etiquetas extendidas e iconos</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="641"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2933"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2935"/>
         <source>Creates autorun.inf and icon files for the drive</source>
         <translation>Crea los archivos autorun.inf y de icono para la unidad</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="646"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2855"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2857"/>
         <source>Check device for bad blocks</source>
         <translation>Buscar bloques dañados en dispositivo</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="647"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2934"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2936"/>
         <source>Scan the device for bad blocks before writing.
 This can take a long time on large drives.</source>
         <translation>Escanee el dispositivo en busca de bloques defectuosos antes de escribir.
@@ -3388,37 +3391,37 @@ Esto puede tardar mucho en unidades grandes.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="650"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2866"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2868"/>
         <source>1 pass (default)</source>
         <translation>1 pasada (por defecto)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="651"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2867"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2869"/>
         <source>2 passes (SLC pattern)</source>
         <translation>2 pasadas (patrón SLC)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="652"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2868"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2870"/>
         <source>3 passes (MLC pattern)</source>
         <translation>3 pasadas (patrón MLC)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="653"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2869"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2871"/>
         <source>4 passes (TLC pattern)</source>
         <translation>4 pasadas (patrón TLC)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="654"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2870"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2872"/>
         <source>5 passes (TLC pattern)</source>
         <translation>5 pasadas (patrón TLC)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="656"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2936"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2938"/>
         <source>Number of bad block scan passes.
 Multiple passes with different patterns detect more types of NAND defects.</source>
         <translation>Número de pasadas de escaneo de bloques defectuosos.
@@ -3426,7 +3429,7 @@ Varias pasadas con distintos patrones detectan más tipos de defectos NAND.</tra
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="697"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2779"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2781"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
@@ -3436,37 +3439,37 @@ Varias pasadas con distintos patrones detectan más tipos de defectos NAND.</tra
         <translation>Preferencias</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1238"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1240"/>
         <source>WIM/ESD files are not supported.
 Please use an ISO or IMG file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1348"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1350"/>
         <source>No image selected</source>
         <translation>Ninguna imagen seleccionada</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1349"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1351"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
         <translation>Para continuar, por favor seleccione una imagen o disco (IMG u otro formato), o si solo quiere formatear seleccione &quot;No booteable&quot; en &quot;Elección de arranque&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1501"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2795"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1503"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2797"/>
         <source>CANCELAR</source>
         <translation>CANCELAR</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1775"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2400"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2803"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1777"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2402"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2805"/>
         <source>PREPARED</source>
         <translation>PREPARADO</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="711"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2938"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2940"/>
         <source>Operation progress</source>
         <translation>Progreso de la operación</translation>
     </message>
@@ -3492,7 +3495,7 @@ Please use an ISO or IMG file.</source>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="758"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2791"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2793"/>
         <source>Select interface language</source>
         <translation>Seleccionar el idioma de la interfaz</translation>
     </message>
@@ -3502,7 +3505,7 @@ Please use an ISO or IMG file.</source>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="763"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2792"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2794"/>
         <source>About Rufus</source>
         <translation>Acerca de Rufus</translation>
     </message>
@@ -3512,32 +3515,32 @@ Please use an ISO or IMG file.</source>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="776"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2793"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2795"/>
         <source>Open log window</source>
         <translation>Abrir la ventana de log</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="788"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1769"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2795"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1771"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2797"/>
         <source>START</source>
         <translation>EMPEZAR</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="791"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2939"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2941"/>
         <source>Start the USB formatting/writing operation</source>
         <translation>Empezar la operación de formateo/escritura USB</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="794"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2796"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2798"/>
         <source>CLOSE</source>
         <translation>CERRAR</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="796"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2940"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2942"/>
         <source>Close Rufus</source>
         <translation>Cerrar Rufus</translation>
     </message>
@@ -3550,38 +3553,38 @@ Please use an ISO or IMG file.</source>
         <translation type="vanished">Barra de estado que muestra el estado actual de la operación</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="939"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2837"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="941"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2839"/>
         <source>Default</source>
         <translation>Por defecto</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="953"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="955"/>
         <source>Select image...</source>
         <translation>Seleccionar imagen...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="966"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="968"/>
         <source>Clear</source>
         <translation>Borrar historial</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1066"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1068"/>
         <source>1 device found</source>
         <translation>1 dispositivo encontrado</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1067"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1069"/>
         <source>%1 devices found</source>
         <translation>%1 dispositivos encontrados</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1109"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1111"/>
         <source>UEFI-CSM</source>
         <translation>UEFI-CSM</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1110"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1112"/>
         <source>UEFI-CSM (Compatibility Support Module) is a component of the UEFI firmware that emulates a legacy BIOS environment, so that operating systems and bootloaders that only support BIOS boot can still run on UEFI machines.
 
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
@@ -3590,56 +3593,56 @@ Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firm
 Elija &apos;BIOS (o UEFI-CSM)&apos; para firmware BIOS heredado o para firmware UEFI con CSM activado. Elija &apos;UEFI (no CSM)&apos; para arranque UEFI nativo, p. ej. en máquinas certificadas para Windows 11 o cuando se usa Secure Boot.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1129"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1131"/>
         <source>Save Settings</source>
         <translation>Guardar configuración</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1130"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1132"/>
         <source>Settings saved.</source>
         <translation>Configuración guardada.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1141"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1143"/>
         <source>Computing image hashes...</source>
         <translation>Calculando los hashs de la imagen...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1197"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2943"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1199"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2945"/>
         <source>No removable devices found</source>
         <translation>No se encontraron dispositivos extraíbles</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1228"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1237"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1247"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1258"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1280"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1292"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1316"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1337"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1357"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="1809"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1230"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1239"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1249"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1260"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1282"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1294"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1318"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1339"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1359"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1811"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1229"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1231"/>
         <source>The selected file is not a valid disk image.
 Please select an ISO or IMG file.</source>
         <translation>El archivo seleccionado no es una imagen de disco válida.
 Por favor, seleccione un archivo ISO o IMG.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1248"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1250"/>
         <source>The image file is located on the target drive!
 Please copy the image to a different drive first.</source>
         <translation>¡El archivo de imagen se encuentra en la unidad de destino!
 Copie primero la imagen a otra unidad.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1259"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1261"/>
         <source>The image is too large for this device!
 Image size: %1
 Device size: %2</source>
@@ -3648,14 +3651,14 @@ Tamaño de la imagen: %1
 Tamaño del dispositivo: %2</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1281"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1283"/>
         <source>MS-DOS cannot boot from a drive with a 64KB cluster size.
 Please select a smaller cluster size or a different filesystem.</source>
         <translation>MS-DOS no puede arrancar desde una unidad con un tamaño de clúster de 64KB.
 Seleccione un tamaño de clúster menor u otro sistema de archivos.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1293"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1295"/>
         <source>The image contains a file larger than 4GB.
 FAT32 does not support files larger than 4GB.
 Please select NTFS or exFAT.</source>
@@ -3664,59 +3667,59 @@ FAT32 no admite archivos de más de 4GB.
 Seleccione NTFS o exFAT.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1304"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1306"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1305"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1307"/>
         <source>The selected image does not appear to be UEFI-bootable.
 Continue anyway?</source>
         <translation>La imagen seleccionada no parece ser arrancable en UEFI.
 ¿Continuar de todos modos?</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1317"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1319"/>
         <source>UEFI:NTFS requires NTFS or exFAT filesystem.</source>
         <translation>UEFI:NTFS requiere un sistema de archivos NTFS o exFAT.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1337"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1339"/>
         <source>Please select a target device.</source>
         <translation>Seleccione un dispositivo de destino.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1357"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1359"/>
         <source>Could not read device info.</source>
         <translation>No se pudo leer la información del dispositivo.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1440"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1442"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
         <translation>El gestor de arranque es MS-DOS: se fuerza el sistema de archivos FAT16</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1475"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1477"/>
         <source>DD Image Write</source>
         <translation>Escritura de imagen DD</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1476"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1478"/>
         <source>Format Only</source>
         <translation>Solo formato</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1477"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1479"/>
         <source>Create Bootable</source>
         <translation>Crear unidad de arranque</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1478"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1480"/>
         <source>ISO Mode</source>
         <translation>Modo ISO</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1482"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1484"/>
         <source>This will DESTROY ALL DATA on:
 %1 (%2)
 
@@ -3743,17 +3746,17 @@ Sistema de archivos: %4
         <translation type="vanished">Escribiendo...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1548"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Select bootable image</source>
         <translation>Seleccionar imagen de arranque</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1552"/>
         <source>Disk Images (*.iso *.img *.vhd *.vhdx *.wim *.esd *.gz *.bz2 *.xz *.zst);;All Files (*)</source>
         <translation>Imágenes de disco (*.iso *.img *.vhd *.vhdx *.wim *.esd *.gz *.bz2 *.xz *.zst);;Todos los archivos (*)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1558"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1560"/>
         <source>Devices refreshed</source>
         <translation>Dispositivos actualizados</translation>
     </message>
@@ -3762,29 +3765,29 @@ Sistema de archivos: %4
         <translation type="vanished">Disco o imagen ISO</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1619"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1621"/>
         <source>Analyzing image...</source>
         <translation>Analizando la imagen...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1681"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1683"/>
         <source>Invalid Image</source>
         <translation>Imagen no válida</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1682"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1684"/>
         <source>This file is not a valid disk image and cannot be written or booted.
 Please check your file!</source>
         <translation>Este archivo no es válido para poder grabar o bootear.
 ¡Compruebe su archivo!</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1687"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1689"/>
         <source>Image not bootable</source>
         <translation>Imagen no booteable</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1688"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1690"/>
         <source>This image has a defined partition scheme, but no bootloader, so it can only be written as a disk clone.</source>
         <translation>Esta imagen tiene un esquema de particiones definido, pero no contiene un gestor de arranque (bootloader), por lo que solo podrás grabarla como una clonación de disco.</translation>
     </message>
@@ -3797,22 +3800,22 @@ Please check your file!</source>
         <translation type="vanished">Escrito tal cual (modo DD)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1741"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1743"/>
         <source>Image hashes computed</source>
         <translation>¡Hash completado!</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1742"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1744"/>
         <source>Image Hashes</source>
         <translation>Hash de la imagen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1798"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1800"/>
         <source>Rufus: Completed</source>
         <translation>Rufus: Completado</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1798"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1800"/>
         <source>Rufus: Failed</source>
         <translation>Rufus: Error</translation>
     </message>
@@ -3829,7 +3832,7 @@ Please check your file!</source>
         <translation type="vanished">FALLO al realizar la operación</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1807"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1809"/>
         <source>Cancelled</source>
         <translation>CANCELADO</translation>
     </message>
@@ -3838,42 +3841,42 @@ Please check your file!</source>
         <translation type="vanished">Finalizando...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1928"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2691"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2843"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1930"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2693"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2845"/>
         <source>Hide advanced format options</source>
         <translation>Ocultar opciones de formato avanzadas</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1945"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2703"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2848"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1947"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2705"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2850"/>
         <source>Hide advanced drive properties</source>
         <translation>Ocultar propiedades avanzadas de la unidad</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2154"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2156"/>
         <source>MS-DOS boot mode only supports FAT16.</source>
         <translation>El modo de arranque MS-DOS solo admite FAT16.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2398"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2400"/>
         <source>SELECT IMAGE</source>
         <translation>SELECCIONE IMAGEN</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2516"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2518"/>
         <source>Not applicable</source>
         <translation>No aplicable</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2747"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2749"/>
         <source>Non bootable</source>
         <translation>No arrancable - Solo formatear</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1600"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2751"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1602"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2753"/>
         <source>Disk or ISO image (Please select a file)</source>
         <translation>Disco o imagen ISO (Elija por favor)</translation>
     </message>
@@ -3882,7 +3885,7 @@ Please check your file!</source>
         <translation type="vanished">FALTA SELECCIONAR LA IMAGEN</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2901"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2903"/>
         <source>UEFI:NTFS</source>
         <translation>UEFI:NTFS</translation>
     </message>
@@ -3891,42 +3894,42 @@ Please check your file!</source>
         <translation type="vanished">Añadir partición persistente</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1854"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1856"/>
         <source>Disable the log window</source>
         <translation>Desactivar la ventana de log</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1855"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1857"/>
         <source>Enable the log window</source>
         <translation>Activar la ventana de log</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2878"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2880"/>
         <source>Verify written data (read back and hash)</source>
         <translation>Verificar los datos escritos (relectura y hash)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2881"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2883"/>
         <source>Bootloader</source>
         <translation>Gestor de arranque</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="591"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2789"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2886"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2791"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2888"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="504"/>
-        <location filename="../../src/ui/MainWindow.cpp" line="2914"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2916"/>
         <source>Image option:
 • Standard: Regular Windows installation
 • Windows To Go: Run Windows from USB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="2899"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2901"/>
         <source>EFI System Partition (ESP)</source>
         <translation>Partición del sistema EFI (ESP)</translation>
     </message>
@@ -4256,12 +4259,11 @@ Para continuar, elija su idioma y pulse Aceptar.</translation>
         <translation>Sistema de archivos &apos;%1&apos; desconocido.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="380"/>
         <source>Progress</source>
-        <translation>Progreso</translation>
+        <translation type="vanished">Progreso</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="464"/>
+        <location filename="../../src/main.cpp" line="458"/>
         <source>Cannot run Rufus without administrator privileges.
 
 Please run with sudo:
@@ -4272,7 +4274,7 @@ Ejecútelo con sudo:
   sudo %1</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="469"/>
+        <location filename="../../src/main.cpp" line="463"/>
         <source>Rufus - Administrator Required</source>
         <translation>Rufus - Se requieren privilegios de administrador</translation>
     </message>

@@ -484,6 +484,9 @@ void FormatWorker::run() {
 // ─── DD write image ────────────────────────────────────────────────
 bool FormatWorker::writeImageDD() {
     emit logMessage(QStringLiteral("Writing image in DD mode..."), 0);
+    // Show the operation name inside the progress bar, next to the
+    // percentage ("Writing image in DD mode: 42%").
+    emit statusChanged(tr("Writing image in DD mode..."));
 
     // For DD mode, first unmount everything
     DeviceManager::unmountPartitions(m_config.targetDevice.path);
