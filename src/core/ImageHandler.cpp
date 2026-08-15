@@ -107,6 +107,7 @@ uint16_t ImageHandler::detectSyslinuxVersion(const QString &mountPoint) {
         mountPoint + "/isolinux/isolinux.bin",
         mountPoint + "/isolinux/ldlinux.sys",
         mountPoint + "/syslinux/ldlinux.sys",
+        mountPoint + "/boot/syslinux/isolinux.bin",
         mountPoint + "/boot/syslinux/ldlinux.sys",
         mountPoint + "/usr/lib/syslinux/ldlinux.sys"
     };
@@ -118,10 +119,13 @@ uint16_t ImageHandler::detectSyslinuxVersion(const QString &mountPoint) {
         QByteArray data = f.read(4096);
         f.close();
 
-        // Syslinux version string typically at offset 0x2A-0x40 or searchable
-        // Look for pattern like "syslinux 6.04" or "isolinux 4.07" etc.
-        int idx = data.indexOf("syslinux ");
-        if (idx < 0) idx = data.indexOf("isolinux ");
+        // Syslinux version string typically at offset 0x2A-0x40 or searchable.
+        // Look for pattern like "syslinux 6.04" or "isolinux 4.07" etc. The
+        // banner inside isolinux.bin is uppercase ("ISOLINUX 6.04 ..."), so
+        // match case-insensitively.
+        const QByteArray lower = data.toLower();
+        int idx = lower.indexOf("syslinux ");
+        if (idx < 0) idx = lower.indexOf("isolinux ");
         if (idx >= 0) {
             QByteArray ver = data.mid(idx + 9, 10);
             int dot = ver.indexOf('.');
@@ -895,6 +899,7 @@ void ImageHandler::scanIsoContents(const QString &path, ImageInfo &info) {
     // Check for isolinux.bin (boot indicator)
     info.isBootable = info.slVersion > 0 ||
                       QFileInfo::exists(mp + "/isolinux/isolinux.bin") ||
+                      QFileInfo::exists(mp + "/boot/syslinux/isolinux.bin") ||
                       QFileInfo::exists(mp + "/boot/etfsboot.com") ||
                       info.hasBootmgr ||
                       info.hasBootmgrEfi ||
@@ -1352,20 +1357,23 @@ bool ImageHandler::extractIso(const QString &isoPath, const QString &destPath,
 }
 
 bool ImageHandler::extractCompressed(const QString &archivePath, const QString &destPath,
-                                     std::function<void(int)> percentCallback) {
+                                     std::function<void(int)> percentCallback,
+                                     std::function<void(const QString &)> fileCopied) {
     QDir().mkpath(destPath);
     QProcess proc;
     proc.start("7z", {"x", archivePath, "-o" + destPath, "-y"});
     if (proc.waitForStarted(10000)) {
         while (!proc.waitForFinished(200)) {
             QByteArray out = proc.readAllStandardOutput();
-            if (percentCallback) {
-                for (const QByteArray &line : out.split('\n')) {
-                    if (line.contains('%')) {
-                        bool ok = false;
-                        int v = line.trimmed().left(3).trimmed().toInt(&ok);
-                        if (ok) percentCallback(v);
-                    }
+            for (const QByteArray &line : out.split('\n')) {
+                if (percentCallback && line.contains('%')) {
+                    bool ok = false;
+                    int v = line.trimmed().left(3).trimmed().toInt(&ok);
+                    if (ok) percentCallback(v);
+                }
+                // 7z 'x' prints one 'Extracting  <name>' line per file
+                if (fileCopied && line.startsWith("Extracting")) {
+                    fileCopied(line.mid(10).trimmed());
                 }
             }
         }

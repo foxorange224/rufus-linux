@@ -4,13 +4,19 @@
 #include "utils/MsgBox.h"
 #include "utils/Settings.h"
 #include "backend/DeviceManager.h"
+#include "backend/PartitionManager.h"
+#include "core/ImageHandler.h"
+#include "worker/FormatWorker.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QMessageBox>
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QDir>
+#include <QStyle>
+#include <QStyleFactory>
 #include <unistd.h>
 #include <QDialog>
 #include <QVBoxLayout>
@@ -51,17 +57,25 @@ static void printHelp(const QCommandLineParser &parser) {
 static int listDevices() {
     QList<DeviceInfo> devices = DeviceManager::enumerate();
     QTextStream out(stdout);
+    out << QCoreApplication::translate("main", "List of removable devices:")
+        << QStringLiteral("\n\n");
+    if (devices.isEmpty()) {
+        out << QCoreApplication::translate("main", "No removable devices found")
+            << QStringLiteral("\n");
+        return 0;
+    }
     for (const DeviceInfo &dev : devices) {
         double sizeGiB = dev.size / (1024.0 * 1024 * 1024);
-        out << dev.path << QStringLiteral("  ")
-            << QString::number(sizeGiB, 'f', 1) << QStringLiteral("G  ")
-            << dev.name;
-        if (!dev.model.isEmpty())
-            out << QStringLiteral("  [") << dev.model << QStringLiteral("]");
-        if (dev.isUsb)
-            out << QStringLiteral("  USB");
-        if (dev.isSystem)
-            out << QStringLiteral("  SYSTEM");
+        QString sizeText = QString::number(sizeGiB, 'f', 0);
+        if (sizeText.isEmpty())
+            sizeText = QStringLiteral("0");
+        out << QStringLiteral("   %1 (%2, %3 GB) - %4")
+            .arg(QFileInfo(dev.path).fileName())
+            .arg(dev.path)
+            .arg(sizeText)
+            .arg(dev.name);
+        if (dev.isReadOnly)
+            out << QCoreApplication::translate("main", " (read only)");
         out << QStringLiteral("\n");
     }
     return 0;
@@ -128,26 +142,67 @@ static void useOriginalUserEnvironment(const QString &homeDir) {
         qputenv("XDG_CACHE_HOME", (homeDir + QStringLiteral("/.cache")).toUtf8());
 }
 
+// Read the LANG setting of the desktop session (KDE keeps it in
+// plasma-localerc; systemd systems default to /etc/locale.conf). Running
+// through sudo/pkexec loses the user's locale, so Rufus must re-discover
+// it to honor "always start in the session's language".
+static QString detectSessionLanguage(const QString &homeDir) {
+    auto readLang = [](const QString &path) -> QString {
+        QFile f(path);
+        if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+            return QString();
+        while (!f.atEnd()) {
+            const QString line = QString::fromUtf8(f.readLine()).trimmed();
+            if (line.isEmpty() || line.startsWith(QChar('#')) || !line.contains(QChar('=')))
+                continue;
+            const QString key = line.section(QChar('='), 0, 0).trimmed();
+            const QString val = line.section(QChar('='), 1).trimmed();
+            if (key == QStringLiteral("LANG") && !val.isEmpty() && !val.startsWith(QChar('"')))
+                return val;
+        }
+        return QString();
+    };
+
+    if (!homeDir.isEmpty()) {
+        const QString sessionFile = homeDir + QStringLiteral("/.config/plasma-localerc");
+        if (QFileInfo::exists(sessionFile)) {
+            // [Formats] LANG holds the session language; if that section is
+            // missing, [Translations] LANGUAGE is the UI language.
+            QString lang = readLang(sessionFile);
+            if (!lang.isEmpty())
+                return lang;
+        }
+    }
+    if (QFileInfo::exists(QStringLiteral("/etc/locale.conf")))
+        return readLang(QStringLiteral("/etc/locale.conf"));
+    return QString();
+}
+
 static QStringList checkMissingDependencies() {
     static const char *tools[] = {"syslinux", "grub-install", "7z", "fuseiso"};
     QStringList missing;
     for (const char *t : tools) {
         QProcess p;
         p.start(QStringLiteral("which"), {QString::fromLatin1(t)});
-        if (!p.waitForFinished(3000) || p.exitCode() != 0)
+        if (!p.waitForFinished(5000) || p.exitCode() != 0)
             missing << QString::fromLatin1(t);
     }
     return missing;
 }
 
-static void showDependencyError(const QStringList &missing) {
+static void showDependencyWarning(const QStringList &missing) {
     QString joined = missing.join(QStringLiteral(", "));
-    MsgBox::critical(nullptr,
-        QCoreApplication::translate("main", "Rufus - Missing dependencies"),
+    MsgBox::warning(nullptr,
+        QCoreApplication::translate("main", "Rufus - Missing optional dependencies"),
         QCoreApplication::translate("main",
-            "Rufus cannot run because required dependencies are missing from your "
-            "system.\n\n"
-            "Missing dependencies:\n%1\n\n"
+            "Some optional dependencies are missing from your system.\n\n"
+            "Missing:\n%1\n\n"
+            "Rufus can still run, but the following operations will not be "
+            "available:\n"
+            "- syslinux: BIOS bootloader installation\n"
+            "- grub-install: GRUB bootloader installation\n"
+            "- 7z: extraction of compressed (ZIP/7z) images\n"
+            "- fuseiso: ISO extraction\n\n"
             "Install them using the package manager that comes by default with "
             "your distribution.").arg(joined));
 }
@@ -208,21 +263,127 @@ static void showFirstRunWelcome() {
 
     QObject::connect(accept, &QPushButton::clicked, &dlg, &QDialog::accept);
 
-    if (dlg.exec() == QDialog::Accepted) {
-        QString code = lang->currentData().toString();
-        Localization::setLanguage(code);
-        Settings::instance().setLanguage(code);
-        Settings::instance().setFirstRun(false);
-        Settings::instance().sync();
+        if (dlg.exec() == QDialog::Accepted) {
+            QString code = lang->currentData().toString();
+            Localization::setLanguage(code);
+            Settings::instance().setLanguage(code);
+            Settings::instance().setFirstRun(false);
+            Settings::instance().sync();
+        }
+}
 
-        dlg.setWindowTitle(QCoreApplication::translate("main", "Welcome to Rufus"));
-        text->setText(QCoreApplication::translate("main",
-            "Welcome to Rufus! Thank you for using this tool. We are thrilled that "
-            "you care about our work as much as we enjoy working on it.\n\n"
-            "Rufus requires administrator privileges to access storage devices.\n\n"
-            "To continue, please choose your language and press Accept."));
-        accept->setText(QCoreApplication::translate("main", "Accept"));
+// Headless CLI write mode:
+//   sudo ./rufus --image=/path/to/image.iso [--boot=mbr|gpt]
+//                 [--filesystem=default|name] [--device=sdX]
+// Runs the same FormatWorker pipeline as the GUI, printing the log to
+// stdout and exiting with 0 on success, 1 on failure.
+static int cliWrite(const QString &imagePath, const QString &bootOpt,
+                    const QString &fsOpt, const QString &deviceOpt) {
+    if (deviceOpt.isEmpty()) {
+        fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Please specify a device with --device (e.g. --device=sdc).")));
+        return 1;
     }
+    if (imagePath.isEmpty()) {
+        fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Please specify an image with --image.")));
+        return 1;
+    }
+    if (!QFileInfo::exists(imagePath)) {
+        fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Image not found: %1").arg(imagePath)));
+        return 1;
+    }
+
+    DeviceInfo dev;
+    for (const DeviceInfo &d : DeviceManager::enumerate()) {
+        if (d.path == deviceOpt || QFileInfo(d.path).fileName() == deviceOpt) {
+            dev = d;
+            break;
+        }
+    }
+    if (dev.path.isEmpty()) {
+        fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Device '%1' not found.").arg(deviceOpt)));
+        return 1;
+    }
+    if (dev.isReadOnly) {
+        fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Device '%1' is read only.").arg(dev.path)));
+        return 1;
+    }
+
+    ImageInfo info = ImageHandler::detect(imagePath);
+    const bool rawDiskImage = info.isDDOnly() || info.isRawDiskImage();
+
+    printf("%s\n", qPrintable(QCoreApplication::translate("main",
+        "Using image: %1...").arg(imagePath)));
+    fflush(stdout);
+
+    FormatWorker::Config config;
+    config.targetDevice = dev;
+    config.imagePath = imagePath;
+    config.verifyAfterWrite = true;
+
+    if (rawDiskImage) {
+        // Whole-disk (DD) write: partition scheme and file system do not
+        // apply, so warn when the user asked for them.
+        config.mode = FormatWorker::Mode::WriteImage;
+        if (!bootOpt.isEmpty() || !fsOpt.isEmpty()) {
+            const QString ignored = QCoreApplication::translate("main",
+                "The '--filesystem=%1' and '--boot=%2' instructions were ignored, "
+                "as they do not work on disk image formats (IMG/VHD).")
+                .arg(fsOpt.isEmpty() ? QStringLiteral("default") : fsOpt,
+                     bootOpt.isEmpty() ? QStringLiteral("default") : bootOpt);
+            printf("%s\n", qPrintable(ignored));
+            fflush(stdout);
+        }
+    } else {
+        config.mode = FormatWorker::Mode::WriteImageIso;
+        if (bootOpt.compare(QStringLiteral("gpt"), Qt::CaseInsensitive) == 0) {
+            config.scheme = PartitionScheme::GPT;
+            config.targetType = TargetSystemType::UEFI;
+        } else {
+            config.scheme = PartitionScheme::MBR;
+            config.targetType = TargetSystemType::BIOS;
+        }
+        if (fsOpt.isEmpty() || fsOpt.compare(QStringLiteral("default"), Qt::CaseInsensitive) == 0) {
+            config.filesystem = FileSystem::FAT32;
+        } else {
+            config.filesystem = PartitionManager::fsFromString(fsOpt);
+            if (config.filesystem == FileSystem::Unknown) {
+                fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+                    "Unknown file system '%1'.").arg(fsOpt)));
+                return 1;
+            }
+        }
+        config.bootloaderType = info.recommendedBootloader.isEmpty()
+            ? QStringLiteral("syslinux") : info.recommendedBootloader;
+    }
+
+    bool success = false;
+    QString finalMessage;
+    FormatWorker worker;
+    worker.setConfig(config);
+    QObject::connect(&worker, &FormatWorker::logMessage,
+        [](const QString &msg, int) {
+            printf("%s\n", qPrintable(msg));
+            fflush(stdout);
+        });
+    QObject::connect(&worker, &FormatWorker::statusChanged,
+        [](const QString &status) {
+            printf("%s\n", qPrintable(status));
+            fflush(stdout);
+        });
+    QObject::connect(&worker, &FormatWorker::finished,
+        [&](bool ok, const QString &message) {
+            success = ok;
+            finalMessage = message;
+            printf("\n%s\n", qPrintable(message));
+            fflush(stdout);
+        });
+    worker.run();
+    return success ? 0 : 1;
 }
 
 int main(int argc, char *argv[]) {
@@ -236,21 +397,47 @@ int main(int argc, char *argv[]) {
                    "  --help              Show this help\n"
                    "  --version           Show version\n"
                    "  --list-devices      List available devices and exit\n"
+                   "  --devices           Alias for --list-devices\n"
+                   "  --image=<path>      Write an ISO/IMG image (headless mode)\n"
+                   "  --boot=mbr|gpt      Partition scheme for --image (default: mbr)\n"
+                   "  --filesystem=<name> File system for --image (default, FAT16, FAT32,\n"
+                   "                      NTFS, exFAT, ext2/3/4, btrfs, XFS, UDF)\n"
+                   "  --device=sdX        Target device for --image\n"
                    "  --welcome-done      Internal: welcome dialog already shown\n"
                    "  --debug             Enable debug logging to /tmp/rufus_debug.log\n");
             return 0;
         }
         if (strcmp(argv[i], "--version") == 0) {
-            printf("Rufus 1.0.1 - Create bootable USB drives\n");
+            printf("Rufus 1.0.2 - Create bootable USB drives\n");
             printf("Linux port using Qt6 and C++\n");
             printf("GNU GPL v3 License\n");
             return 0;
         }
-        if (strcmp(argv[i], "--list-devices") == 0) {
-        }
     }
 
     QString userConfigDir;
+    // Always start in the desktop session's language when a translation
+    // for it exists (see Localization::init).
+    const QString sessionLang = detectSessionLanguage(getOriginalUserHomeDir());
+    if (!sessionLang.isEmpty())
+        qputenv("LANG", sessionLang.toUtf8());
+
+    // Running as root through sudo/pkexec loses XDG_RUNTIME_DIR, which
+    // makes Qt print "QStandardPaths: XDG_RUNTIME_DIR not set" warnings
+    // and can confuse session helpers: point it at the original user's
+    // runtime directory (readable by root).
+    if (qEnvironmentVariableIsEmpty("XDG_RUNTIME_DIR")) {
+        const char *sudoUid = qgetenv("SUDO_UID").constData();
+        const char *pkexecUid = qgetenv("PKEXEC_UID").constData();
+        const char *uidStr = (sudoUid && sudoUid[0]) ? sudoUid
+                                                      : (pkexecUid && pkexecUid[0]) ? pkexecUid : nullptr;
+        if (uidStr) {
+            QString rtDir = QStringLiteral("/run/user/%1").arg(QString::fromUtf8(uidStr));
+            if (QFileInfo::exists(rtDir))
+                qputenv("XDG_RUNTIME_DIR", rtDir.toUtf8());
+        }
+    }
+
     if (geteuid() != 0) {
         // Not running as root - show error and exit
         userConfigDir = getOriginalUserHomeDir();
@@ -260,7 +447,7 @@ int main(int argc, char *argv[]) {
 
         QApplication app(argc, argv);
         app.setApplicationName(QStringLiteral("Rufus"));
-        app.setApplicationVersion(QStringLiteral("1.0.1"));
+        app.setApplicationVersion(QStringLiteral("1.0.2"));
         app.setOrganizationName(QStringLiteral("Rufus"));
         app.setOrganizationDomain(QStringLiteral("rufus.ie"));
         app.setQuitOnLastWindowClosed(true);
@@ -278,6 +465,73 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // Headless CLI mode: --image (write), --list-devices/--devices (list).
+    // Detected before QApplication so no display is required; runs the
+    // same write pipeline as the GUI and prints progress to stdout.
+    {
+        bool cliMode = false;
+        for (int i = 1; i < argc; i++) {
+            const QByteArray arg(argv[i]);
+            if (arg.startsWith("--image") || arg == "--list-devices" || arg == "--devices") {
+                cliMode = true;
+                break;
+            }
+        }
+        if (cliMode) {
+            // Same user environment as the GUI path: HOME/XDG point at the
+            // original user so virtual loop drives and translations resolve
+            // identically (must run before QCoreApplication).
+            const QString cliHome = getOriginalUserHomeDir();
+            useOriginalUserEnvironment(cliHome);
+
+            QCoreApplication app(argc, argv);
+            app.setApplicationName(QStringLiteral("Rufus"));
+            app.setApplicationVersion(QStringLiteral("1.0.2"));
+            app.setOrganizationName(QStringLiteral("Rufus"));
+            app.setOrganizationDomain(QStringLiteral("rufus.ie"));
+
+            Localization::init(QCoreApplication::applicationDirPath());
+
+            QCommandLineParser parser;
+            parser.setApplicationDescription(QStringLiteral("Create bootable USB drives from ISO/IMG files"));
+            parser.addHelpOption();
+            parser.addVersionOption();
+
+            QCommandLineOption imageOpt(QStringLiteral("image"),
+                QStringLiteral("Image (ISO/IMG) to write to the device"), QStringLiteral("path"));
+            parser.addOption(imageOpt);
+            QCommandLineOption bootOpt(QStringLiteral("boot"),
+                QStringLiteral("Partition scheme: mbr or gpt"), QStringLiteral("scheme"));
+            parser.addOption(bootOpt);
+            QCommandLineOption fsOpt(QStringLiteral("filesystem"),
+                QStringLiteral("File system: default, FAT16, FAT32, NTFS, exFAT, ext2/3/4, btrfs, XFS, UDF"),
+                QStringLiteral("name"));
+            parser.addOption(fsOpt);
+            QCommandLineOption deviceOpt(QStringLiteral("device"),
+                QStringLiteral("Target device (e.g. sdc)"), QStringLiteral("sdX"));
+            parser.addOption(deviceOpt);
+            QCommandLineOption listOpt(QStringLiteral("list-devices"),
+                QStringLiteral("List available devices and exit"));
+            parser.addOption(listOpt);
+            QCommandLineOption listAliasOpt(QStringLiteral("devices"),
+                QStringLiteral("Alias for --list-devices"));
+            parser.addOption(listAliasOpt);
+
+            parser.process(app);
+
+            if (parser.isSet(QStringLiteral("list-devices")) ||
+                parser.isSet(QStringLiteral("devices")))
+                return listDevices();
+            if (parser.isSet(QStringLiteral("image")))
+                return cliWrite(parser.value(QStringLiteral("image")),
+                    parser.value(QStringLiteral("boot")),
+                    parser.value(QStringLiteral("filesystem")),
+                    parser.value(QStringLiteral("device")));
+            parser.showHelp(0);
+            return 0;
+        }
+    }
+
     // Running as root - use original user's config directory
     userConfigDir = getOriginalUserHomeDir();
     // Point Qt's platform theme at the user's config (theme, icons, dark/light)
@@ -288,17 +542,20 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("Rufus"));
-    app.setApplicationVersion(QStringLiteral("1.0.1"));
+    app.setApplicationVersion(QStringLiteral("1.0.2"));
     app.setOrganizationName(QStringLiteral("Rufus"));
     app.setOrganizationDomain(QStringLiteral("rufus.ie"));
     app.setQuitOnLastWindowClosed(true);
 
-    // No forced style: let the platform theme pick the desktop style so the
-    // application follows the system theme (dark/light/colorful).
+    // A style chosen in Preferences (Settings "style", default "fusion")
+    // is always applied, so the look is predictable across desktops.
     app.setWindowIcon(makeAppIcon());
 
     Localization::init(QApplication::applicationDirPath());
     Settings::instance().init(QApplication::applicationDirPath(), userConfigDir);
+    QStyle *style = QStyleFactory::create(Settings::instance().style());
+    if (style)
+        QApplication::setStyle(style);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral("Create bootable USB drives from ISO/IMG files"));
@@ -308,6 +565,9 @@ int main(int argc, char *argv[]) {
     QCommandLineOption listOpt(QStringLiteral("list-devices"),
         QStringLiteral("List available devices and exit"));
     parser.addOption(listOpt);
+    QCommandLineOption listAliasOpt(QStringLiteral("devices"),
+        QStringLiteral("Alias for --list-devices"));
+    parser.addOption(listAliasOpt);
 
     QCommandLineOption debugOpt(QStringLiteral("debug"),
         QStringLiteral("Enable debug logging to /tmp/rufus_debug.log"));
@@ -325,7 +585,8 @@ int main(int argc, char *argv[]) {
 
     bool showHelp = parser.isSet(QStringLiteral("help"));
     bool showVersion = parser.isSet(QStringLiteral("version"));
-    bool listDev = parser.isSet(QStringLiteral("list-devices"));
+    bool listDev = parser.isSet(QStringLiteral("list-devices")) ||
+                   parser.isSet(QStringLiteral("devices"));
 
     if (parser.isSet(QStringLiteral("welcome-done"))) {
         welcomeDone = true;
@@ -350,16 +611,15 @@ int main(int argc, char *argv[]) {
             showFirstRunWelcome();
 
         QStringList missing = checkMissingDependencies();
-        if (!missing.isEmpty()) {
-            showDependencyError(missing);
-            return 1;
-        }
+        if (!missing.isEmpty())
+            showDependencyWarning(missing);
     }
 
     Logger::init();
+    Logger::setDebugEnabled(g_debugEnabled);
 
     // Log detected system language
-    Logger::info(QCoreApplication::translate("main", "Detected language: %1")
+    Logger::info(QStringLiteral("Detected language: %1")
                      .arg(Localization::detectedSystemLanguage()));
 
     MainWindow window;

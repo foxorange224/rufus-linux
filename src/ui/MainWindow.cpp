@@ -1,5 +1,7 @@
 #include "MainWindow.h"
+#include "ThemeWatcher.h"
 #include "AboutDialog.h"
+#include "PreferencesDialog.h"
 #include "LogDialog.h"
 #include "utils/Logger.h"
 #include "utils/Localization.h"
@@ -233,6 +235,9 @@ MainWindow::MainWindow(QWidget *parent)
     loadSettings();
     populateDevices();
     updateIdleProgressBarText();
+    // Follow live desktop theme changes (KDE / LXQt color scheme).
+    m_themeWatcher = new ThemeWatcher(this);
+    m_themeWatcher->applyNow();
     m_autoRefreshTimer = new QTimer(this);
     m_autoRefreshTimer->setInterval(3000);
     connect(m_autoRefreshTimer, &QTimer::timeout, this, &MainWindow::onAutoRefresh);
@@ -323,8 +328,9 @@ void MainWindow::closeEvent(QCloseEvent *event) {
         // run() is still executing ("QThread: Destroyed while thread is
         // still running") and lose the worker's cleanup.
         m_pendingClose = true;
-        m_startBtn->setText(tr("Cancelling - Please wait..."));
+        m_startBtn->setText(tr("ESPERE..."));
         m_startBtn->setEnabled(false);
+        statusBar()->showMessage(tr("Cancelling - Please wait..."));
         if (m_worker) m_worker->cancel();
         event->ignore();
         return;
@@ -370,6 +376,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
 void MainWindow::changeEvent(QEvent *event) {
     if (event->type() == QEvent::LanguageChange)
         retranslateUi();
+    if (event->type() == QEvent::PaletteChange && m_hashBtn)
+        updateHashButtonStyle();
     QMainWindow::changeEvent(event);
 }
 
@@ -415,7 +423,8 @@ void MainWindow::setupUi() {
 
     auto *deviceCol = new QVBoxLayout;
     deviceCol->setSpacing(2);
-    deviceCol->addWidget(new QLabel(tr("Device")));
+    m_deviceLabel = new QLabel(tr("Device"));
+    deviceCol->addWidget(m_deviceLabel);
     m_deviceCombo = new QComboBox;
     m_deviceCombo->setMinimumWidth(350);
     m_deviceCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -461,13 +470,7 @@ void MainWindow::setupUi() {
     m_hashBtn->setFixedSize(18, 18);
     m_hashBtn->setFlat(true);
     m_hashBtn->setToolTip(tr("Compute MD5, SHA-1 and SHA-256 hashes for the selected image"));
-    // Highlight the button when hovered, like a focused/selected control.
-    // The highlight color is resolved from the current palette so it works
-    // in both light and dark themes.
-    m_hashBtn->setStyleSheet(QStringLiteral(
-        "QPushButton { border: none; background: transparent; }"
-        "QPushButton:hover { background-color: %1; border-radius: 3px; }")
-        .arg(palette().color(QPalette::Highlight).name()));
+    updateHashButtonStyle();
 
     // SELECT is a dropdown button: "Select image…" plus the recently used
     // images, like the original Rufus SELECT menu.
@@ -489,8 +492,8 @@ void MainWindow::setupUi() {
     bootCol->addLayout(bootRow);
     mainLayout->addLayout(bootCol);
 
-    // Image option + persistence row (label above the combo, like the
-    // other fields — shown for Windows images / persistence-capable ISOs)
+    // Image option row (label above the combo, like the other fields —
+    // only shown for Windows images)
     auto *imageOptCol = new QVBoxLayout;
     imageOptCol->setSpacing(2);
     m_imageOptionLabel = new QLabel(tr("Image option"));
@@ -498,30 +501,10 @@ void MainWindow::setupUi() {
     m_imageOptionCombo = new QComboBox;
     m_imageOptionCombo->addItem(tr("Standard Windows installation"));
     m_imageOptionCombo->addItem(tr("Windows To Go"));
-    m_imageOptionCombo->addItem(tr("Persistence"));
     m_imageOptionCombo->setToolTip(tr("Image option:\n"
         "• Standard: Regular Windows installation\n"
-        "• Windows To Go: Run Windows from USB\n"
-        "• Persistence: Keep changes across reboots"));
-    m_persistenceSlider = new QSlider(Qt::Horizontal);
-    m_persistenceSlider->setRange(128, 32768);
-    m_persistenceSlider->setValue(4096);
-    m_persistenceSlider->setFixedWidth(80);
-    m_persistenceSlider->setToolTip(tr("Size of the persistence partition"));
-    m_persistenceSizeSpin = new QSpinBox;
-    m_persistenceSizeSpin->setRange(128, 32768);
-    m_persistenceSizeSpin->setValue(4096);
-    m_persistenceSizeSpin->setSuffix(QStringLiteral(" MB"));
-    m_persistenceSizeSpin->setFixedWidth(90);
-    m_persistenceSizeSpin->setToolTip(tr("Persistence partition size in MB"));
-    m_persistenceUnitsCombo = new QComboBox;
-    m_persistenceUnitsCombo->addItem(QStringLiteral("MB"), 1);
-    m_persistenceUnitsCombo->addItem(QStringLiteral("GB"), 1024);
-    m_persistenceUnitsCombo->setToolTip(tr("Units for persistence size"));
+        "• Windows To Go: Run Windows from USB"));
     imageOptRow->addWidget(m_imageOptionCombo);
-    imageOptRow->addWidget(m_persistenceSlider);
-    imageOptRow->addWidget(m_persistenceSizeSpin);
-    imageOptRow->addWidget(m_persistenceUnitsCombo);
     imageOptRow->addStretch();
     imageOptCol->addWidget(m_imageOptionLabel);
     imageOptCol->addLayout(imageOptRow);
@@ -544,12 +527,11 @@ void MainWindow::setupUi() {
 
     auto *targetCol = new QVBoxLayout;
     auto *targetLabelRow = new QHBoxLayout;
-    auto *targetLabel = new QLabel(tr("Target system"));
+    m_targetSystemLabel = new QLabel(tr("Target system"));
     m_csmHelpLabel = new QLabel(QStringLiteral("<a href='#' style='text-decoration:none; color:#2d89ef;'>?</a>"));
     m_csmHelpLabel->setToolTip(tr("Click for information about UEFI-CSM (Compatibility Support Module)"));
     m_csmHelpLabel->setCursor(Qt::PointingHandCursor);
-    targetLabelRow->addWidget(targetLabel);
-    targetLabelRow->addWidget(m_csmHelpLabel);
+    targetLabelRow->addWidget(m_targetSystemLabel);
     targetLabelRow->addStretch();
     m_targetSystemCombo = new QComboBox;
     m_targetSystemCombo->addItem(tr("BIOS (or UEFI-CSM)"), 0);
@@ -561,10 +543,14 @@ void MainWindow::setupUi() {
     // The default scheme is MBR: only BIOS (or UEFI-CSM) is offered then.
     updateTargetSystemForScheme();
     // The combo (not its label) spans the available space and reaches the
-    // right margin, like original Rufus.
+    // right margin, like original Rufus. The blue "?" sits right next to
+    // the combo, not beside the "Target system" caption.
     m_targetSystemCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     targetCol->addLayout(targetLabelRow);
-    targetCol->addWidget(m_targetSystemCombo);
+    auto *targetComboRow = new QHBoxLayout;
+    targetComboRow->addWidget(m_targetSystemCombo);
+    targetComboRow->addWidget(m_csmHelpLabel);
+    targetCol->addLayout(targetComboRow);
     schemeTargetRow->addLayout(targetCol, 1);
     mainLayout->addLayout(schemeTargetRow);
 
@@ -677,11 +663,6 @@ void MainWindow::setupUi() {
     mainLayout->addLayout(bbRow);
 
     // Internal-only widgets (always hidden, keep logic working)
-    m_persistentCheck = new QCheckBox;
-    m_persistentCheck->setVisible(false);
-    m_persistentCheck->setChecked(false);
-    mainLayout->addWidget(m_persistentCheck);
-
     m_verifyWriteCheck = new QCheckBox;
     m_verifyWriteCheck->setVisible(false);
     m_verifyWriteCheck->setChecked(true);
@@ -720,9 +701,11 @@ void MainWindow::setupUi() {
     m_progressBar = new QProgressBar;
     m_progressBar->setMinimumHeight(24);
     m_progressBar->setTextVisible(true);
+    m_progressBar->setAlignment(Qt::AlignCenter);
     // Blank until an operation starts (original Rufus shows nothing until
-    // START is pressed); the status text lives inside the bar via
-    // setFormat(), not in the status bar.
+    // START is pressed); all status text is rendered centered inside the
+    // bar via setFormat(), using the palette colors so it stays readable
+    // on any theme.
     m_progressBar->setFormat(QString());
     m_progressBar->setValue(0);
     m_progressBar->setToolTip(tr("Operation progress"));
@@ -779,13 +762,20 @@ void MainWindow::setupUi() {
                                    QStyle::SP_MessageBoxInformation));
     m_aboutBtn->setToolTip(tr("About Rufus"));
 
+    // Preferences button sits right next to About, like the original.
+    m_prefsBtn = new QToolButton;
+    m_prefsBtn->setIcon(themedIcon({QStringLiteral("preferences-system"),
+                                    QStringLiteral("configure")},
+                                   QStyle::SP_FileDialogDetailedView));
+    m_prefsBtn->setToolTip(tr("Preferences"));
+
     m_logBtn = new QToolButton;
     m_logBtn->setIcon(themedIcon({QStringLiteral("utilities-log-viewer"),
                                   QStringLiteral("text-x-generic")},
                                  QStyle::SP_FileDialogDetailedView));
     m_logBtn->setToolTip(tr("Open log window"));
 
-    for (QToolButton *b : {m_langBtn, m_aboutBtn, m_logBtn}) {
+    for (QToolButton *b : {m_langBtn, m_aboutBtn, m_prefsBtn, m_logBtn}) {
         b->setAutoRaise(true);
         b->setIconSize(QSize(16, 16));
         b->setFixedSize(24, 24);
@@ -799,7 +789,6 @@ void MainWindow::setupUi() {
     m_startBtn->setFixedWidth(90);
     m_startBtn->setDefault(true);
     m_startBtn->setToolTip(tr("Start the USB formatting/writing operation"));
-    m_startBtn->setStyleSheet("QPushButton { font-weight: bold; }");
     bottomRow->addWidget(m_startBtn);
 
     m_closeBtn = new QPushButton(tr("CLOSE"));
@@ -826,9 +815,11 @@ void MainWindow::setupUi() {
 
     // Use available locales from Localization instead of hardcoded list
     QStringList availableLocales = Localization::availableLocales();
-    QSettings langSettings(QStringLiteral("Rufus"), QStringLiteral("Rufus"));
-    QString savedLang = langSettings.value(QStringLiteral("language"), QLocale::system().name()).toString();
-    savedLang.replace(QChar('_'), QChar('-'));
+    // The checked entry must match the language actually in use (which at
+    // startup is the desktop session's, detected in main.cpp) — not the
+    // value saved in settings, which may differ after a manual switch.
+    QString currentLang = Localization::currentLanguage();
+    currentLang.replace(QChar('_'), QChar('-'));
 
     // Only a few languages are shipped for now
     const QStringList supportedLangs = {QStringLiteral("en"), QStringLiteral("es-ES"),
@@ -845,7 +836,7 @@ void MainWindow::setupUi() {
             auto *action = m_langMenu->addAction(le.label);
             action->setData(le.code);
             action->setCheckable(true);
-            if (savedLang.startsWith(le.code))
+            if (currentLang.startsWith(le.code))
                 action->setChecked(true);
             m_langGroup->addAction(action);
         }
@@ -858,7 +849,7 @@ void MainWindow::setupUi() {
             auto *action = m_langMenu->addAction(label);
             action->setData(code);
             action->setCheckable(true);
-            if (savedLang == code)
+            if (currentLang == code)
                 action->setChecked(true);
             m_langGroup->addAction(action);
         }
@@ -869,9 +860,6 @@ void MainWindow::setupUi() {
     m_saveBtn->setVisible(false);
     m_imageOptionLabel->setVisible(false);
     m_imageOptionCombo->setVisible(false);
-    m_persistenceSlider->setVisible(false);
-    m_persistenceSizeSpin->setVisible(false);
-    m_persistenceUnitsCombo->setVisible(false);
 
     // Window size is locked programmatically (updateFixedSize()); the
     // height changes only when advanced sections expand/collapse, exactly
@@ -996,15 +984,15 @@ void MainWindow::updateElapsedLabel() {
 // ─── Fixed window size (original Rufus behavior) ─────────────────────
 // The window cannot be resized or maximized by the user; it is locked to
 // the natural size of its content. The height changes only when a section
-// is expanded/collapsed at runtime (advanced options, image info row,
-// persistence row), mirroring the compact fixed window of original Rufus
+// is expanded/collapsed at runtime (advanced options, image info row),
+// mirroring the compact fixed window of original Rufus
 // (~455-460 px wide, ~620-630 px tall collapsed, ~700-720 px expanded).
 void MainWindow::updateFixedSize() {
     // Unlock first: adjustSize() cannot shrink a widget whose minimum and
     // maximum sizes are both locked by the previous setFixedSize().
     setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
     setMinimumSize(0, 0);
-    // Toggling widget visibility (advanced sections, image/persistence rows)
+    // Toggling widget visibility (advanced sections, image rows)
     // only SCHEDULES the layout update asynchronously. If we read sizeHint()
     // right away it still reports the OLD (expanded) size, so the window would
     // fail to shrink back when a section is collapsed and the extra space would
@@ -1053,18 +1041,14 @@ void MainWindow::updateLogPanelSize() {
         m_logDialog->updateGeometry();
 
     bool logInWindow = m_logDialog->isVisible() && m_logAttached;
+    int formWidth = 455;
     if (logInWindow) {
-        // The form is already locked to 455 px in setupUi and never changes.
-        // Only the log is locked to 455 px so the window grows to ~2x without
-        // ever squashing or moving the form's buttons.
-        m_logDialog->setFixedWidth(455);
+        m_logDialog->setFixedWidth(formWidth);
     } else {
-        // Release only the log's lock so a detached top-level log can be
-        // freely resized. The form stays locked at 455 at all times.
         m_logDialog->setMinimumSize(360, 200);
         m_logDialog->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
     }
-    int newWidth = qMax(m_mainHBox->sizeHint().width(), 455);
+    int newWidth = qMax(m_mainHBox->sizeHint().width(), formWidth);
     setFixedSize(newWidth, curHeight);
     move(topLeft);
 }
@@ -1110,6 +1094,10 @@ void MainWindow::setupConnections() {
         AboutDialog dlg(this);
         dlg.exec();
     });
+    connect(m_prefsBtn, &QToolButton::clicked, this, [this]() {
+        PreferencesDialog dlg(this);
+        dlg.exec();
+    });
     connect(m_logBtn, &QToolButton::clicked, this, &MainWindow::onOpenLog);
     connect(m_langGroup, &QActionGroup::triggered, this, &MainWindow::onLanguageChanged);
     connect(m_closeBtn, &QPushButton::clicked, this, &QWidget::close);
@@ -1132,31 +1120,8 @@ void MainWindow::setupConnections() {
     });
     connect(m_fsCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &MainWindow::onFsChanged);
-    connect(m_persistenceSlider, &QSlider::valueChanged, this, [this](int v) {
-        m_persistenceSizeSpin->setValue(
-            (v + m_persistenceUnitsCombo->currentData().toInt() / 2)
-            / m_persistenceUnitsCombo->currentData().toInt());
-    });
-    connect(m_persistenceSizeSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int v) {
-        m_persistenceSlider->setValue(v * m_persistenceUnitsCombo->currentData().toInt());
-    });
-    connect(m_persistenceUnitsCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int) {
-        // Keep the slider (MB) as the source of truth and re-display the
-        // spin value in the newly selected units.
-        int mult = m_persistenceUnitsCombo->currentData().toInt();
-        m_persistenceSizeSpin->setRange(qMax(1, m_persistenceSlider->minimum() / mult),
-                                        m_persistenceSlider->maximum() / mult);
-        int mb = m_persistenceSlider->value();
-        m_persistenceSizeSpin->setValue((mb + mult / 2) / mult);
-    });
     connect(m_imageOptionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int idx) {
-        bool persistence = (idx == 2);
-        m_persistenceSlider->setVisible(persistence);
-        m_persistenceSizeSpin->setVisible(persistence);
-        m_persistenceUnitsCombo->setVisible(persistence);
-        m_persistentCheck->setChecked(persistence);
         if (idx == 1)
             m_verifyWriteCheck->setChecked(false);
         updateFixedSize();
@@ -1196,11 +1161,6 @@ void MainWindow::setupConnections() {
     connect(m_uefiMediaCheck, &QCheckBox::toggled, this, [this](bool) {
         if (m_schemeCombo->currentData().toInt() == static_cast<int>(PartitionScheme::GPT))
             m_espCheck->setChecked(m_uefiMediaCheck->isChecked());
-    });
-    connect(m_persistentCheck, &QCheckBox::toggled, this, [this](bool checked) {
-        m_persistenceSlider->setVisible(checked);
-        m_persistenceSizeSpin->setVisible(checked);
-        m_persistenceUnitsCombo->setVisible(checked);
     });
 }
 
@@ -1270,6 +1230,15 @@ bool MainWindow::runBootChecks() {
             MsgBox::critical(this, tr("Error"),
                 tr("The selected file is not a valid disk image.\n"
                    "Please select an ISO or IMG file."));
+            return false;
+        }
+        // WIM/ESD are Windows imaging formats, not disk images: writing them
+        // would produce a blank drive that only reports "success".
+        if (m_lastImageInfo.type == ImageType::WIM ||
+            m_lastImageInfo.type == ImageType::ESD) {
+            MsgBox::critical(this, tr("Error"),
+                tr("WIM/ESD files are not supported.\n"
+                   "Please use an ISO or IMG file."));
             return false;
         }
         QFileInfo fi(imgPath);
@@ -1359,8 +1328,9 @@ void MainWindow::onStartStop() {
     if (m_isRunning) {
         if (m_worker) {
             m_worker->cancel();
-            m_startBtn->setText(tr("Cancelling - Please wait..."));
+            m_startBtn->setText(tr("ESPERE..."));
             m_startBtn->setEnabled(false);
+            statusBar()->showMessage(tr("Cancelling - Please wait..."));
         }
         return;
     }
@@ -1370,14 +1340,25 @@ void MainWindow::onStartStop() {
         return;
     }
 
+    QString imagePath = selectedImagePath();
+    int bootTypeVal = m_bootSelectionCombo->currentData().toInt();
+
+    // In "Disk or ISO image" mode with no image selected, guide the user
+    // instead of silently formatting or installing a bootloader without
+    // knowing which image to write.
+    if (bootTypeVal == static_cast<int>(BootType::Image) && imagePath.isEmpty()) {
+        MsgBox::warning(this, tr("No image selected"),
+            tr("To continue, please select an image or disk (IMG or other "
+               "format), or if you only want to format, select \"Non bootable\" "
+               "in the boot selection."));
+        return;
+    }
+
     DeviceInfo dev = DeviceManager::getDevice(m_deviceCombo->currentData().toString());
     if (dev.path.isEmpty()) {
         MsgBox::warning(this, tr("Error"), tr("Could not read device info."));
         return;
     }
-
-    QString imagePath = selectedImagePath();
-    int bootTypeVal = m_bootSelectionCombo->currentData().toInt();
 
     // Run pre-flight boot checks
     if (!runBootChecks())
@@ -1464,9 +1445,7 @@ void MainWindow::onStartStop() {
     int targetIdx = m_targetSystemCombo->currentData().toInt();
     config.targetType = (targetIdx == 1) ? TargetSystemType::UEFI : TargetSystemType::BIOS;
 
-    config.extraParts.persistence = m_persistentCheck->isChecked();
-    config.persistentSizeMB = m_persistenceSlider->value();
-    config.extraParts.persistenceSizeMB = m_persistenceSlider->value();
+    config.extraParts.persistence = false;
     // Uncompressed size: used as the DD progress total so compressed
     // images don't jump to 100% before the write actually finishes.
     config.projectedSize = static_cast<qint64>(m_lastImageInfo.projectedSize);
@@ -1521,7 +1500,7 @@ void MainWindow::onStartStop() {
     // Setup UI for operation
     setControlsEnabled(false);
     m_isRunning = true;
-    m_startBtn->setText(tr("Cancel"));
+    m_startBtn->setText(tr("CANCELAR"));
     m_startBtn->setEnabled(true);
     m_progressBar->setFormat(QStringLiteral("%p%"));
     m_progressBar->setValue(0);
@@ -1625,19 +1604,15 @@ void MainWindow::onImageChanged(const QString &path) {
         }
         // No image anymore: MS-DOS becomes available again.
         updateBootloaderItemState();
-    m_hashBtn->setVisible(false);
-    // Reset the image option/persistence row so no stale Windows To Go
-    // state leaks into the next image (or a format-only operation).
-    m_imageOptionLabel->setVisible(false);
-    m_imageOptionCombo->setVisible(false);
-    m_imageOptionCombo->setCurrentIndex(0);
-    m_persistenceSlider->setVisible(false);
-    m_persistenceSizeSpin->setVisible(false);
-    m_persistenceUnitsCombo->setVisible(false);
-    m_persistentCheck->setChecked(false);
-    updateFixedSize();
-    updateIdleProgressBarText();
-    return;
+        m_hashBtn->setVisible(false);
+        // Reset the image option row so no stale Windows To Go state leaks
+        // into the next image (or a format-only operation).
+        m_imageOptionLabel->setVisible(false);
+        m_imageOptionCombo->setVisible(false);
+        m_imageOptionCombo->setCurrentIndex(0);
+        updateFixedSize();
+        updateIdleProgressBarText();
+        return;
     }
 
     // Image detection (ISO mount + content scan) can take seconds, so it
@@ -2041,6 +2016,9 @@ void MainWindow::onSchemeChanged(int index) {
         m_targetSystemCombo->blockSignals(true);
         m_targetSystemCombo->setCurrentIndex(wantIdx);
         m_targetSystemCombo->blockSignals(false);
+        // The index was set with signals blocked, so the "?" help link
+        // next to the combo would not be updated by onTargetSystemChanged.
+        m_csmHelpLabel->setVisible(want == 0);
     }
     updateTargetSystemForScheme();
     m_targetSystemCombo->setEnabled(!m_formatNotApplicable);
@@ -2065,10 +2043,9 @@ void MainWindow::onTargetSystemChanged(int index) {
         }
     }
 
-    // Show CSM help label when BIOS is available but cannot be selected
-    int scheme = m_schemeCombo->currentData().toInt();
-    bool showHelp = (scheme != static_cast<int>(PartitionScheme::GPT) && target == 1);
-    m_csmHelpLabel->setVisible(showHelp);
+    // Show the blue "?" help link next to the combo whenever the
+    // "BIOS (or UEFI-CSM)" target is selected.
+    m_csmHelpLabel->setVisible(target == 0);
 }
 
 void MainWindow::onFsChanged(int index) {
@@ -2325,10 +2302,14 @@ void MainWindow::updateTargetSystemForScheme() {
             m_targetSystemCombo->setCurrentIndex(biosIdx);
     }
     m_targetSystemCombo->blockSignals(false);
+    // The combo may have been changed with signals blocked above: keep the
+    // blue "?" help link in sync with the actually selected target.
+    m_csmHelpLabel->setVisible(m_targetSystemCombo->currentData().toInt() == 0);
 }
 
 void MainWindow::setControlsEnabled(bool enabled) {
     m_deviceCombo->setEnabled(enabled);
+    m_langBtn->setEnabled(enabled);
     m_refreshBtn->setEnabled(enabled);
     m_bootSelectionCombo->setEnabled(enabled);
     m_selectBtn->setEnabled(enabled);
@@ -2339,9 +2320,6 @@ void MainWindow::setControlsEnabled(bool enabled) {
     m_verifyWriteCheck->setEnabled(enabled);
     m_badBlocksCheck->setEnabled(enabled);
     m_nbPassesCombo->setEnabled(enabled && m_badBlocksCheck->isChecked());
-    m_persistentCheck->setEnabled(enabled);
-    m_persistenceSizeSpin->setEnabled(enabled && m_persistentCheck->isChecked());
-    m_persistenceSlider->setEnabled(enabled && m_persistentCheck->isChecked());
     m_espCheck->setEnabled(enabled);
     m_uefiNtfsCheck->setEnabled(enabled);
     m_oldBiosFixCheck->setEnabled(enabled);
@@ -2380,14 +2358,14 @@ void MainWindow::updateContextualStates() {
     m_verifyWriteCheck->setEnabled(enabled);
     m_badBlocksCheck->setEnabled(enabled);
     m_nbPassesCombo->setEnabled(enabled && m_badBlocksCheck->isChecked());
-    m_persistentCheck->setEnabled(enabled);
-    m_persistenceSizeSpin->setEnabled(enabled && m_persistentCheck->isChecked());
-    m_persistenceSlider->setEnabled(enabled && m_persistentCheck->isChecked());
     m_espCheck->setEnabled(enabled);
     m_uefiNtfsCheck->setEnabled(enabled);
     m_oldBiosFixCheck->setEnabled(enabled);
     m_uefiMediaCheck->setEnabled(enabled);
 
+    // START needs a real device. (Without an image in "Disk or ISO image"
+    // mode the button stays enabled and onStartStop() shows guidance
+    // instead of starting, so the user is told how to proceed.)
     m_startBtn->setEnabled(enabled);
 
     // Re-assert the per-image sub-states (Not applicable combos, MS-DOS
@@ -2412,12 +2390,26 @@ void MainWindow::updateIdleProgressBarText() {
     // Like original Rufus, the bar is never blank: it shows a hint when
     // the user still has to pick an image (boot selection = "Disk or ISO
     // image" with no file), or "PREPARED" once the selection is ready to
-    // write (image loaded, or any other boot selection).
+    // write (image loaded, or any other boot selection). All status text
+    // is rendered centered inside the bar (theme-compatible, palette
+    // colors — never right-aligned).
     bool imageSlot = static_cast<BootType>(m_bootSelectionCombo->currentData().toInt()) ==
                      BootType::Image;
     bool hasImage = imageSlot && !selectedImagePath().isEmpty();
-    m_progressBar->setFormat((imageSlot && !hasImage)
-        ? tr("FALTA SELECCIONAR LA IMAGEN") : tr("PREPARED"));
+    if (imageSlot && !hasImage) {
+        m_progressBar->setFormat(tr("SELECT IMAGE"));
+    } else {
+        m_progressBar->setFormat(tr("PREPARED"));
+    }
+}
+
+void MainWindow::updateHashButtonStyle() {
+    if (!m_hashBtn)
+        return;
+    m_hashBtn->setStyleSheet(QStringLiteral(
+        "QPushButton { border: none; background: transparent; }"
+        "QPushButton:hover { background-color: %1; border-radius: 3px; }")
+        .arg(palette().color(QPalette::Highlight).name()));
 }
 
 void MainWindow::updateRecommendedSettings(const QString &imagePath) {
@@ -2465,31 +2457,18 @@ void MainWindow::updateRecommendedSettings(const QString &imagePath) {
 }
 
 void MainWindow::updateAdvancedFromImage(const ImageInfo &info) {
-    bool hasPersist = info.hasPersistence();
-    m_persistentCheck->setEnabled(hasPersist);
-    if (!hasPersist)
-        m_persistentCheck->setChecked(false);
-
     m_espCheck->setEnabled(info.isUefiBootable);
 
     bool needsUefiNtfs = info.hasWindows() && info.has4GBFile &&
                          info.partitionScheme.contains("GPT", Qt::CaseInsensitive);
     m_uefiNtfsCheck->setEnabled(needsUefiNtfs);
 
-    // Show image option for Windows images
-    bool hasWinToGo = info.hasWindows() && info.wininstIndex > 0;
-    bool hasPersistOption = info.hasPersistence();
-    bool showImageOpt = hasWinToGo || hasPersistOption;
+    // Show the image option row only for Windows images (Windows To Go is
+    // a Windows-only option; Linux ISOs never get an image option).
+    bool showImageOpt = info.hasWindows() && info.wininstIndex > 0;
     m_imageOptionLabel->setVisible(showImageOpt);
     m_imageOptionCombo->setVisible(showImageOpt);
 
-    // If persistence, pre-check
-    if (hasPersistOption && hasPersist) {
-        m_persistentCheck->setChecked(true);
-        m_persistenceSlider->setVisible(true);
-        m_persistenceSizeSpin->setVisible(true);
-        m_persistenceUnitsCombo->setVisible(true);
-    }
     updateFixedSize();
 }
 
@@ -2527,6 +2506,10 @@ void MainWindow::setPartitionSchemeFromImage(const ImageInfo &info) {
         m_schemeCombo->setCurrentIndex(idx);
         m_schemeCombo->blockSignals(false);
     }
+    // The scheme change is applied with signals blocked, so re-sync the
+    // "UEFI (non CSM)" target visibility, which depends on the scheme.
+    if (upper == "GPT")
+        updateTargetSystemForScheme();
 }
 
 void MainWindow::setFormatNotApplicable(bool notApplicable) {
@@ -2669,7 +2652,6 @@ void MainWindow::loadSettings() {
     updateTargetSystemForScheme();
     m_verifyWriteCheck->setChecked(settings.verifyWrite());
     m_badBlocksCheck->setChecked(settings.badBlocks());
-    m_persistentCheck->setChecked(settings.persistence());
     m_labelEdit->setText(settings.volumeLabel());
     m_listUsbHddCheck->setChecked(settings.listUsbHdd());
     m_recentImages = settings.recentImages();
@@ -2688,7 +2670,6 @@ void MainWindow::loadSettings() {
         m_extendedLabelCheck->setVisible(false);
         m_badBlocksCheck->setVisible(false);
         m_nbPassesCombo->setVisible(false);
-        m_persistentCheck->setVisible(false);
         m_verifyWriteCheck->setVisible(false);
         m_espCheck->setVisible(false);
         m_uefiNtfsCheck->setVisible(false);
@@ -2704,7 +2685,6 @@ void MainWindow::loadSettings() {
         m_extendedLabelCheck->setVisible(true);
         m_badBlocksCheck->setVisible(true);
         m_nbPassesCombo->setVisible(true);
-        m_persistentCheck->setVisible(true);
         m_verifyWriteCheck->setVisible(true);
         m_espCheck->setVisible(true);
         m_uefiNtfsCheck->setVisible(true);
@@ -2726,13 +2706,10 @@ void MainWindow::loadSettings() {
         m_advancedDriveToggle->setIcon(style()->standardIcon(QStyle::SP_ArrowDown));
     }
 
-    // Settings
-    QString langCode = settings.language();
-    if (!langCode.isEmpty() && langCode != Localization::currentLanguage()) {
-        Localization::setLanguage(langCode);
-        QEvent langEvent(QEvent::LanguageChange);
-        QApplication::sendEvent(this, &langEvent);
-    }
+    // The interface language is detected from the desktop session at
+    // startup (see main.cpp): the saved preference is not re-applied here,
+    // so the app always follows the session language on launch. The
+    // language menu still switches it for the current session.
 
     // Combos were restored with signals blocked, so normalize the
     // MS-DOS/image interaction explicitly (e.g. a saved msdos bootloader
@@ -2757,7 +2734,6 @@ void MainWindow::saveSettings() {
     settings.setListUsbHdd(m_listUsbHddCheck->isChecked());
     settings.setVolumeLabel(m_labelEdit->text());
     settings.setBadBlocks(m_badBlocksCheck->isChecked());
-    settings.setPersistence(m_persistentCheck->isChecked());
     settings.setImageOption(m_imageOptionCombo->currentIndex());
     settings.setRecentImages(m_recentImages);
     settings.sync();
@@ -2793,6 +2769,10 @@ void MainWindow::rebuildBootSelectionCombo() {
 void MainWindow::retranslateUi() {
     setWindowTitle(tr("Rufus %1").arg(QApplication::applicationVersion()));
 
+    if (m_deviceLabel)
+        m_deviceLabel->setText(tr("Device"));
+    if (m_targetSystemLabel)
+        m_targetSystemLabel->setText(tr("Target system"));
     if (m_driveHeader)
         m_driveHeader->setText(tr("Drive Properties"));
     if (m_formatHeader)
@@ -2814,17 +2794,18 @@ void MainWindow::retranslateUi() {
     m_aboutBtn->setToolTip(tr("About Rufus"));
     m_logBtn->setToolTip(tr("Open log window"));
 
-    m_startBtn->setText(m_isRunning ? tr("Cancel") : tr("START"));
+    m_startBtn->setText(m_isRunning ? tr("CANCELAR") : tr("START"));
     m_closeBtn->setText(tr("CLOSE"));
 
-    // The progress bar shows the (translated) idle hint — "FALTA
-    // SELECCIONAR LA IMAGEN", "PREPARED" — or keeps "PREPARED" at 100%
-    // when a previous operation finished.
+    // The progress bar shows the (translated) idle hint — "SELECCIONE
+    // IMAGEN", "PREPARADO" — or keeps "PREPARADO" at 100% when a previous
+    // operation finished.
     if (m_progressBar && !m_isRunning) {
-        if (m_progressBar->value() >= 100)
+        if (m_progressBar->value() >= 100) {
             m_progressBar->setFormat(tr("PREPARED"));
-        else
+        } else {
             updateIdleProgressBarText();
+        }
     }
 
     if (m_partitionSchemeLabel)
@@ -2875,11 +2856,10 @@ void MainWindow::retranslateUi() {
     m_extendedLabelCheck->setText(tr("Create extended label and icon files"));
     m_badBlocksCheck->setText(tr("Check device for bad blocks"));
 
-    if (m_imageOptionCombo && m_imageOptionCombo->count() == 3) {
+    if (m_imageOptionCombo && m_imageOptionCombo->count() == 2) {
         m_imageOptionCombo->blockSignals(true);
         m_imageOptionCombo->setItemText(0, tr("Standard Windows installation"));
         m_imageOptionCombo->setItemText(1, tr("Windows To Go"));
-        m_imageOptionCombo->setItemText(2, tr("Persistence"));
         m_imageOptionCombo->blockSignals(false);
     }
 
@@ -2896,8 +2876,6 @@ void MainWindow::retranslateUi() {
     if (m_csmHelpLabel)
         m_csmHelpLabel->setToolTip(tr("Click for information about UEFI-CSM (Compatibility Support Module)"));
 
-    if (m_persistentCheck)
-        m_persistentCheck->setText(tr("Add persistent partition"));
     if (m_verifyWriteCheck)
         m_verifyWriteCheck->setText(tr("Verify written data (read back and hash)"));
 
@@ -2936,11 +2914,7 @@ void MainWindow::retranslateUi() {
         "• Non bootable: Just format the drive\n• Disk or ISO image: Create from an ISO/IMG file\n"
         "• FreeDOS: Create a FreeDOS bootable drive\n• MS-DOS: Create an MS-DOS bootable drive"));
     m_imageOptionCombo->setToolTip(tr("Image option:\n"
-        "• Standard: Regular Windows installation\n• Windows To Go: Run Windows from USB\n"
-        "• Persistence: Keep changes across reboots"));
-    m_persistenceSlider->setToolTip(tr("Size of the persistence partition"));
-    m_persistenceSizeSpin->setToolTip(tr("Persistence partition size in MB"));
-    m_persistenceUnitsCombo->setToolTip(tr("Units for persistence size"));
+        "• Standard: Regular Windows installation\n• Windows To Go: Run Windows from USB"));
     m_schemeCombo->setToolTip(tr("Partition scheme:\n"
         "• MBR: Master Boot Record (compatible, BIOS + UEFI-CSM)\n"
         "• GPT: GUID Partition Table (modern, native UEFI)"));

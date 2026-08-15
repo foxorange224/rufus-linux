@@ -177,7 +177,8 @@ public:
                            std::function<bool()> isCancelled = nullptr,
                            std::function<void(const QString &)> fileCopied = nullptr);
     static bool extractCompressed(const QString &archivePath, const QString &destPath,
-                                  std::function<void(int)> percentCallback);
+                                  std::function<void(int)> percentCallback,
+                                  std::function<void(const QString &)> fileCopied = nullptr);
     static bool extractMsDos(const QString &destPath);
     static bool isBootableIso(const QString &path);
     static bool hasPartitionTable(const QString &path);

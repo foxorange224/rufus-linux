@@ -70,6 +70,11 @@ public:
     QString language() const;
     void setLanguage(const QString &code);
 
+    // Qt style preference: a style name from QStyleFactory::keys()
+    // (defaults to "fusion").
+    QString style() const;
+    void setStyle(const QString &name);
+
     bool firstRun() const;
     void setFirstRun(bool done);
 

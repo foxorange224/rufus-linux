@@ -77,6 +77,22 @@ bool FormatWorker::waitForPartition(const QString &path, int timeoutMs) {
     return QFileInfo::exists(path);
 }
 
+ImageInfo FormatWorker::detectImage() const {
+    if (!m_imageInfoCached && !m_config.imagePath.isEmpty()) {
+        m_cachedImageInfo = ImageHandler::detect(m_config.imagePath);
+        m_imageInfoCached = true;
+    }
+    return m_cachedImageInfo;
+}
+
+void FormatWorker::setProgress(int percent) {
+    // The progress bar must never go backwards: some steps are mapped onto
+    // fixed percentages (bad blocks 0-50, fake flash 0-10, ISO steps 10-100)
+    // and their ranges overlap depending on the selected options.
+    m_lastProgress = qMax(m_lastProgress, percent);
+    emit progressChanged(m_lastProgress);
+}
+
 static bool loopMountIso(const QString &isoPath, const QString &mountPoint) {
     // One QProcess per attempt, reaped before the next one starts.
     QProcess fuse;
@@ -102,7 +118,8 @@ static qint64 totalDirSize(const QString &dir) {
 }
 
 // Same "X KB / X MB / X GB" human-readable size used by the UI, so log
-// lines like "Extracting: /path/arch.iso (812 MB)" read naturally.
+// lines like "Extracting: /arch/boot/vmlinuz-linux (14 MB)" read
+// naturally.
 static QString formatBytes(qint64 bytes) {
     if (bytes < 1024)
         return QStringLiteral("%1 B").arg(bytes);
@@ -259,10 +276,21 @@ void FormatWorker::run() {
     QString message;
     bool cancelled = false;
 
+    m_lastProgress = 0;
+
+    // An ISO image to extract makes the file-copy phase the long pole of
+    // the operation, so the format steps (which are comparatively quick)
+    // must not eat half of the progress bar. All progress anchors below
+    // are compressed when an image will follow; a plain format keeps the
+    // original Rufus-like spacing.
+    m_hasImage = (m_config.mode == Mode::CreateBootable ||
+                  m_config.mode == Mode::WriteImageIso) &&
+                 !m_config.imagePath.isEmpty();
+
     auto fail = [&](const QString &msg) {
         message = msg;
         emit logMessage(msg, 1);
-        emit progressChanged(100);
+        setProgress(100);
         emit finished(false, msg);
     };
 
@@ -270,7 +298,7 @@ void FormatWorker::run() {
         message = QStringLiteral("Completed successfully in %1 seconds.")
             .arg(totalTimer.elapsed() / 1000.0, 0, 'f', 1);
         emit logMessage(message, 0);
-        emit progressChanged(100);
+        setProgress(100);
         emit finished(true, message);
     };
 
@@ -287,9 +315,9 @@ void FormatWorker::run() {
     // Status bar detail: with an image loaded, say which image is being
     // used; a plain format shows a neutral "working with the drive" hint.
     if (m_config.imagePath.isEmpty()) {
-        emit statusBarMessage(tr("Trabajando con la unidad..."));
+        emit statusBarMessage(tr("Working with the drive..."));
     } else {
-        emit statusBarMessage(tr("Usando la imagen: %1")
+        emit statusBarMessage(tr("Using image: %1")
             .arg(QFileInfo(m_config.imagePath).fileName()));
     }
 
@@ -317,7 +345,7 @@ void FormatWorker::run() {
         emit statusChanged(tr("Checking for fake flash..."));
         bool fake = BadBlocks::detectFakeFlash(
             m_config.targetDevice.path, m_config.targetDevice.size,
-            [this](int p) { emit progressChanged(p / 10); });
+            [this](int p) { setProgress(m_hasImage ? p / 20 : p / 10); });
         if (fake)
             emit logMessage(QStringLiteral("WARNING: Device appears to be fake/flash!"), 2);
     }
@@ -330,7 +358,7 @@ void FormatWorker::run() {
     // (original rufus.c: IS_DD_BOOTABLE && (!is_iso || disable_iso)).
     bool isDdMode = (m_config.mode == Mode::WriteImage);
     if (m_config.mode == Mode::CreateBootable && !m_config.imagePath.isEmpty()) {
-        ImageInfo imgInfo = ImageHandler::detect(m_config.imagePath);
+        ImageInfo imgInfo = detectImage();
         isDdMode = imgInfo.isDDOnly();
     }
 
@@ -356,19 +384,32 @@ void FormatWorker::run() {
         .arg(m_config.imagePath.isEmpty() ? QStringLiteral("no image")
                                            : m_config.imagePath), 0);
 
+    // Progress anchors. With an image to extract afterwards, the format
+    // steps are compressed so the ISO copy dominates the bar; without an
+    // image the format itself is the whole operation and keeps the wider
+    // spacing (like original Rufus).
+    const int kZero = m_hasImage ? 5 : 10;
+    const int kInit = m_hasImage ? 8 : 15;
+    const int kParts = m_hasImage ? 12 : 25;
+    const int kPersist = m_hasImage ? 17 : 35;
+    const int kFormat = m_hasImage ? 22 : 50;
+    const int kMbr = m_hasImage ? 25 : 55;
+    m_copyStart = kMbr;
+    m_copyEnd = m_hasImage ? 88 : 85;
+
     // Original Rufus log sequence: clearing structures, zeroing 8 MB at
     // the top and 1 MB at the end of the drive, then initializing disk.
     emit logMessage(QStringLiteral("Clearing MBR/PBR/GPT structures..."), 0);
     if (!zeroMbr()) { fail(QStringLiteral("Failed to clear device")); return; }
     emit logMessage(QStringLiteral("Zeroed 8 MB at the top of the drive"), 0);
     emit logMessage(QStringLiteral("Zeroed 1 MB at the end of the drive"), 0);
-    emit progressChanged(10);
+    setProgress(kZero);
 
     emit logMessage(QStringLiteral("Initializing disk..."), 0);
     emit logMessage(QStringLiteral("Partitioning (%1)...")
         .arg(m_config.scheme == PartitionScheme::GPT ? QStringLiteral("GPT") : QStringLiteral("MBR")), 0);
     if (!createPartitionTable()) { fail(QStringLiteral("Failed to create partition table")); return; }
-    emit progressChanged(15);
+    setProgress(kInit);
 
     emit logMessage(QStringLiteral("Creating partitions..."), 0);
     if (!createRufusPartitions()) { fail(QStringLiteral("Failed to create partitions")); return; }
@@ -383,15 +424,15 @@ void FormatWorker::run() {
             .arg(kMib)
             .arg(qMax<qint64>(mainSize / kMib, 1) / 1024.0, 0, 'f', 0), 0);
     }
-    emit progressChanged(25);
+    setProgress(kParts);
 
     if (m_config.extraParts.persistence) {
         if (!formatPersistencePartition()) { fail(QStringLiteral("Failed to format persistence partition")); return; }
     }
-    emit progressChanged(35);
+    setProgress(kPersist);
 
     if (!formatMainPartition()) { fail(QStringLiteral("Failed to format main partition")); return; }
-    emit progressChanged(50);
+    setProgress(kFormat);
 
     // Write MBR (boot-type-aware selection, like original Rufus)
     {
@@ -421,7 +462,7 @@ void FormatWorker::run() {
     if (!writeSbr()) {
         emit logMessage(QStringLiteral("SBR write failed"), 2);
     }
-    emit progressChanged(55);
+    setProgress(kMbr);
 
     // Mount, install bootloader (before file copy), copy files, remount after
     if (!mountAndCopyFiles()) {
@@ -429,7 +470,7 @@ void FormatWorker::run() {
         fail(QStringLiteral("Failed to copy files"));
         return;
     }
-    emit progressChanged(85);
+    setProgress(m_copyEnd);
 
     // NTFS checkdisk at end (like Rufus does)
     if (m_config.filesystem == FileSystem::NTFS) {
@@ -471,7 +512,7 @@ bool FormatWorker::writeImageDD() {
         .arg(writeResult.bytesWritten).arg(m_config.targetDevice.path), 0);
 
     DriveWriter::syncDevice(m_config.targetDevice.path);
-    emit progressChanged(100);
+    setProgress(100);
     return true;
 }
 
@@ -487,7 +528,7 @@ bool FormatWorker::checkBadBlocksPass() {
 
     BadBlockResult result = BadBlocks::check(
         m_config.targetDevice.path, 0, mode,
-        [this](int p) { emit progressChanged(p / 2); },
+        [this](int p) { setProgress(p / 2); },
         totalPasses);
 
     emit logMessage(result.summary, result.badSectors > 0 ? 2 : 0);
@@ -592,7 +633,7 @@ bool FormatWorker::formatPersistencePartition() {
     }
 
     // Determine label based on whether it's Ubuntu-style (casper-rw) or Debian-style
-    ImageInfo imgInfo = ImageHandler::detect(m_config.imagePath);
+    ImageInfo imgInfo = detectImage();
     QString persistenceLabel = imgInfo.usesCasper
         ? QStringLiteral("casper-rw") : QStringLiteral("persistence");
 
@@ -664,7 +705,7 @@ bool FormatWorker::mountAndCopyFiles() {
     // needs its own FreeLoader boot files from the ISO, like original Rufus).
     ImageInfo imgInfo;
     if (!m_config.imagePath.isEmpty())
-        imgInfo = ImageHandler::detect(m_config.imagePath);
+        imgInfo = detectImage();
     bool reactosBoot = (imgInfo.osType == OsType::ReactOS);
 
     // Make sure we unmount on exit
@@ -719,20 +760,35 @@ bool FormatWorker::mountAndCopyFiles() {
     if (!m_config.imagePath.isEmpty()) {
         if (imgInfo.type == ImageType::ISO) {
             emit statusChanged(tr("Extracting ISO files to USB..."));
-            emit logMessage(QStringLiteral("Extracting: %1 (%2)")
-                .arg(m_config.imagePath)
-                .arg(formatBytes(QFileInfo(m_config.imagePath).size())), 0);
+            emit logMessage(QStringLiteral("Extracting ISO files to USB..."), 0);
 
+            // Per-file reporting: the copy callbacks fire when a file
+            // STARTS being written, so its size on the target is still
+            // 0 (or partial). Stat the source (the mounted ISO) instead:
+            // it is complete, so the log line appears right when the
+            // file starts extracting, matching the status bar.
             QTemporaryDir isoMountDir;
             isoMountDir.setAutoRemove(true);
-            QString isoMp = isoMountDir.path();
+            const QString isoMp = isoMountDir.path();
 
-            // The extraction phase occupies the 55%..85% window of the
-            // overall progress; map the *real* extraction percentage
-            // (bytes copied vs total) into that window so the bar moves
-            // steadily instead of jumping.
+            auto onFile = [this, isoMp](const QString &name) {
+                const QString rel = name.startsWith('/') ? name
+                                                         : QStringLiteral("/") + name;
+                const QString msg = tr("Extracting: %1 (%2)")
+                    .arg(rel)
+                    .arg(formatBytes(QFileInfo(isoMp + rel).size()));
+                emit logMessage(msg, 0);
+                emit statusBarMessage(tr("Extracting: %1").arg(rel));
+            };
+
+            // The extraction phase occupies the m_copyStart..m_copyEnd
+            // window of the overall progress; map the *real* extraction
+            // percentage (bytes copied vs total) into that window so the
+            // bar moves steadily instead of jumping.
             auto extractPercent = [this](int pct) {
-                emit progressChanged(qBound(55, 55 + 30 * qBound(0, pct, 100) / 100, 85));
+                setProgress(qBound(m_copyStart,
+                    m_copyStart + (m_copyEnd - m_copyStart) *
+                                 qBound(0, pct, 100) / 100, m_copyEnd));
             };
 
             if (loopMountIso(m_config.imagePath, isoMp)) {
@@ -743,13 +799,7 @@ bool FormatWorker::mountAndCopyFiles() {
                             n * 100 / qMax<qint64>(1, total)));
                     },
                     [this]() { return isCancelled(); },
-                    [this](const QString &name) {
-                        // Path as seen from the USB root, not the mount
-                        // point: "Extrayendo: /system/core.img".
-                        emit statusBarMessage(tr("Extrayendo: %1")
-                            .arg(name.startsWith('/') ? name
-                                                      : QStringLiteral("/") + name));
-                    })) {
+                    onFile)) {
                     loopUnmount(isoMp);
                     cleanup();
                     emit logMessage(QStringLiteral("Failed to copy files from ISO"), 1);
@@ -760,17 +810,12 @@ bool FormatWorker::mountAndCopyFiles() {
                 if (!ImageHandler::extractIso(m_config.imagePath, mountPoint,
                     [&extractPercent](int pct) { extractPercent(pct); },
                     [this]() { return isCancelled(); },
-                    [this](const QString &name) {
-                        emit statusBarMessage(tr("Extrayendo: %1")
-                            .arg(name.startsWith('/') ? name
-                                                      : QStringLiteral("/") + name));
-                    })) {
+                    onFile)) {
                     cleanup();
                     emit logMessage(QStringLiteral("ISO extraction failed"), 1);
                     return false;
                 }
             }
-
             // Apply Windows 7 EFI fix if needed
             if (imgInfo.hasBootmgrEfi && !imgInfo.isUefiBootable &&
                 m_config.targetType == TargetSystemType::UEFI) {
@@ -906,15 +951,14 @@ bool FormatWorker::mountAndCopyFiles() {
     }
 
     // Finalize (original Rufus 'Finalizing, please wait...'): create the
-    // syslinux.cfg UEFI redirect and the extended label files, in the
-    // same relative order as the original logs.
+    // extended label files, in the same relative order as the original
+    // logs.
     emit logMessage(QStringLiteral("Finalizing, please wait..."), 0);
-    createSyslinuxUefiRedirect(mountPoint, imgInfo);
     createExtendedLabelFiles(mountPoint);
 
     // Match bootloader version from image and download if needed
     if (m_config.bootloaderType != "none" && m_config.mode == Mode::CreateBootable) {
-        ImageInfo imgInfo = ImageHandler::detect(m_config.imagePath);
+        ImageInfo imgInfo = detectImage();
         matchBootloaderVersion(mountPoint, imgInfo);
         downloadBootloaderIfNeeded(mountPoint);
     }
@@ -922,13 +966,20 @@ bool FormatWorker::mountAndCopyFiles() {
     // 4. Extract additional archive
     if (!m_config.archivePath.isEmpty()) {
         emit statusChanged(tr("Extracting additional files..."));
-        emit logMessage(QStringLiteral("Extracting: %1 (%2)")
-            .arg(m_config.archivePath)
-            .arg(formatBytes(QFileInfo(m_config.archivePath).size())), 0);
+        // Per-file reporting: 7z prints each file when its extraction
+        // starts, and the target file is only partially written, so the
+        // size is not known yet. Log it immediately, like the status bar.
+        auto onFile = [this](const QString &name) {
+            const QString rel = name.startsWith('/') ? name
+                                                     : QStringLiteral("/") + name;
+            emit logMessage(tr("Extracting: %1").arg(rel), 0);
+            emit statusBarMessage(tr("Extracting: %1").arg(rel));
+        };
         ImageHandler::extractCompressed(m_config.archivePath, mountPoint,
             [this](int pct) {
-                emit progressChanged(qBound(85, 85 + 10 * qBound(0, pct, 100) / 100, 95));
-            });
+                setProgress(qBound(85, 85 + 10 * qBound(0, pct, 100) / 100, 95));
+            },
+            onFile);
     }
 
     cleanup();
@@ -1058,47 +1109,12 @@ bool FormatWorker::createExtendedLabelFiles(const QString &mountPoint) {
     return true;
 }
 
-// ─── Syslinux config redirect (mixed firmware compatibility) ────────
-// Original Rufus behavior for UEFI images: when the ISO ships its
-// Syslinux configuration under /boot/syslinux/ (e.g. Arch Linux), a
-// root-level syslinux.cfg redirecting there is created after extraction
-// so the volume still boots on legacy/mixed firmware:
-//   'Created: E:\syslinux.cfg -> /boot/syslinux/syslinux.cfg'
-bool FormatWorker::createSyslinuxUefiRedirect(const QString &mountPoint, const ImageInfo &imgInfo) {
-    if (!imgInfo.isUefiBootable || m_config.imagePath.isEmpty())
-        return true;
-
-    QString target;
-    for (const QString &p : { mountPoint + "/boot/syslinux/syslinux.cfg",
-                              mountPoint + "/syslinux/syslinux.cfg" }) {
-        if (QFileInfo::exists(p)) {
-            target = p;
-            break;
-        }
-    }
-    if (target.isEmpty())
-        return true;
-
-    // If the volume already has a root config (the ISO's own, or the one
-    // written for ReactOS), keep it.
-    if (QFileInfo::exists(mountPoint + "/syslinux.cfg"))
-        return true;
-
-    QString redirect = target.startsWith(mountPoint)
-        ? target.mid(mountPoint.length()) : QStringLiteral("/boot/syslinux/syslinux.cfg");
-
-    QFile cfg(mountPoint + "/syslinux.cfg");
-    if (!cfg.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        emit logMessage(QStringLiteral("Failed to create syslinux.cfg redirect"), 2);
-        return false;
-    }
-    cfg.write("INCLUDE ");
-    cfg.write(redirect.toUtf8());
-    cfg.write("\n");
-    cfg.close();
-    emit logMessage(QStringLiteral("Created: syslinux.cfg -> %1").arg(redirect), 0);
-    return true;
-}
+// ─── Syslinux config redirect note ──────────────────────────────────
+// No root-level syslinux.cfg redirect is created: syslinux already
+// searches /boot/syslinux/syslinux.cfg natively, and an 'INCLUDE'
+// redirect breaks module resolution (after INCLUDE, relative paths like
+// 'COM32 whichsys.c32' resolve from the partition root), so Arch Linux
+// BIOS boot would fail with 'Failed to load COM32 file whichsys.c32'.
 bool FormatWorker::verifyWrite() {
     emit logMessage(QStringLiteral("Verifying written data..."), 0);
 
@@ -1302,7 +1318,7 @@ bool FormatWorker::applyUnattendCustomization(const QString &mountPoint) {
         return true;
     }
 
-    ImageInfo imgInfo = ImageHandler::detect(m_config.imagePath);
+    ImageInfo imgInfo = detectImage();
     if (!imgInfo.hasWindows()) {
         emit logMessage(QStringLiteral("Not a Windows image, skipping unattend"), 2);
         return true;

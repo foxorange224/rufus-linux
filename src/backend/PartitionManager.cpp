@@ -125,62 +125,81 @@ ClusterSizeInfo PartitionManager::getClusterSizes(FileSystem fs, qint64 diskSize
     return info;
 }
 
-QStringList PartitionManager::getClusterSizeLabels(FileSystem fs, qint64 diskSize) {
-    QStringList labels;
-    ClusterSizeInfo csi = getClusterSizes(fs, diskSize);
-    if (csi.allowedMask == 0) {
-        labels << QObject::tr("Default");
-        return labels;
+// Index of a cluster size inside kClusterSizeLabels. The mask bit map is
+// bit N = (512 << N) bytes (labels 0..17 cover 512 B .. 64 MB).
+static int clusterSizeLabelIndex(qint64 clusterSize) {
+    int i = 0;
+    for (qint64 s = 512; s < clusterSize && i < 17; s <<= 1)
+        i++;
+    return i;
+}
+
+// Cluster sizes (in bytes) enabled by the mask that the mkfs tools can
+// actually create. Sizes above the filesystem ceiling are skipped, exactly
+// like Windows clamps oversized clusters: mkfs.fat accepts at most 64KB
+// clusters (FAT16: 32KB), mkfs.ntfs up to 64KB and exFAT up to 32MB.
+static QList<qint64> allowedClusterSizes(FileSystem fs, const ClusterSizeInfo &csi) {
+    QList<qint64> sizes;
+    if (csi.allowedMask == 0)
+        return sizes;
+
+    qint64 maxSize = 64LL * 1024;
+    switch (fs) {
+    case FileSystem::FAT16: maxSize = 32LL * 1024; break;
+    case FileSystem::NTFS:  maxSize = 64LL * 1024; break;
+    case FileSystem::exFAT: maxSize = 32LL * 1024 * 1024; break;
+    default: return sizes; // ext/UDF: "Default" only
     }
 
-    labels << QObject::tr("Default");
     for (int i = 0; i < 18; i++) {
-        qint64 clusterSize = (i < 13) ? (512LL << i) : (8192LL << (i - 13));
-        if (clusterSize == 0) continue;
-        if (csi.allowedMask & clusterSize) {
-            QString label = kClusterSizeLabels[i];
-            if (clusterSize == csi.defaultSize)
-                label = QObject::tr("%1 (Default)").arg(label);
-            labels << label;
-        }
+        const qint64 clusterSize = 512LL << i;
+        if (clusterSize > maxSize)
+            continue;
+        if (csi.allowedMask & clusterSize)
+            sizes.append(clusterSize);
+    }
+    return sizes;
+}
+
+QStringList PartitionManager::getClusterSizeLabels(FileSystem fs, qint64 diskSize) {
+    QStringList labels;
+    labels << QObject::tr("Default");
+
+    ClusterSizeInfo csi = getClusterSizes(fs, diskSize);
+    const QList<qint64> sizes = allowedClusterSizes(fs, csi);
+    for (const qint64 clusterSize : sizes) {
+        QString label = kClusterSizeLabels[clusterSizeLabelIndex(clusterSize)];
+        if (clusterSize == csi.defaultSize)
+            label = QObject::tr("%1 (Default)").arg(label);
+        labels << label;
     }
     return labels;
 }
 
 int PartitionManager::getDefaultClusterIndex(FileSystem fs, qint64 diskSize) {
     ClusterSizeInfo csi = getClusterSizes(fs, diskSize);
-    if (csi.defaultSize == 0 || csi.allowedMask == 0)
+    if (csi.defaultSize == 0)
         return 0;
 
     int index = 0;
-    for (int i = 0; i < 18; i++) {
-        qint64 clusterSize = (i < 13) ? (512LL << i) : (8192LL << (i - 13));
-        if (clusterSize == 0) continue;
-        if ((csi.allowedMask & clusterSize) == 0) continue;
+    for (const qint64 clusterSize : allowedClusterSizes(fs, csi)) {
         index++;
         if (clusterSize == csi.defaultSize)
             return index;
     }
-    return 0;
+    return 0; // default size not creatable: let mkfs decide
 }
 
 // Returns the cluster size in KiB selected by the combo index, or 0 for
 // "Default" (let mkfs decide).
 int PartitionManager::getClusterSizeFromIndex(FileSystem fs, qint64 diskSize, int index) {
-    ClusterSizeInfo csi = getClusterSizes(fs, diskSize);
-    if (csi.allowedMask == 0 || index <= 0)
+    if (index <= 0)
         return 0;
 
-    int idx = 0;
-    for (int i = 0; i < 18; i++) {
-        qint64 clusterSize = (i < 13) ? (512LL << i) : (8192LL << (i - 13));
-        if (clusterSize == 0) continue;
-        if ((csi.allowedMask & clusterSize) == 0) continue;
-        idx++;
-        if (idx == index)
-            return static_cast<int>(clusterSize / kKB);
-    }
-    return 0;
+    const QList<qint64> sizes = allowedClusterSizes(fs, getClusterSizes(fs, diskSize));
+    if (index - 1 >= sizes.size())
+        return 0;
+    return static_cast<int>(sizes[index - 1] / kKB);
 }
 
 QList<FileSystem> PartitionManager::getAllowedFileSystems(BootType bootType,
@@ -370,11 +389,9 @@ bool PartitionManager::createPartition(const QString &devicePath, const Partitio
     sfdisk.write(script.toUtf8());
     sfdisk.closeWriteChannel();
     finishProcess(sfdisk, 10000);
-    if (sfdisk.exitStatus() == QProcess::NormalExit && sfdisk.exitCode() == 0)
-        goto done;
+    bool sfdiskOk = (sfdisk.exitStatus() == QProcess::NormalExit && sfdisk.exitCode() == 0);
 
-    // Fallback to parted
-    {
+    if (!sfdiskOk) {
         QString fsStr;
         switch (layout.fs) {
         case FileSystem::FAT16: fsStr = "fat16"; break;
@@ -394,7 +411,6 @@ bool PartitionManager::createPartition(const QString &devicePath, const Partitio
             return false;
     }
 
-done:
     refreshPartitionTable(devicePath);
     QThread::msleep(300);
     return true;
@@ -598,7 +614,7 @@ QList<PartitionInfo> PartitionManager::listPartitions(const QString &devicePath)
 qint64 PartitionManager::getDeviceSize(const QString &devicePath) {
     QProcess proc;
     proc.start("blockdev", {"--getsize64", devicePath});
-    if (!proc.waitForFinished(5000))
+    if (!proc.waitForFinished(5000) || proc.exitCode() != 0)
         return 0;
     return proc.readAllStandardOutput().trimmed().toLongLong();
 }
@@ -671,7 +687,7 @@ FileSystem PartitionManager::fsFromString(const QString &s) {
     if (u == "EXFAT") return FileSystem::exFAT;
     if (u == "NTFS")  return FileSystem::NTFS;
     if (u == "UDF")   return FileSystem::UDF;
-    if (u == "REFS" || u == "REFS") return FileSystem::ReFS;
+    if (u == "REFS" || u == "ReFS") return FileSystem::ReFS;
     if (u == "EXT2")  return FileSystem::ext2;
     if (u == "EXT3")  return FileSystem::ext3;
     if (u == "EXT4")  return FileSystem::ext4;

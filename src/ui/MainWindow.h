@@ -31,6 +31,7 @@
 #include "worker/FormatWorker.h"
 
 class LogDialog;
+class ThemeWatcher;
 class QVBoxLayout;
 class QHBoxLayout;
 class QFrame;
@@ -81,6 +82,7 @@ private:
     void setFormatNotApplicable(bool notApplicable);
     void updateContextualStates();
     void updateIdleProgressBarText();
+    void updateHashButtonStyle();
     void updateRecommendedSettings(const QString &imagePath);
     void updateAdvancedFromImage(const ImageInfo &info);
     void loadSettings();
@@ -111,22 +113,21 @@ private:
     // Drive Properties
     QComboBox *m_deviceCombo = nullptr;
     QPushButton *m_refreshBtn = nullptr;
+    QLabel *m_deviceLabel = nullptr;
     QComboBox *m_bootSelectionCombo = nullptr;
     QPushButton *m_saveBtn = nullptr;
     QPushButton *m_hashBtn = nullptr;
     QToolButton *m_selectBtn = nullptr;
     QMenu *m_selectMenu = nullptr;
 
-    // Image option + persistence row
+    // Image option row (Windows images only)
     QLabel *m_imageOptionLabel = nullptr;
     QComboBox *m_imageOptionCombo = nullptr;
-    QSlider *m_persistenceSlider = nullptr;
-    QSpinBox *m_persistenceSizeSpin = nullptr;
-    QComboBox *m_persistenceUnitsCombo = nullptr;
 
     // Partition scheme + target system
     QComboBox *m_schemeCombo = nullptr;
     QComboBox *m_targetSystemCombo = nullptr;
+    QLabel *m_targetSystemLabel = nullptr;
     QLabel *m_csmHelpLabel = nullptr;
 
     // Drive advanced section
@@ -154,7 +155,6 @@ private:
     QCheckBox *m_extendedLabelCheck = nullptr;
     QCheckBox *m_badBlocksCheck = nullptr;
     QComboBox *m_nbPassesCombo = nullptr;
-    QCheckBox *m_persistentCheck = nullptr;
     QCheckBox *m_verifyWriteCheck = nullptr;
     QCheckBox *m_espCheck = nullptr;
     QCheckBox *m_uefiNtfsCheck = nullptr;
@@ -173,13 +173,18 @@ private:
     QTimer *m_elapsedTick = nullptr;
     QElapsedTimer m_elapsedTimer;
 
+    // Watches the desktop theme config (kdeglobals / lxqt.conf) and reapplies
+    // the palette live when the user switches the global color scheme.
+    ThemeWatcher *m_themeWatcher = nullptr;
+
     // Bottom buttons
     QPushButton *m_startBtn = nullptr;
     QPushButton *m_closeBtn = nullptr;
 
-    // Icon-only toolbar (Language, About, Log)
+    // Icon-only toolbar (Language, About, Preferences, Log)
     QToolButton *m_langBtn = nullptr;
     QToolButton *m_aboutBtn = nullptr;
+    QToolButton *m_prefsBtn = nullptr;
     QToolButton *m_logBtn = nullptr;
 
     // Language

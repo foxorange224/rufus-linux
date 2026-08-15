@@ -2,6 +2,8 @@ add_library(rufus_ui STATIC
     MainWindow.cpp
     AboutDialog.cpp
     LogDialog.cpp
+    PreferencesDialog.cpp
+    ThemeWatcher.cpp
 )
 target_include_directories(rufus_ui PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

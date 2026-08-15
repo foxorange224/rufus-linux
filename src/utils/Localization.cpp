@@ -95,6 +95,9 @@ void Localization::init(const QString &appDir) {
     m_detectedSystemLang = locale.name();
 
     QStringList searchPaths = {
+        // Translations bundled inside the binary (resources.qrc) first, so
+        // the app works standalone; filesystem paths as dev fallbacks.
+        QStringLiteral(":/translations"),
         m_localeDir,
         appDir + QStringLiteral("/../res/translations"),
         appDir + QStringLiteral("/../../res/translations"),
@@ -128,6 +131,8 @@ void Localization::init(const QString &appDir) {
 bool Localization::setLanguage(const QString &langCode) {
     QString appDir = QCoreApplication::applicationDirPath();
     QStringList searchPaths = {
+        // Translations bundled inside the binary (resources.qrc) first.
+        QStringLiteral(":/translations"),
         m_localeDir,
         appDir + QStringLiteral("/translations"),
         appDir + QStringLiteral("/../res/translations"),
@@ -179,6 +184,8 @@ QString Localization::translate(const QString &context, const QString &source) {
 QList<QString> Localization::availableLocales() {
     QStringList codes;
     QStringList searchPaths = {
+        // Translations bundled inside the binary (resources.qrc) first.
+        QStringLiteral(":/translations"),
         m_localeDir,
         QCoreApplication::applicationDirPath() + QStringLiteral("/translations")
     };

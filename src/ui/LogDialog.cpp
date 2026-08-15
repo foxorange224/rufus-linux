@@ -30,10 +30,7 @@ LogDialog::LogDialog(QWidget *parent)
     m_textEdit = new QTextEdit;
     m_textEdit->setReadOnly(true);
     m_textEdit->document()->setMaximumBlockCount(5000);
-    m_textEdit->setStyleSheet(
-        "QTextEdit { background-color: #1e1e1e; color: #d4d4d4; "
-        "font-family: 'Monospace', 'Courier New', monospace; font-size: 11px; "
-        "border: 1px solid #444; }");
+    updateLogColors();
     layout->addWidget(m_textEdit, 1);
 
     auto *btnLayout = new QHBoxLayout;
@@ -79,6 +76,18 @@ void LogDialog::setDetached(bool detached) {
         setWindowTitle(tr("Log"));
 }
 
+void LogDialog::updateLogColors() {
+    QPalette pal = palette();
+    QColor bg = pal.color(QPalette::Base);
+    QColor fg = pal.color(QPalette::Text);
+    QColor border = pal.color(QPalette::Mid);
+    m_textEdit->setStyleSheet(
+        QStringLiteral("QTextEdit { background-color: %1; color: %2; "
+                       "font-family: 'Monospace', 'Courier New', monospace; font-size: 11px; "
+                       "border: 1px solid %3; }")
+            .arg(bg.name(), fg.name(), border.name()));
+}
+
 void LogDialog::changeEvent(QEvent *event) {
     if (event->type() == QEvent::LanguageChange) {
         m_clearBtn->setText(tr("Clear"));
@@ -87,6 +96,8 @@ void LogDialog::changeEvent(QEvent *event) {
         m_detachBtn->setToolTip(m_detached ? tr("Attach to main window")
                                            : tr("Detach from main window"));
     }
+    if (event->type() == QEvent::PaletteChange)
+        updateLogColors();
     QWidget::changeEvent(event);
 }
 
@@ -103,18 +114,14 @@ QString LogDialog::buildHeader() {
     QStringList header;
     QSysInfo sysInfo;
     QString kernelVer = sysInfo.kernelVersion();
-    QString productType = sysInfo.productType();
-    QString productVer = sysInfo.productVersion();
     QString arch = QSysInfo::currentCpuArchitecture();
     header << QStringLiteral("Rufus v%1 (%2, Qt %3)")
         .arg(QApplication::applicationVersion())
         .arg(arch)
         .arg(QStringLiteral(QT_VERSION_STR));
-    header << QStringLiteral("System: %1 %2, %3 (%4-bit, Kernel %5)")
-        .arg(productType, productVer, arch,
+    header << QStringLiteral("System: %1, %2 (%3-bit, Kernel %4)")
+        .arg(detectDistroString(), arch,
              QString::number(QSysInfo::WordSize), kernelVer);
-
-    header << tr("Detected language: %1").arg(Localization::detectedSystemLanguage());
 
     auto checkTool = [](const QString &name) -> QString {
         QProcess p;
@@ -131,6 +138,37 @@ QString LogDialog::buildHeader() {
     header << QStringLiteral("---");
 
     return header.join(QStringLiteral("\n")) + QStringLiteral("\n");
+}
+
+QString LogDialog::detectDistroString() {
+    // Prefer /etc/os-release for accurate distro info. Rolling-release
+    // distros (Arch, etc.) carry no VERSION_ID, so annotate them as such.
+    QFile f(QStringLiteral("/etc/os-release"));
+    if (f.open(QIODevice::ReadOnly)) {
+        QString name, version;
+        const QStringList lines = QString::fromUtf8(f.readAll()).split('\n');
+        f.close();
+        for (const QString &line : lines) {
+            if (line.startsWith(QStringLiteral("PRETTY_NAME=")))
+                name = line.section('=', 1).remove('"');
+            else if (line.startsWith(QStringLiteral("VERSION_ID=")))
+                version = line.section('=', 1).remove('"');
+        }
+        if (!name.isEmpty()) {
+            if (!version.isEmpty())
+                name += QStringLiteral(" %1").arg(version);
+            else if (name.contains(QStringLiteral("Arch"), Qt::CaseInsensitive))
+                name += QStringLiteral(" (rolling release)");
+            return name;
+        }
+    }
+
+    // Fallback to QSysInfo (which reports "unknown" for rolling distros).
+    QString type = QSysInfo::productType();
+    QString ver = QSysInfo::productVersion();
+    if (ver.isEmpty() || ver == QLatin1String("unknown"))
+        ver = QStringLiteral("(rolling release)");
+    return QStringLiteral("%1 %2").arg(type, ver);
 }
 
 void LogDialog::onClear() {
@@ -170,7 +208,8 @@ void LogDialog::onRefresh() {
         bool atBottom = (m_textEdit->verticalScrollBar()->value()
                          >= m_textEdit->verticalScrollBar()->maximum() - 2);
 
-        // Only append new entries, timestamped and colored by level
+        // Only append new entries, colored by level (no timestamps: the
+        // GUI log shows plain messages only)
         for (int i = m_lastLogCount; i < count; ++i) {
             const LogEntry &entry = entries[i];
             QString color;
@@ -180,8 +219,8 @@ void LogDialog::onRefresh() {
             case Logger::Debug:   color = QStringLiteral("#8a8a8a"); break;
             default:              color = QStringLiteral("#d4d4d4"); break;
             }
-            QString line = QStringLiteral("<span style=\"color:%1\">[%2] %3</span>")
-                .arg(color, entry.timestamp, entry.message.toHtmlEscaped());
+            QString line = QStringLiteral("<span style=\"color:%1\">%2</span>")
+                .arg(color, entry.message.toHtmlEscaped());
             m_textEdit->append(line);
         }
 

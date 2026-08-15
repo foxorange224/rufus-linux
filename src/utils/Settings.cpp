@@ -46,30 +46,6 @@ QSettings *Settings::createSettings(const QString &appDir) {
     }
 }
 
-// Get the original user's home directory when running under sudo
-static QString getOriginalUserHomeDir() {
-    // Check SUDO_USER first
-    const char *sudoUser = qgetenv("SUDO_USER").constData();
-    if (sudoUser && sudoUser[0] != '\0') {
-        struct passwd *pw = getpwnam(sudoUser);
-        if (pw && pw->pw_dir) {
-            return QString::fromUtf8(pw->pw_dir);
-        }
-    }
-
-    // Check SUDO_UID
-    const char *sudoUid = qgetenv("SUDO_UID").constData();
-    if (sudoUid && sudoUid[0] != '\0') {
-        uid_t uid = static_cast<uid_t>(atoi(sudoUid));
-        struct passwd *pw = getpwuid(uid);
-        if (pw && pw->pw_dir) {
-            return QString::fromUtf8(pw->pw_dir);
-        }
-    }
-
-    return QString();
-}
-
 QByteArray Settings::geometry() const {
     if (!m_settings) return QByteArray();
     return m_settings->value(QStringLiteral("geometry")).toByteArray();
@@ -232,6 +208,15 @@ QString Settings::language() const {
 
 void Settings::setLanguage(const QString &code) {
     if (m_settings) m_settings->setValue(QStringLiteral("language"), code);
+}
+
+QString Settings::style() const {
+    if (!m_settings) return QStringLiteral("fusion");
+    return m_settings->value(QStringLiteral("style"), QStringLiteral("fusion")).toString();
+}
+
+void Settings::setStyle(const QString &name) {
+    if (m_settings) m_settings->setValue(QStringLiteral("style"), name);
 }
 
 bool Settings::firstRun() const {

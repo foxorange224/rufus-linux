@@ -101,8 +101,7 @@ QString Mounter::createTempMountPoint() {
 }
 
 bool Mounter::removeMountPoint(const QString &mountPoint) {
-    QDir dir(mountPoint);
-    return dir.rmdir(".") || !dir.exists();
+    return QDir().rmdir(mountPoint);
 }
 
 bool Mounter::execMount(const QStringList &args) {

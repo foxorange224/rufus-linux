@@ -27,9 +27,11 @@ private slots:
     void onClear();
     void onSave();
     void onRefresh();
+    void updateLogColors();
 
 private:
     QString buildHeader();
+    static QString detectDistroString();
 
     QTextEdit *m_textEdit = nullptr;
     QPushButton *m_clearBtn = nullptr;

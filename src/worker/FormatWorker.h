@@ -113,7 +113,6 @@ private:
     bool writeSbr();
     bool ntfsCheckDisk();
     bool createExtendedLabelFiles(const QString &mountPoint);
-    bool createSyslinuxUefiRedirect(const QString &mountPoint, const ImageInfo &imgInfo);
 
     // Bootloader version matching
     bool matchBootloaderVersion(const QString &mountPoint, const ImageInfo &imgInfo);
@@ -124,8 +123,18 @@ private:
     QString partitionNthPath(int n) const;
     QString persistencePartitionPath() const;
     bool waitForPartition(const QString &path, int timeoutMs = 5000);
+    ImageInfo detectImage() const;
+    void setProgress(int percent);
 
     Config m_config;
     QAtomicInt m_cancelled{0};
     int m_totalSteps = 10;
+    int m_lastProgress = 0;
+    bool m_hasImage = false;
+    // Progress window occupied by the ISO extraction phase (computed in
+    // run(), used by mountAndCopyFiles()).
+    int m_copyStart = 55;
+    int m_copyEnd = 85;
+    mutable ImageInfo m_cachedImageInfo;
+    mutable bool m_imageInfoCached = false;
 };

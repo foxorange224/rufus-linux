@@ -1,17 +1,20 @@
 #include "Logger.h"
 #include <QDir>
+#include <QFileInfo>
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QDebug>
+#include <cstdio>
 
 QFile Logger::m_file;
 QMutex Logger::m_mutex;
 QList<LogEntry> Logger::m_entries;
+bool Logger::m_debugEnabled = false;
+QString Logger::m_srcPrefix;
 
 void Logger::messageHandler(QtMsgType type, const QMessageLogContext &context,
                             const QString &msg) {
-    Q_UNUSED(context);
     Level level;
     switch (type) {
     case QtDebugMsg:   level = Debug;   break;
@@ -19,12 +22,31 @@ void Logger::messageHandler(QtMsgType type, const QMessageLogContext &context,
     case QtWarningMsg: level = Warning; break;
     default:           level = Error;   break;
     }
+
+    // QtDebugMsg: only shown in the terminal with --debug, never stored.
+    if (level == Debug) {
+        if (m_debugEnabled)
+            fprintf(stderr, "%s\n", qPrintable(msg));
+        return;
+    }
+
+    // Messages from Qt internals (e.g. "XDG_RUNTIME_DIR not set...") have
+    // a context outside our source tree: they are terminal-only noise with
+    // --debug and must not pollute the GUI log.
+    const char *file = context.file;
+    if (!file || !m_srcPrefix.isEmpty() &&
+                     !QString::fromUtf8(file).startsWith(m_srcPrefix)) {
+        if (m_debugEnabled)
+            fprintf(stderr, "%s\n", qPrintable(msg));
+        return;
+    }
+
     write(level, msg);
 
-    // Keep the original terminal output visible
-    QTextStream stream(stderr);
-    stream << msg << QLatin1Char('\n');
-    stream.flush();
+    // Without --debug only warnings/errors reach the terminal; the full
+    // stream appears with --debug.
+    if (m_debugEnabled || level >= Warning)
+        fprintf(stderr, "%s\n", qPrintable(msg));
 }
 
 void Logger::init() {
@@ -35,6 +57,10 @@ void Logger::init() {
     m_file.setFileName(path);
     if (!m_file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
         return;
+
+    // Source tree prefix of this file, used to tell our own messages apart
+    // from Qt-internal ones in messageHandler().
+    m_srcPrefix = QFileInfo(QString::fromUtf8(__FILE__)).absolutePath();
 
     // Route qDebug()/qWarning()/... from the whole application into the log
     qInstallMessageHandler(messageHandler);
@@ -50,10 +76,14 @@ void Logger::shutdown() {
     qInstallMessageHandler(nullptr);
 }
 
+void Logger::setDebugEnabled(bool enabled) {
+    m_debugEnabled = enabled;
+}
+
 void Logger::write(int level, const QString &message) {
     QMutexLocker locker(&m_mutex);
 
-    QString timestamp = QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz"));
+    QString timestamp = QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd HH:mm:ss.zzz"));
 
     LogEntry entry;
     entry.timestamp = timestamp;

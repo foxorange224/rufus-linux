@@ -14,4 +14,10 @@
         <file>icons/rufus-512.png</file>
         <file>icons/rufus.ico</file>
     </qresource>
+    <qresource prefix="/translations">
+        <file alias="rufus_en.qm">translations/rufus_en.qm</file>
+        <file alias="rufus_es-ES.qm">translations/rufus_es-ES.qm</file>
+        <file alias="rufus_pt-BR.qm">translations/rufus_pt-BR.qm</file>
+        <file alias="rufus_ru-RU.qm">translations/rufus_ru-RU.qm</file>
+    </qresource>
 </RCC>

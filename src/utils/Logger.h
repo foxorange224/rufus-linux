@@ -28,6 +28,11 @@ public:
     static QList<LogEntry> allLogs();
     static QString fullText();
 
+    // With --debug, debug-level and Qt-internal messages are echoed to the
+    // terminal; without it they are suppressed entirely (they never reach
+    // the GUI log or the log file).
+    static void setDebugEnabled(bool enabled);
+
 private:
     static QString levelToString(Level level);
     static void messageHandler(QtMsgType type, const QMessageLogContext &context,
@@ -35,6 +40,8 @@ private:
     static QFile m_file;
     static QMutex m_mutex;
     static QList<LogEntry> m_entries;
+    static bool m_debugEnabled;
+    static QString m_srcPrefix; // source tree prefix (for foreign-message detection)
 };
 
 inline void Logger::info(const QString &message) { write(Info, message); }

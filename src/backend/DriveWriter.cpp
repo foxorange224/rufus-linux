@@ -195,7 +195,7 @@ WriteResult DriveWriter::writeDD(const QString &imagePath, const QString &device
                 ok = writeAll(fd, buffer, aligned);
             totalWritten += aligned;
             if (ok && fdPlain >= 0 && n > aligned)
-                ok = writeAll(fdPlain, buffer + aligned, n - aligned);
+                ok = ::pwrite(fdPlain, buffer + aligned, n - aligned, totalWritten);
             else if (ok && n > aligned)
                 ok = writeAll(fd, buffer + aligned, n - aligned);
             if (!ok) writeErrors++;

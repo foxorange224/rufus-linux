@@ -159,6 +159,10 @@ bool BadBlocks::detectFakeFlash(const QString &devicePath, qint64 reportedSize,
 
     char *writeBuf = new char[sectorSize];
     char *readBuf = new char[sectorSize];
+    char *backup = new char[static_cast<size_t>(numSamples) * sectorSize];
+    qint64 *offsets = new qint64[numSamples];
+    bool *touched = new bool[numSamples]();
+    int sampleCount = 0;
 
     bool isFake = false;
 
@@ -169,6 +173,19 @@ bool BadBlocks::detectFakeFlash(const QString &devicePath, qint64 reportedSize,
         // Write different patterns at each sample point
         qint64 offset = (static_cast<qint64>(i) * testSize / numSamples);
         offset = (offset / sectorSize) * sectorSize;
+
+        // Preserve the original sector so it can be restored afterwards
+        qint64 got = 0;
+        while (got < sectorSize) {
+            qint64 r = ::pread(fd, backup + static_cast<size_t>(sampleCount) * sectorSize + got,
+                               sectorSize - got, offset + got);
+            if (r <= 0) break;
+            got += r;
+        }
+        if (got < sectorSize) continue;
+        offsets[sampleCount] = offset;
+        touched[sampleCount] = true;
+        sampleCount++;
 
         // Use alternating patterns (0xAA, 0x55, 0xFF, 0x00)
         uint8_t pattern = (i % 4 == 0) ? 0xAA : (i % 4 == 1) ? 0x55 :
@@ -193,8 +210,21 @@ bool BadBlocks::detectFakeFlash(const QString &devicePath, qint64 reportedSize,
         }
     }
 
+    // Restore the original contents of every sample point
+    for (int i = 0; i < sampleCount; i++) {
+        if (!touched[i]) continue;
+        if (::pwrite(fd, backup + static_cast<size_t>(i) * sectorSize,
+                     sectorSize, offsets[i]) != sectorSize) {
+            isFake = true;
+        }
+    }
+    ::fsync(fd);
+
     delete[] writeBuf;
     delete[] readBuf;
+    delete[] backup;
+    delete[] offsets;
+    delete[] touched;
     ::close(fd);
     return isFake;
 }
