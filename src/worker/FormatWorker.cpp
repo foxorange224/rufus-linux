@@ -821,11 +821,9 @@ bool FormatWorker::mountAndCopyFiles(QString *failureReason) {
             auto onFile = [this, isoMp](const QString &name) {
                 const QString rel = name.startsWith('/') ? name
                                                          : QStringLiteral("/") + name;
-                const QString msg = tr("Extracting: %1 (%2)")
-                    .arg(rel)
-                    .arg(formatBytes(QFileInfo(isoMp + rel).size()));
-                emit logMessage(msg, 0);
-                emit statusBarMessage(tr("Extracting: %1").arg(rel));
+                const QString size = formatBytes(QFileInfo(isoMp + rel).size());
+                emit logMessage(QStringLiteral("Extracting: %1 (%2)").arg(rel, size), 0);
+                emit statusBarMessage(tr("Extracting: %1 (%2)").arg(rel, size));
             };
 
             // The extraction phase occupies the m_copyStart..m_copyEnd
@@ -1027,7 +1025,7 @@ bool FormatWorker::mountAndCopyFiles(QString *failureReason) {
         auto onFile = [this](const QString &name) {
             const QString rel = name.startsWith('/') ? name
                                                      : QStringLiteral("/") + name;
-            emit logMessage(tr("Extracting: %1").arg(rel), 0);
+            emit logMessage(QStringLiteral("Extracting: %1").arg(rel), 0);
             emit statusBarMessage(tr("Extracting: %1").arg(rel));
         };
 if (!ImageHandler::extractCompressed(m_config.archivePath, mountPoint,

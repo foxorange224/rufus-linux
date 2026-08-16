@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>Rufus について</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>バージョン %1 (Linux 版)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - 信頼できる USB フォーマットツール</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>バージョン %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>公式ウェブサイト: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Copyright © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Linux 移植: FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>クレジット: Pete Batard（オリジナルの Rufus 作者）、FoxOrange224（Linux 移植）</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>翻訳: アラビア語、中国語（簡体字）、英語、スペイン語、ペルシャ語、フランス語、ドイツ語、インドネシア語、日本語、韓国語、ポルトガル語（ブラジル）、ロシア語、トルコ語、ベトナム語</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>バグの報告や機能の要望はこちら:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>追加の著作権:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>ライセンス</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>ライセンス ファイルが見つかりません。</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">バージョン %1 (Linux 版)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>ISO/IMG ファイルから起動可能な USB ドライブを作成します。
+        <translation type="vanished">ISO/IMG ファイルから起動可能な USB ドライブを作成します。
 
 原作者: Pete Batard (Akeo)
 GNU GPL v3 ライセンス
@@ -29,17 +88,15 @@ GNU GPL v3 ライセンス
 Qt6 と C++ による Linux 移植版</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>GitHub の Linux 移植版</translation>
+        <translation type="vanished">GitHub の Linux 移植版</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>GitHub のオリジナル Rufus (Windows)</translation>
+        <translation type="vanished">GitHub のオリジナル Rufus (Windows)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>閉じる</translation>
     </message>
@@ -69,7 +126,7 @@ Qt6 と C++ による Linux 移植版</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>偽造フラッシュをチェックしています...</translation>
+        <translation>デバイスをチェックしています...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Qt6 と C++ による Linux 移植版</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>DD モードでイメージを書き込んでいます...</translation>
+        <translation>イメージを書き込んでいます...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Qt6 と C++ による Linux 移植版</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>ISO ファイルを USB に展開しています...</translation>
+        <translation>ISO ファイルを展開しています...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>展開中: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>展開中: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>ISO を展開できませんでした: %1 がインストールされていません。</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>ISO を展開できませんでした。</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Win7 EFI ブート修正を適用しています...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>ReactOS ブートローダーをインストールしています...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>追加ファイルを展開しています...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>追加ファイルを展開できませんでした。
 7z がインストールされていることと、アーカイブが有効であることを確認してください。</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Windows 無人インストールを適用しています...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>パーティションブートレコードを書き込んでいます...</translation>
     </message>
@@ -304,7 +359,7 @@ Make sure 7z is installed and the archive is valid.</source>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>キャンセル中 - お待ちください...</translation>
+        <translation>キャンセル中、お待ちください...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -871,7 +926,7 @@ Continue anyway?</source>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 がこのシステムにインストールされていません。
-'%2' パッケージをインストールして、もう一度お試しください。</translation>
+&apos;%2&apos; パッケージをインストールして、もう一度お試しください。</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z がこのシステムにインストールされていません。
 追加ファイルの展開に必要です。
-'p7zip' パッケージをインストールして、もう一度お試しください。</translation>
+&apos;p7zip&apos; パッケージをインストールして、もう一度お試しください。</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -903,9 +958,8 @@ Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>デバイス情報を読み取れませんでした。</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>ブートローダーが MS-DOS です: FAT16 ファイルシステムを強制します</translation>
+        <translation type="vanished">ブートローダーが MS-DOS です: FAT16 ファイルシステムを強制します</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1335,17 +1389,17 @@ Rufus はストレージデバイスにアクセスするために管理者権�
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>デバイス '%1' が見つかりません。</translation>
+        <translation>デバイス &apos;%1&apos; が見つかりません。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>デバイス '%1' は読み取り専用です。</translation>
+        <translation>デバイス &apos;%1&apos; は読み取り専用です。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>デバイス '%1' はシステムディスクであり、上書きされません。</translation>
+        <translation>デバイス &apos;%1&apos; はシステムディスクであり、上書きされません。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1355,12 +1409,12 @@ Rufus はストレージデバイスにアクセスするために管理者権�
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>'--filesystem=%1' と '--boot=%2' の指示は、ディスクイメージ形式 (IMG/VHD) では機能しないため無視されました。</translation>
+        <translation>&apos;--filesystem=%1&apos; と &apos;--boot=%2&apos; の指示は、ディスクイメージ形式 (IMG/VHD) では機能しないため無視されました。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>不明なファイルシステム '%1'。</translation>
+        <translation>不明なファイルシステム &apos;%1&apos;。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

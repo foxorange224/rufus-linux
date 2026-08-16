@@ -1,14 +1,18 @@
 #include "AboutDialog.h"
 #include "utils/Logger.h"
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QTextEdit>
+#include <QDialog>
 #include <QApplication>
 #include <QPixmap>
 #include <QDesktopServices>
 #include <QProcess>
 #include <QUrl>
 #include <QFileInfo>
+#include <QFile>
 #include <pwd.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -37,53 +41,124 @@ AboutDialog::AboutDialog(QWidget *parent)
     auto *layout = new QVBoxLayout(this);
     layout->setSpacing(8);
 
-    // Program icon (from the rufus-*.png set embedded in the resources)
+    // ── Top: small pendrive icon (left) + main text block (right) ──
+    auto *top = new QHBoxLayout;
+    top->setSpacing(16);
+
     auto *iconLabel = new QLabel;
-    QPixmap iconPix(QStringLiteral(":/icons/icons/rufus-256.png"));
+    QPixmap iconPix(QStringLiteral(":/icons/icons/rufus-128.png"));
     if (!iconPix.isNull())
-        iconLabel->setPixmap(iconPix.scaled(72, 72, Qt::KeepAspectRatio,
+        iconLabel->setPixmap(iconPix.scaled(48, 48, Qt::KeepAspectRatio,
             Qt::SmoothTransformation));
-    iconLabel->setAlignment(Qt::AlignCenter);
-    layout->addWidget(iconLabel);
+    iconLabel->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+    top->addWidget(iconLabel);
 
-    auto *title = new QLabel(QStringLiteral("<h2>Rufus</h2>"));
-    title->setAlignment(Qt::AlignCenter);
-    layout->addWidget(title);
+    auto *text = new QVBoxLayout;
+    text->setSpacing(2);
 
-    auto *version = new QLabel(tr("Version %1 (Linux Port)")
+    // Header (like the original: "Rufus, the trustworthy USB formatting tool")
+    auto *title = new QLabel(tr("Rufus - The Reliable USB Formatting Utility"));
+    QFont titleFont = title->font();
+    titleFont.setBold(true);
+    titleFont.setPointSize(titleFont.pointSize() + 2);
+    title->setFont(titleFont);
+    title->setWordWrap(true);
+    text->addWidget(title);
+
+    auto *version = new QLabel(tr("Version %1")
         .arg(QApplication::applicationVersion()));
-    version->setAlignment(Qt::AlignCenter);
-    layout->addWidget(version);
+    text->addWidget(version);
 
-    layout->addSpacing(10);
+    auto *website = new QLabel(tr("Official website: "
+        "<a href='https://rufus.ie'>https://rufus.ie</a>"));
+    website->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    website->setOpenExternalLinks(false);
+    text->addWidget(website);
 
-    auto *desc = new QLabel(tr(
-        "Create bootable USB drives from ISO/IMG files.\n\n"
-        "Originally created by Pete Batard (Akeo)\n"
-        "GNU GPL v3 License\n\n"
-        "Linux port using Qt6 and C++"));
-    desc->setWordWrap(true);
-    desc->setMinimumWidth(380);
-    desc->setAlignment(Qt::AlignCenter);
-    layout->addWidget(desc);
+    text->addSpacing(6);
 
-    auto *linkPort = new QLabel(
-        QStringLiteral("<p><a href=\"https://www.github.com/foxorange224/rufus-linux\">%1</a></p>")
-        .arg(tr("Linux port on GitHub")));
-    linkPort->setWordWrap(true);
-    linkPort->setAlignment(Qt::AlignCenter);
-    linkPort->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    linkPort->setOpenExternalLinks(false);
-    layout->addWidget(linkPort);
+    auto *copyright = new QLabel(tr("Copyright © 2011-2026 Pete Batard"));
+    copyright->setWordWrap(true);
+    text->addWidget(copyright);
 
-    auto *linkOriginal = new QLabel(
-        QStringLiteral("<p><a href=\"https://github.com/pbatard/rufus\">%1</a></p>")
-        .arg(tr("Original Rufus (Windows) on GitHub")));
-    linkOriginal->setWordWrap(true);
-    linkOriginal->setAlignment(Qt::AlignCenter);
-    linkOriginal->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    linkOriginal->setOpenExternalLinks(false);
-    layout->addWidget(linkOriginal);
+    auto *portCredit = new QLabel(tr("Linux port by FoxOrange224"));
+    portCredit->setWordWrap(true);
+    text->addWidget(portCredit);
+
+    auto *credits = new QLabel(tr("Credits: Pete Batard (original Rufus "
+        "author), FoxOrange224 (Linux port)"));
+    credits->setWordWrap(true);
+    text->addWidget(credits);
+
+    auto *translations = new QLabel(tr("Translations: Arabic, Chinese "
+        "(Simplified), English, Spanish, Persian, French, German, Indonesian, "
+        "Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese"));
+    translations->setWordWrap(true);
+    text->addWidget(translations);
+
+    text->addSpacing(6);
+
+    auto *bugsLabel = new QLabel(tr("Report bugs or request enhancements at:"));
+    bugsLabel->setWordWrap(true);
+    text->addWidget(bugsLabel);
+
+    auto *bugsLink = new QLabel(QStringLiteral("<a href=\"https://github.com/"
+        "foxorange224/rufus-linux/issues\">"
+        "https://github.com/foxorange224/rufus-linux/issues</a>"));
+    bugsLink->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    bugsLink->setOpenExternalLinks(false);
+    text->addWidget(bugsLink);
+
+    top->addLayout(text, 1);
+    layout->addLayout(top);
+
+    // ── Middle: additional copyrights box (scrollable, like the original) ──
+    auto *copyrightsTitle = new QLabel(tr("Additional Copyrights:"));
+    layout->addWidget(copyrightsTitle);
+
+    auto *copyrightsEdit = new QTextEdit;
+    copyrightsEdit->setReadOnly(true);
+    copyrightsEdit->setPlainText(QStringLiteral(
+        "Rufus is licensed under the GNU General Public License v3 (GPLv3).\n"
+        "See the LICENSE file or click the \"License\" button for the full "
+        "text.\n\n"
+        "This Linux port bundles or links against the following third-party "
+        "components:\n\n"
+        "- Qt 6, Copyright (c) The Qt Company Ltd and contributors.\n"
+        "  Licensed under the GNU Lesser General Public License v3 (LGPLv3).\n\n"
+        "- zstd, xxhash, FSE and HUF (libs/bled), Copyright (c) Meta "
+        "Platforms, Inc. and affiliates; xxhash also Copyright (c) Yann "
+        "Collet.\n"
+        "  Dual-licensed under the BSD-style license and the GNU General "
+        "Public License v2 (GPLv2).\n\n"
+        "- FreeDOS (res/freedos), Copyright (c) Jim Hall and the FreeDOS "
+        "Project.\n"
+        "  Licensed under the GNU General Public License v2 (GPLv2).\n\n"
+        "- SYSLINUX (res/syslinux), Copyright (c) H. Peter Anvin and "
+        "contributors.\n"
+        "  Licensed under the GNU General Public License v2 (GPLv2).\n\n"
+        "- GRUB 2 (res/grub2), Copyright (c) the Free Software Foundation.\n"
+        "  Licensed under the GNU General Public License v3 (GPLv3).\n\n"
+        "- UEFI:NTFS (res/uefi), a UEFI bootloader that provides read/write "
+        "access to NTFS drives.\n\n"
+        "- MBR boot records and templates (res/mbr), from the original Rufus "
+        "project.\n\n"
+        "The original Rufus for Windows is Copyright (c) 2011-2026 Pete "
+        "Batard <pete@akeo.ie>."));
+    layout->addWidget(copyrightsEdit, 1);
+
+    // ── Bottom: License (left) / OK (right), like the original ──
+    auto *buttons = new QHBoxLayout;
+
+    auto *licenseBtn = new QPushButton(tr("License"));
+    buttons->addWidget(licenseBtn);
+
+    buttons->addStretch();
+
+    auto *okBtn = new QPushButton(tr("OK"));
+    okBtn->setDefault(true);
+    buttons->addWidget(okBtn);
+    layout->addLayout(buttons);
 
     // Opening links from a root process: QDesktopServices and xdg-open run
     // as root, where browsers refuse to start, and xdg-open on Plasma 6
@@ -133,16 +208,31 @@ AboutDialog::AboutDialog(QWidget *parent)
         // user's session (both detached, so this is harmless).
         openAsUser({QStringLiteral("xdg-open"), url});
     };
-    connect(linkPort, &QLabel::linkActivated, openLink);
-    connect(linkOriginal, &QLabel::linkActivated, openLink);
+    connect(website, &QLabel::linkActivated, openLink);
+    connect(bugsLink, &QLabel::linkActivated, openLink);
 
-    layout->addStretch();
-
-    auto *closeBtn = new QPushButton(tr("Close"));
-    connect(closeBtn, &QPushButton::clicked, this, &QDialog::accept);
-    layout->addWidget(closeBtn);
+    connect(okBtn, &QPushButton::clicked, this, &QDialog::accept);
+    connect(licenseBtn, &QPushButton::clicked, this, [this]() {
+        QDialog dlg(this);
+        dlg.setWindowTitle(tr("License"));
+        auto *dlgLayout = new QVBoxLayout(&dlg);
+        auto *edit = new QTextEdit;
+        edit->setReadOnly(true);
+        QFile licenseFile(QStringLiteral(":/LICENSE"));
+        if (licenseFile.open(QIODevice::ReadOnly))
+            edit->setPlainText(QString::fromUtf8(licenseFile.readAll()));
+        else
+            edit->setPlainText(tr("License file not found."));
+        dlgLayout->addWidget(edit);
+        auto *closeBtn = new QPushButton(tr("Close"));
+        connect(closeBtn, &QPushButton::clicked, &dlg, &QDialog::accept);
+        dlgLayout->addWidget(closeBtn, 0, Qt::AlignRight);
+        dlg.resize(640, 480);
+        dlg.exec();
+    });
 
     // Size the dialog to its content (never clips the description or the
     // links, even with larger fonts or after a language change).
-    layout->setSizeConstraint(QLayout::SetFixedSize);
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    resize(520, 540);
 }

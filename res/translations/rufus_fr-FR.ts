@@ -4,42 +4,99 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>À propos de Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>Version %1 (portage Linux)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - L'outil de formatage USB fiable</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>Version %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>Site web officiel : &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Copyright © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Port Linux par FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>Crédits : Pete Batard (auteur du Rufus original), FoxOrange224 (port Linux)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>Traductions : arabe, chinois (simplifié), anglais, espagnol, persan, français, allemand, indonésien, japonais, coréen, portugais (Brésil), russe, turc, vietnamien</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>Signalez des bugs ou demandez des améliorations sur :</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>Droits d'auteur supplémentaires :</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>Licence</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>Fichier de licence introuvable.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">Version %1 (portage Linux)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>Créez des clés USB amorçables à partir de fichiers ISO/IMG.
+        <translation type="vanished">Créez des clés USB amorçables à partir de fichiers ISO/IMG.
 
-Créé à l'origine par Pete Batard (Akeo)
+Créé à l&apos;origine par Pete Batard (Akeo)
 Licence GNU GPL v3
 
 Portage Linux utilisant Qt6 et C++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>Portage Linux sur GitHub</translation>
+        <translation type="vanished">Portage Linux sur GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>Rufus original (Windows) sur GitHub</translation>
+        <translation type="vanished">Rufus original (Windows) sur GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
@@ -54,7 +111,7 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="323"/>
         <source>Using image: %1</source>
-        <translation>Utilisation de l'image : %1</translation>
+        <translation>Utilisation de l&apos;image : %1</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="328"/>
@@ -69,7 +126,7 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>Vérification de la clé USB contrefaite...</translation>
+        <translation>Vérification de l&apos;appareil...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>Écriture de l'image en mode DD...</translation>
+        <translation>Écriture de l&apos;image...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -124,7 +181,7 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="715"/>
         <source>The partition could not be created or detected.</source>
-        <translation>La partition n'a pas pu être créée ou détectée.</translation>
+        <translation>La partition n&apos;a pas pu être créée ou détectée.</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="724"/>
@@ -139,7 +196,7 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="766"/>
         <source>Installing bootloader...</source>
-        <translation>Installation du chargeur d'amorçage...</translation>
+        <translation>Installation du chargeur d&apos;amorçage...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="776"/>
@@ -149,7 +206,7 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="785"/>
         <source>Could not remount the partition after installing the bootloader.</source>
-        <translation>Impossible de remonter la partition après l'installation du chargeur d'amorçage.</translation>
+        <translation>Impossible de remonter la partition après l&apos;installation du chargeur d&apos;amorçage.</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="794"/>
@@ -164,61 +221,59 @@ Portage Linux utilisant Qt6 et C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>Extraction des fichiers ISO vers la clé USB...</translation>
+        <translation>Extraction des fichiers ISO...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>Extraction : %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>Extraction : %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
-        <translation>Impossible d'extraire l'ISO : %1 n'est pas installé.</translation>
+        <translation>Impossible d&apos;extraire l&apos;ISO : %1 n&apos;est pas installé.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
-        <translation>Impossible d'extraire l'ISO.</translation>
+        <translation>Impossible d&apos;extraire l&apos;ISO.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Application du correctif de démarrage EFI Win7...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
-        <translation>Installation du chargeur d'amorçage ReactOS...</translation>
+        <translation>Installation du chargeur d&apos;amorçage ReactOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>Extraction des fichiers supplémentaires...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
-        <translation>Impossible d'extraire le fichier supplémentaire.
-Assurez-vous que 7z est installé et que l'archive est valide.</translation>
+        <translation>Impossible d&apos;extraire le fichier supplémentaire.
+Assurez-vous que 7z est installé et que l&apos;archive est valide.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
-        <translation>Application de l'installation automatique de Windows...</translation>
+        <translation>Application de l&apos;installation automatique de Windows...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
-        <translation>Écriture de l'enregistrement de démarrage de la partition...</translation>
+        <translation>Écriture de l&apos;enregistrement de démarrage de la partition...</translation>
     </message>
 </context>
 <context>
@@ -268,7 +323,7 @@ Assurez-vous que 7z est installé et que l'archive est valide.</translation>
     <message>
         <location filename="../../src/ui/LogDialog.cpp" line="190"/>
         <source>Cannot write to %1</source>
-        <translation>Impossible d'écrire dans %1</translation>
+        <translation>Impossible d&apos;écrire dans %1</translation>
     </message>
     <message>
         <location filename="../../src/ui/LogDialog.cpp" line="198"/>
@@ -304,7 +359,7 @@ Assurez-vous que 7z est installé et que l'archive est valide.</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>Annulation - Veuillez patienter...</translation>
+        <translation>Annulation, veuillez patienter...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>Sélectionnez la clé USB sur laquelle écrire.
 Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou cochez
-'Lister les disques durs USB' pour afficher les lecteurs fixes.</translation>
+&apos;Lister les disques durs USB&apos; pour afficher les lecteurs fixes.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -362,7 +417,7 @@ Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou 
 • MS-DOS: Create an MS-DOS bootable drive</source>
         <translation>Sélectionnez le type de clé USB amorçable à créer.
 • Non amorçable : formater simplement le lecteur
-• Image disque ou ISO : créer à partir d'un fichier ISO/IMG
+• Image disque ou ISO : créer à partir d&apos;un fichier ISO/IMG
 • FreeDOS : créer un lecteur amorçable FreeDOS
 • MS-DOS : créer un lecteur amorçable MS-DOS</translation>
     </message>
@@ -370,7 +425,7 @@ Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou 
         <location filename="../../src/ui/MainWindow.cpp" line="509"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3021"/>
         <source>Compute MD5, SHA-1 and SHA-256 hashes for the selected image</source>
-        <translation>Calculer les empreintes MD5, SHA-1 et SHA-256 de l'image sélectionnée</translation>
+        <translation>Calculer les empreintes MD5, SHA-1 et SHA-256 de l&apos;image sélectionnée</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="515"/>
@@ -388,7 +443,7 @@ Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou 
         <location filename="../../src/ui/MainWindow.cpp" line="536"/>
         <location filename="../../src/ui/MainWindow.cpp" line="2935"/>
         <source>Image option</source>
-        <translation>Option d'image</translation>
+        <translation>Option d&apos;image</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="539"/>
@@ -408,7 +463,7 @@ Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou 
         <source>Image option:
 • Standard: Regular Windows installation
 • Windows To Go: Run Windows from USB</source>
-        <translation>Option d'image :
+        <translation>Option d&apos;image :
 • Standard : installation Windows normale
 • Windows To Go : exécuter Windows depuis une clé USB</translation>
     </message>
@@ -492,19 +547,19 @@ Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou 
         <location filename="../../src/ui/MainWindow.cpp" line="608"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3040"/>
         <source>Add an extra alignment partition and other fixes for old BIOS</source>
-        <translation>Ajouter une partition d'alignement supplémentaire et d'autres correctifs pour les anciens BIOS</translation>
+        <translation>Ajouter une partition d&apos;alignement supplémentaire et d&apos;autres correctifs pour les anciens BIOS</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="612"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3013"/>
         <source>Enable runtime UEFI media validation</source>
-        <translation>Activer la validation UEFI du support à l'exécution</translation>
+        <translation>Activer la validation UEFI du support à l&apos;exécution</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="613"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3041"/>
         <source>Validate UEFI boot media at runtime (may affect compatibility)</source>
-        <translation>Valider le support de démarrage UEFI à l'exécution (peut affecter la compatibilité)</translation>
+        <translation>Valider le support de démarrage UEFI à l&apos;exécution (peut affecter la compatibilité)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="620"/>
@@ -530,8 +585,8 @@ Seules les clés USB amovibles sont listées par défaut. Appuyez sur Ctrl+F ou 
         <location filename="../../src/ui/MainWindow.cpp" line="3042"/>
         <source>Volume label (up to 11 characters for FAT/FAT32,
 up to 32 characters for NTFS/exFAT)</source>
-        <translation>Nom du volume (jusqu'à 11 caractères pour FAT/FAT32,
-jusqu'à 32 caractères pour NTFS/exFAT)</translation>
+        <translation>Nom du volume (jusqu&apos;à 11 caractères pour FAT/FAT32,
+jusqu&apos;à 32 caractères pour NTFS/exFAT)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="636"/>
@@ -563,7 +618,7 @@ ext2/3/4 sont des systèmes de fichiers natifs de Linux.</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="652"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3047"/>
         <source>Allocation unit size. Default is recommended.</source>
-        <translation>Taille d'unité d'allocation. La valeur par défaut est recommandée.</translation>
+        <translation>Taille d&apos;unité d&apos;allocation. La valeur par défaut est recommandée.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="662"/>
@@ -591,7 +646,7 @@ Décochez pour un formatage complet (efface toutes les données)</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="676"/>
         <location filename="../../src/ui/MainWindow.cpp" line="2971"/>
         <source>Create extended label and icon files</source>
-        <translation>Créer les fichiers de libellé et d'icône étendus</translation>
+        <translation>Créer les fichiers de libellé et d&apos;icône étendus</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="678"/>
@@ -610,7 +665,7 @@ Décochez pour un formatage complet (efface toutes les données)</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="3051"/>
         <source>Scan the device for bad blocks before writing.
 This can take a long time on large drives.</source>
-        <translation>Analyser le périphérique pour détecter les blocs défectueux avant l'écriture.
+        <translation>Analyser le périphérique pour détecter les blocs défectueux avant l&apos;écriture.
 Cela peut prendre du temps sur les gros lecteurs.</translation>
     </message>
     <message>
@@ -648,7 +703,7 @@ Cela peut prendre du temps sur les gros lecteurs.</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="3053"/>
         <source>Number of bad block scan passes.
 Multiple passes with different patterns detect more types of NAND defects.</source>
-        <translation>Nombre de passages d'analyse des blocs défectueux.
+        <translation>Nombre de passages d&apos;analyse des blocs défectueux.
 Plusieurs passages avec des motifs différents détectent davantage de types de défauts NAND.</translation>
     </message>
     <message>
@@ -661,13 +716,13 @@ Plusieurs passages avec des motifs différents détectent davantage de types de 
         <location filename="../../src/ui/MainWindow.cpp" line="748"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3055"/>
         <source>Operation progress</source>
-        <translation>Progression de l'opération</translation>
+        <translation>Progression de l&apos;opération</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="795"/>
         <location filename="../../src/ui/MainWindow.cpp" line="2908"/>
         <source>Select interface language</source>
-        <translation>Sélectionner la langue de l'interface</translation>
+        <translation>Sélectionner la langue de l&apos;interface</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="800"/>
@@ -697,7 +752,7 @@ Plusieurs passages avec des motifs différents détectent davantage de types de 
         <location filename="../../src/ui/MainWindow.cpp" line="828"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3056"/>
         <source>Start the USB formatting/writing operation</source>
-        <translation>Démarrer l'opération de formatage/écriture USB</translation>
+        <translation>Démarrer l&apos;opération de formatage/écriture USB</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="831"/>
@@ -747,7 +802,7 @@ Plusieurs passages avec des motifs différents détectent davantage de types de 
         <source>UEFI-CSM (Compatibility Support Module) is a component of the UEFI firmware that emulates a legacy BIOS environment, so that operating systems and bootloaders that only support BIOS boot can still run on UEFI machines.
 
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
-        <translation>UEFI-CSM (module de support de compatibilité) est un composant du firmware UEFI qui émule un environnement BIOS hérité, afin que les systèmes d'exploitation et les chargeurs d'amorçage qui ne prennent en charge que le démarrage BIOS puissent toujours fonctionner sur les machines UEFI.
+        <translation>UEFI-CSM (module de support de compatibilité) est un composant du firmware UEFI qui émule un environnement BIOS hérité, afin que les systèmes d&apos;exploitation et les chargeurs d&apos;amorçage qui ne prennent en charge que le démarrage BIOS puissent toujours fonctionner sur les machines UEFI.
 
 Choisissez « BIOS (ou UEFI-CSM) » pour un firmware BIOS hérité, ou pour un firmware UEFI avec CSM activé. Choisissez « UEFI (sans CSM) » pour un démarrage UEFI natif, par exemple sur les machines certifiées Windows 11 ou lorsque Secure Boot est utilisé.</translation>
     </message>
@@ -764,7 +819,7 @@ Choisissez « BIOS (ou UEFI-CSM) » pour un firmware BIOS hérité, ou pour un f
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1174"/>
         <source>Computing image hashes...</source>
-        <translation>Calcul des empreintes de l'image...</translation>
+        <translation>Calcul des empreintes de l&apos;image...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1230"/>
@@ -793,7 +848,7 @@ Choisissez « BIOS (ou UEFI-CSM) » pour un firmware BIOS hérité, ou pour un f
         <location filename="../../src/ui/MainWindow.cpp" line="1262"/>
         <source>The selected file is not a valid disk image.
 Please select an ISO or IMG file.</source>
-        <translation>Le fichier sélectionné n'est pas une image disque valide.
+        <translation>Le fichier sélectionné n&apos;est pas une image disque valide.
 Sélectionnez un fichier ISO ou IMG.</translation>
     </message>
     <message>
@@ -808,15 +863,15 @@ Utilisez un fichier ISO ou IMG.</translation>
         <source>The image file is located on the target drive!
 Please copy the image to a different drive first.</source>
         <translation>Le fichier image se trouve sur le lecteur cible !
-Copiez d'abord l'image sur un autre lecteur.</translation>
+Copiez d&apos;abord l&apos;image sur un autre lecteur.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1292"/>
         <source>The image is too large for this device!
 Image size: %1
 Device size: %2</source>
-        <translation>L'image est trop grande pour ce périphérique !
-Taille de l'image : %1
+        <translation>L&apos;image est trop grande pour ce périphérique !
+Taille de l&apos;image : %1
 Taille du périphérique : %2</translation>
     </message>
     <message>
@@ -831,7 +886,7 @@ Sélectionnez une taille de cluster plus petite ou un autre système de fichiers
         <source>The image contains a file larger than 4GB.
 FAT32 does not support files larger than 4GB.
 Please select NTFS or exFAT.</source>
-        <translation>L'image contient un fichier de plus de 4 Go.
+        <translation>L&apos;image contient un fichier de plus de 4 Go.
 FAT32 ne prend pas en charge les fichiers de plus de 4 Go.
 Sélectionnez NTFS ou exFAT.</translation>
     </message>
@@ -846,7 +901,7 @@ Sélectionnez NTFS ou exFAT.</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="1338"/>
         <source>The selected image does not appear to be UEFI-bootable.
 Continue anyway?</source>
-        <translation>L'image sélectionnée ne semble pas amorçable en UEFI.
+        <translation>L&apos;image sélectionnée ne semble pas amorçable en UEFI.
 Continuer quand même ?</translation>
     </message>
     <message>
@@ -870,17 +925,17 @@ Continuer quand même ?</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="1425"/>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
-        <translation>%1 n'est pas installé sur ce système.
-Installez le paquet '%2' et réessayez.</translation>
+        <translation>%1 n&apos;est pas installé sur ce système.
+Installez le paquet &apos;%2&apos; et réessayez.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
         <source>7z is not installed on this system.
 It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
-        <translation>7z n'est pas installé sur ce système.
+        <translation>7z n&apos;est pas installé sur ce système.
 Il est nécessaire pour extraire le fichier supplémentaire.
-Installez le paquet 'p7zip' et réessayez.</translation>
+Installez le paquet &apos;p7zip&apos; et réessayez.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -903,14 +958,13 @@ Installez le paquet 'p7zip' et réessayez.</translation>
         <translation>Impossible de lire les informations du périphérique.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>Le chargeur d'amorçage est MS-DOS : système de fichiers FAT16 forcé</translation>
+        <translation type="vanished">Le chargeur d&apos;amorçage est MS-DOS : système de fichiers FAT16 forcé</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
         <source>DD Image Write</source>
-        <translation>Écrire l'image en mode DD</translation>
+        <translation>Écrire l&apos;image en mode DD</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1586"/>
@@ -972,7 +1026,7 @@ Continuer ?</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1729"/>
         <source>Analyzing image...</source>
-        <translation>Analyse de l'image...</translation>
+        <translation>Analyse de l&apos;image...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1791"/>
@@ -983,7 +1037,7 @@ Continuer ?</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="1792"/>
         <source>This file is not a valid disk image and cannot be written or booted.
 Please check your file!</source>
-        <translation>Ce fichier n'est pas une image disque valide et ne peut pas être écrit ni amorcé.
+        <translation>Ce fichier n&apos;est pas une image disque valide et ne peut pas être écrit ni amorcé.
 Vérifiez votre fichier !</translation>
     </message>
     <message>
@@ -994,17 +1048,17 @@ Vérifiez votre fichier !</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1798"/>
         <source>This image has a defined partition scheme, but no bootloader, so it can only be written as a disk clone.</source>
-        <translation>Cette image a un schéma de partition défini, mais pas de chargeur d'amorçage, elle ne peut donc être écrite que comme un clone de disque.</translation>
+        <translation>Cette image a un schéma de partition défini, mais pas de chargeur d&apos;amorçage, elle ne peut donc être écrite que comme un clone de disque.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1851"/>
         <source>Image hashes computed</source>
-        <translation>Empreintes de l'image calculées</translation>
+        <translation>Empreintes de l&apos;image calculées</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1852"/>
         <source>Image Hashes</source>
-        <translation>Empreintes de l'image</translation>
+        <translation>Empreintes de l&apos;image</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1885"/>
@@ -1030,9 +1084,9 @@ it reports more storage capacity than it actually has.
 Data written beyond the real capacity will be lost.
 Use a genuine drive from a reputable brand.</source>
         <translation>Ce périphérique semble être une clé USB contrefaite :
-il annonce plus de capacité de stockage qu'il n'en a réellement.
+il annonce plus de capacité de stockage qu&apos;il n&apos;en a réellement.
 Les données écrites au-delà de la capacité réelle seront perdues.
-Utilisez une clé authentique d'une marque réputée.</translation>
+Utilisez une clé authentique d&apos;une marque réputée.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1924"/>
@@ -1071,7 +1125,7 @@ Utilisez une clé authentique d'une marque réputée.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2515"/>
         <source>SELECT IMAGE</source>
-        <translation>SÉLECTIONNER L'IMAGE</translation>
+        <translation>SÉLECTIONNER L&apos;IMAGE</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2633"/>
@@ -1086,12 +1140,12 @@ Utilisez une clé authentique d'une marque réputée.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2995"/>
         <source>Verify written data (read back and hash)</source>
-        <translation>Vérifier les données écrites (relire et calculer l'empreinte)</translation>
+        <translation>Vérifier les données écrites (relire et calculer l&apos;empreinte)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2998"/>
         <source>Bootloader</source>
-        <translation>Chargeur d'amorçage</translation>
+        <translation>Chargeur d&apos;amorçage</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="3016"/>
@@ -1115,7 +1169,7 @@ Utilisez une clé authentique d'une marque réputée.</translation>
     <message>
         <location filename="../../src/ui/PreferencesDialog.cpp" line="24"/>
         <source>Interface theme:</source>
-        <translation>Thème de l'interface :</translation>
+        <translation>Thème de l&apos;interface :</translation>
     </message>
 </context>
 <context>
@@ -1144,11 +1198,11 @@ Rufus recommends using ISO image mode so that you have full access to the drive 
 If you experience problems with ISO mode, you can try rewriting the image in DD image mode.
 
 Please select the mode you would like to use to write this image:</source>
-        <translation>L'image que vous avez sélectionnée est un ISOHybrid, ce qui signifie qu'elle peut être écrite soit en mode image ISO (recommandé), soit en mode image DD.
+        <translation>L&apos;image que vous avez sélectionnée est un ISOHybrid, ce qui signifie qu&apos;elle peut être écrite soit en mode image ISO (recommandé), soit en mode image DD.
 
 Rufus recommande le mode image ISO afin que vous ayez un accès complet au lecteur sous Windows après le formatage.
 
-Si vous rencontrez des problèmes avec le mode ISO, vous pouvez réessayer d'écrire l'image en mode DD.
+Si vous rencontrez des problèmes avec le mode ISO, vous pouvez réessayer d&apos;écrire l&apos;image en mode DD.
 
 Sélectionnez le mode que vous souhaitez utiliser pour écrire cette image :</translation>
     </message>
@@ -1171,7 +1225,7 @@ Sélectionnez le mode que vous souhaitez utiliser pour écrire cette image :</tr
         <location filename="../../src/ui/MainWindow.cpp" line="115"/>
         <source>Customize Windows installation options.
 Hover over each option for details.</source>
-        <translation>Personnalisez les options d'installation de Windows.
+        <translation>Personnalisez les options d&apos;installation de Windows.
 Survolez chaque option pour plus de détails.</translation>
     </message>
     <message>
@@ -1182,7 +1236,7 @@ Survolez chaque option pour plus de détails.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="131"/>
         <source>Disables compatibility checks during Windows 11 installation</source>
-        <translation>Désactive les vérifications de compatibilité lors de l'installation de Windows 11</translation>
+        <translation>Désactive les vérifications de compatibilité lors de l&apos;installation de Windows 11</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="135"/>
@@ -1197,12 +1251,12 @@ Survolez chaque option pour plus de détails.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="142"/>
         <source>Disable online account requirement (BypassNRO)</source>
-        <translation>Désactiver l'exigence de compte en ligne (BypassNRO)</translation>
+        <translation>Désactiver l&apos;exigence de compte en ligne (BypassNRO)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="143"/>
         <source>Allows local account creation instead of Microsoft account</source>
-        <translation>Permet la création d'un compte local au lieu d'un compte Microsoft</translation>
+        <translation>Permet la création d&apos;un compte local au lieu d&apos;un compte Microsoft</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="148"/>
@@ -1212,7 +1266,7 @@ Survolez chaque option pour plus de détails.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="149"/>
         <source>Creates a local user account during installation</source>
-        <translation>Crée un compte utilisateur local lors de l'installation</translation>
+        <translation>Crée un compte utilisateur local lors de l&apos;installation</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="153"/>
@@ -1227,22 +1281,22 @@ Survolez chaque option pour plus de détails.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="174"/>
         <source>Username:</source>
-        <translation>Nom d'utilisateur :</translation>
+        <translation>Nom d&apos;utilisateur :</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="176"/>
         <source>Username</source>
-        <translation>Nom d'utilisateur</translation>
+        <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="196"/>
         <source>Missing username</source>
-        <translation>Nom d'utilisateur manquant</translation>
+        <translation>Nom d&apos;utilisateur manquant</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="197"/>
         <source>Please enter a username for the local user account.</source>
-        <translation>Veuillez saisir un nom d'utilisateur pour le compte local.</translation>
+        <translation>Veuillez saisir un nom d&apos;utilisateur pour le compte local.</translation>
     </message>
 </context>
 <context>
@@ -1287,8 +1341,8 @@ Manquantes :
 %1
 
 Rufus peut toujours fonctionner, mais les opérations suivantes ne seront pas disponibles :
-- syslinux : installation du chargeur d'amorçage BIOS
-- grub-install : installation du chargeur d'amorçage GRUB
+- syslinux : installation du chargeur d&apos;amorçage BIOS
+- grub-install : installation du chargeur d&apos;amorçage GRUB
 - 7z : extraction des images compressées (ZIP/7z)
 - fuseiso : extraction des ISO
 
@@ -1306,9 +1360,9 @@ Installez-les avec le gestionnaire de paquets fourni par défaut avec votre dist
 Rufus requires administrator privileges to access storage devices.
 
 To continue, please choose your language and press Accept.</source>
-        <translation>Bienvenue dans Rufus ! Merci d'utiliser cet outil. Nous sommes ravis que notre travail vous tienne à cœur autant que nous aimons y travailler.
+        <translation>Bienvenue dans Rufus ! Merci d&apos;utiliser cet outil. Nous sommes ravis que notre travail vous tienne à cœur autant que nous aimons y travailler.
 
-Rufus nécessite des privilèges d'administrateur pour accéder aux périphériques de stockage.
+Rufus nécessite des privilèges d&apos;administrateur pour accéder aux périphériques de stockage.
 
 Pour continuer, choisissez votre langue et appuyez sur Accepter.</translation>
     </message>
@@ -1335,39 +1389,39 @@ Pour continuer, choisissez votre langue et appuyez sur Accepter.</translation>
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>Périphérique '%1' introuvable.</translation>
+        <translation>Périphérique &apos;%1&apos; introuvable.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>Le périphérique '%1' est en lecture seule.</translation>
+        <translation>Le périphérique &apos;%1&apos; est en lecture seule.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>Le périphérique '%1' est le disque système et ne sera pas écrasé.</translation>
+        <translation>Le périphérique &apos;%1&apos; est le disque système et ne sera pas écrasé.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
         <source>Using image: %1...</source>
-        <translation>Utilisation de l'image : %1...</translation>
+        <translation>Utilisation de l&apos;image : %1...</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>Les instructions '--filesystem=%1' et '--boot=%2' ont été ignorées, car elles ne fonctionnent pas avec les formats d'image disque (IMG/VHD).</translation>
+        <translation>Les instructions &apos;--filesystem=%1&apos; et &apos;--boot=%2&apos; ont été ignorées, car elles ne fonctionnent pas avec les formats d&apos;image disque (IMG/VHD).</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>Système de fichiers inconnu '%1'.</translation>
+        <translation>Système de fichiers inconnu &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>
         <source>The Rufus command line requires administrator privileges.
 Please run with sudo:
   sudo %1</source>
-        <translation>La ligne de commande de Rufus nécessite des privilèges d'administrateur.
+        <translation>La ligne de commande de Rufus nécessite des privilèges d&apos;administrateur.
 Exécutez avec sudo :
   sudo %1</translation>
     </message>
@@ -1384,7 +1438,7 @@ Exécutez avec sudo :
 
 Please run with sudo:
   sudo %1</source>
-        <translation>L'authentification administrateur a été annulée ou a échoué.
+        <translation>L&apos;authentification administrateur a été annulée ou a échoué.
 
 Exécutez avec sudo :
   sudo %1</translation>
@@ -1395,7 +1449,7 @@ Exécutez avec sudo :
 
 Please run with sudo:
   sudo %1</source>
-        <translation>Impossible d'exécuter Rufus sans privilèges d'administrateur, et pkexec n'est pas installé pour les demander.
+        <translation>Impossible d&apos;exécuter Rufus sans privilèges d&apos;administrateur, et pkexec n&apos;est pas installé pour les demander.
 
 Exécutez avec sudo :
   sudo %1</translation>
@@ -1406,8 +1460,8 @@ Exécutez avec sudo :
 An authentication window will open.
 
 Continue?</source>
-        <translation>Rufus nécessite des privilèges d'administrateur pour écrire sur les clés USB.
-Une fenêtre d'authentification va s'ouvrir.
+        <translation>Rufus nécessite des privilèges d&apos;administrateur pour écrire sur les clés USB.
+Une fenêtre d&apos;authentification va s&apos;ouvrir.
 
 Continuer ?</translation>
     </message>

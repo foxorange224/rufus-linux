@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>Rufus 정보</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>버전 %1 (Linux 포트)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - 믿을 수 있는 USB 포맷 도구</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>버전 %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>공식 웹사이트: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Copyright © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Linux 포트: FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>크레딧: Pete Batard(원본 Rufus 작성자), FoxOrange224(Linux 포트)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>번역: 아랍어, 중국어(간체), 영어, 스페인어, 페르시아어, 프랑스어, 독일어, 인도네시아어, 일본어, 한국어, 포르투갈어(브라질), 러시아어, 터키어, 베트남어</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>버그 신고 또는 개선 요청:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>추가 저작권:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>라이선스</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>확인</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>라이선스 파일을 찾을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">버전 %1 (Linux 포트)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>ISO/IMG 파일에서 부팅 가능한 USB 드라이브를 만듭니다.
+        <translation type="vanished">ISO/IMG 파일에서 부팅 가능한 USB 드라이브를 만듭니다.
 
 원작자: Pete Batard (Akeo)
 GNU GPL v3 라이선스
@@ -29,17 +88,15 @@ GNU GPL v3 라이선스
 Qt6과 C++을 사용한 Linux 포트</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>GitHub의 Linux 포트</translation>
+        <translation type="vanished">GitHub의 Linux 포트</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>GitHub의 원본 Rufus (Windows)</translation>
+        <translation type="vanished">GitHub의 원본 Rufus (Windows)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
@@ -69,7 +126,7 @@ Qt6과 C++을 사용한 Linux 포트</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>가짜 플래시 확인 중...</translation>
+        <translation>장치 확인 중...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Qt6과 C++을 사용한 Linux 포트</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>DD 모드로 이미지 작성 중...</translation>
+        <translation>이미지 작성 중...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Qt6과 C++을 사용한 Linux 포트</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>ISO 파일을 USB로 추출 중...</translation>
+        <translation>ISO 파일 추출 중...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>추출 중: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>추출 중: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>ISO를 추출할 수 없습니다: %1이(가) 설치되어 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>ISO를 추출할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Win7 EFI 부팅 수정 적용 중...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>ReactOS 부트로더 설치 중...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>추가 파일 추출 중...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>추가 파일을 추출할 수 없습니다.
 7z가 설치되어 있고 아카이브가 유효한지 확인하세요.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Windows 무인 설치 적용 중...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>파티션 부트 레코드 작성 중...</translation>
     </message>
@@ -304,7 +359,7 @@ Make sure 7z is installed and the archive is valid.</source>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>취소 중 - 잠시 기다려 주세요...</translation>
+        <translation>취소 중, 잠시 기다려 주세요...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>쓸 USB 드라이브를 선택하세요.
 기본적으로 이동식 USB 드라이브만 표시됩니다. 고정 드라이브를 표시하려면 Ctrl+F를 누르거나
-'USB 하드 드라이브 나열'을 선택하세요.</translation>
+&apos;USB 하드 드라이브 나열&apos;을 선택하세요.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -749,7 +804,7 @@ Multiple passes with different patterns detect more types of NAND defects.</sour
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM(호환성 지원 모듈)은 레거시 BIOS 환경을 에뮬레이션하는 UEFI 펌웨어의 구성 요소로, BIOS 부팅만 지원하는 운영 체제와 부트로더가 UEFI 머신에서도 실행될 수 있게 합니다.
 
-레거시 BIOS 펌웨어 또는 CSM이 활성화된 UEFI 펌웨어에는 'BIOS (또는 UEFI-CSM)'을 선택하세요. 기본 UEFI 부팅(예: Windows 11 인증 머신 또는 Secure Boot 사용 시)에는 'UEFI (CSM 아님)'을 선택하세요.</translation>
+레거시 BIOS 펌웨어 또는 CSM이 활성화된 UEFI 펌웨어에는 &apos;BIOS (또는 UEFI-CSM)&apos;을 선택하세요. 기본 UEFI 부팅(예: Windows 11 인증 머신 또는 Secure Boot 사용 시)에는 &apos;UEFI (CSM 아님)&apos;을 선택하세요.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -871,7 +926,7 @@ Continue anyway?</source>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1이(가) 이 시스템에 설치되어 있지 않습니다.
-'%2' 패키지를 설치하고 다시 시도하세요.</translation>
+&apos;%2&apos; 패키지를 설치하고 다시 시도하세요.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z가 이 시스템에 설치되어 있지 않습니다.
 추가 파일을 추출하는 데 필요합니다.
-'p7zip' 패키지를 설치하고 다시 시도하세요.</translation>
+&apos;p7zip&apos; 패키지를 설치하고 다시 시도하세요.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Please install the &apos;p7zip&apos; package and try again.</source>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>계속하려면 이미지 또는 디스크(IMG 또는 기타 형식)를 선택하세요. 포맷만 하려면 부팅 선택에서 "부팅 불가"를 선택하세요.</translation>
+        <translation>계속하려면 이미지 또는 디스크(IMG 또는 기타 형식)를 선택하세요. 포맷만 하려면 부팅 선택에서 &quot;부팅 불가&quot;를 선택하세요.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>장치 정보를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>부트로더가 MS-DOS입니다: FAT16 파일 시스템 강제 적용</translation>
+        <translation type="vanished">부트로더가 MS-DOS입니다: FAT16 파일 시스템 강제 적용</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1335,17 +1389,17 @@ Rufus는 저장 장치에 액세스하려면 관리자 권한이 필요합니다
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>'%1' 장치를 찾을 수 없습니다.</translation>
+        <translation>&apos;%1&apos; 장치를 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>'%1' 장치는 읽기 전용입니다.</translation>
+        <translation>&apos;%1&apos; 장치는 읽기 전용입니다.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>'%1' 장치는 시스템 디스크이므로 덮어쓰지 않습니다.</translation>
+        <translation>&apos;%1&apos; 장치는 시스템 디스크이므로 덮어쓰지 않습니다.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1355,12 +1409,12 @@ Rufus는 저장 장치에 액세스하려면 관리자 권한이 필요합니다
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>'--filesystem=%1' 및 '--boot=%2' 지시는 디스크 이미지 형식(IMG/VHD)에서 작동하지 않으므로 무시되었습니다.</translation>
+        <translation>&apos;--filesystem=%1&apos; 및 &apos;--boot=%2&apos; 지시는 디스크 이미지 형식(IMG/VHD)에서 작동하지 않으므로 무시되었습니다.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>알 수 없는 파일 시스템 '%1'.</translation>
+        <translation>알 수 없는 파일 시스템 &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

@@ -1,5 +1,24 @@
 # ChangeLogs Rufus for Linux
 
+o Version 1.0.3 (2026.08.16):
+    - About dialog redesigned to match the original Rufus layout:
+      * Icon and text block (title, version, official website link,
+        copyright, Linux port credits, translators, bug reporting)
+      * "Additional Copyrights" scroll box with third-party notices
+        (GPLv3, Qt6 LGPLv3, zstd/xxhash, FreeDOS, SYSLINUX, GRUB2,
+        UEFI:NTFS, MBR)
+      * License button opens the full GPLv3 text from the binary
+      * New About strings translated in all 14 shipped languages
+    - Welcome dialog: the language selector now applies the chosen
+      language immediately, retranslating the dialog on the fly
+    - GUI log always scrolls to the bottom (no manual scrolling needed
+      during long operations)
+    - All log and status lines are now shown in English (no localized
+      technical messages in the log)
+    - es-ES translation reviewed: 63 corrections (shorter, clearer
+      messages) propagated to all other shipped languages; all
+      translations remain 100% complete
+
 o Version 1.0.2 (2026.08.15):
     - Boot and format engine reworked:
       * Syslinux redirect stage eliminated (direct MBR/SBR installation)

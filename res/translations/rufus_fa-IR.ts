@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>دربارهٔ Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>نسخهٔ %1 (پورت لینوکس)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - ابزار قابل اعتماد قالب‌بندی USB</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>نسخهٔ %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>وب‌سایت رسمی: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>حقوق نشر © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>پورت لینوکس توسط FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>مشارکت‌کنندگان: Pete Batard (نویسندهٔ Rufus اصلی)، FoxOrange224 (پورت لینوکس)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>ترجمه‌ها: عربی، چینی (ساده‌شده)، انگلیسی، اسپانیایی، فارسی، فرانسوی، آلمانی، اندونزیایی، ژاپنی، کره‌ای، پرتغالی (برزیل)، روسی، ترکی، ویتنامی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>گزارش خطاها یا پیشنهاد بهبود در:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>حقوق نشر اضافی:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>مجوز</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>تأیید</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>فایل مجوز یافت نشد.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">نسخهٔ %1 (پورت لینوکس)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>درایوهای USB قابل بوت از فایل‌های ISO/IMG بسازید.
+        <translation type="vanished">درایوهای USB قابل بوت از فایل‌های ISO/IMG بسازید.
 
 ساخته‌شده توسط پیت باتارد (Akeo)
 مجوز GNU GPL v3
@@ -29,17 +88,15 @@ Linux port using Qt6 and C++</source>
 پورت لینوکس با استفاده از Qt6 و C++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>پورت لینوکس در GitHub</translation>
+        <translation type="vanished">پورت لینوکس در GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>Rufus اصلی (ویندوز) در GitHub</translation>
+        <translation type="vanished">Rufus اصلی (ویندوز) در GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>بستن</translation>
     </message>
@@ -69,7 +126,7 @@ Linux port using Qt6 and C++</source>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>در حال بررسی فلش جعلی...</translation>
+        <translation>در حال بررسی دستگاه...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Linux port using Qt6 and C++</source>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>در حال نوشتن تصویر در حالت DD...</translation>
+        <translation>در حال نوشتن تصویر...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Linux port using Qt6 and C++</source>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>در حال استخراج فایل‌های ISO به USB...</translation>
+        <translation>در حال استخراج فایلهای ISO...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>در حال استخراج: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>در حال استخراج: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>ISO استخراج نشد: %1 نصب نیست.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>ISO استخراج نشد.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>در حال اعمال اصلاح بوت EFI ویندوز 7...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>در حال نصب بوت‌لودر ReactOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>در حال استخراج فایل‌های اضافی...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>فایل اضافی استخراج نشد.
 مطمئن شوید 7z نصب است و آرشیو معتبر است.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>در حال اعمال نصب خودکار ویندوز...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>در حال نوشتن رکورد بوت پارتیشن...</translation>
     </message>
@@ -304,7 +359,7 @@ Make sure 7z is installed and the archive is valid.</source>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>در حال لغو - لطفاً صبر کنید...</translation>
+        <translation>در حال لغو، لطفاً صبر کنید...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>درایو USB موردنظر برای نوشتن را انتخاب کنید.
 به‌طور پیش‌فرض فقط درایوهای USB قابل‌حذف فهرست می‌شوند. Ctrl+F را فشار دهید یا گزینهٔ
-'فهرست هاردهای USB' را علامت بزنید تا درایوهای ثابت نمایش داده شوند.</translation>
+&apos;فهرست هاردهای USB&apos; را علامت بزنید تا درایوهای ثابت نمایش داده شوند.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -749,7 +804,7 @@ Multiple passes with different patterns detect more types of NAND defects.</sour
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM (ماژول پشتیبانی سازگاری) مؤلفه‌ای از سیستم‌عامل UEFI است که محیط BIOS قدیمی را شبیه‌سازی می‌کند، تا سیستم‌عامل‌ها و بوت‌لودرهایی که فقط بوت BIOS را پشتیبانی می‌کنند همچنان روی دستگاه‌های UEFI اجرا شوند.
 
-برای سیستم‌عامل BIOS قدیمی، یا سیستم‌عامل UEFI با CSM فعال، 'BIOS (یا UEFI-CSM)' را انتخاب کنید. برای بوت بومی UEFI، مثلاً روی دستگاه‌های تأییدشدهٔ ویندوز ۱۱ یا هنگام استفاده از Secure Boot، 'UEFI (بدون CSM)' را انتخاب کنید.</translation>
+برای سیستم‌عامل BIOS قدیمی، یا سیستم‌عامل UEFI با CSM فعال، &apos;BIOS (یا UEFI-CSM)&apos; را انتخاب کنید. برای بوت بومی UEFI، مثلاً روی دستگاه‌های تأییدشدهٔ ویندوز ۱۱ یا هنگام استفاده از Secure Boot، &apos;UEFI (بدون CSM)&apos; را انتخاب کنید.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -871,7 +926,7 @@ Continue anyway?</source>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 روی این سیستم نصب نیست.
-لطفاً بستهٔ '%2' را نصب کنید و دوباره تلاش کنید.</translation>
+لطفاً بستهٔ &apos;%2&apos; را نصب کنید و دوباره تلاش کنید.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z روی این سیستم نصب نیست.
 برای استخراج فایل اضافی لازم است.
-لطفاً بستهٔ 'p7zip' را نصب کنید و دوباره تلاش کنید.</translation>
+لطفاً بستهٔ &apos;p7zip&apos; را نصب کنید و دوباره تلاش کنید.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Please install the &apos;p7zip&apos; package and try again.</source>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>برای ادامه، لطفاً یک تصویر یا دیسک (IMG یا قالب دیگر) انتخاب کنید، یا اگر فقط می‌خواهید قالب‌بندی کنید، در انتخاب بوت گزینهٔ "غیر قابل بوت" را انتخاب کنید.</translation>
+        <translation>برای ادامه، لطفاً یک تصویر یا دیسک (IMG یا قالب دیگر) انتخاب کنید، یا اگر فقط می‌خواهید قالب‌بندی کنید، در انتخاب بوت گزینهٔ &quot;غیر قابل بوت&quot; را انتخاب کنید.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>اطلاعات دستگاه خوانده نشد.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>بوت‌لودر MS-DOS است: اعمال سیستم فایل FAT16</translation>
+        <translation type="vanished">بوت‌لودر MS-DOS است: اعمال سیستم فایل FAT16</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1334,17 +1388,17 @@ Rufus برای دسترسی به دستگاه‌های ذخیره‌سازی ب�
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>دستگاه '%1' پیدا نشد.</translation>
+        <translation>دستگاه &apos;%1&apos; پیدا نشد.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>دستگاه '%1' فقط‌خواندنی است.</translation>
+        <translation>دستگاه &apos;%1&apos; فقط‌خواندنی است.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>دستگاه '%1' دیسک سیستم است و بازنویسی نخواهد شد.</translation>
+        <translation>دستگاه &apos;%1&apos; دیسک سیستم است و بازنویسی نخواهد شد.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1354,12 +1408,12 @@ Rufus برای دسترسی به دستگاه‌های ذخیره‌سازی ب�
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>دستورهای '--filesystem=%1' و '--boot=%2' نادیده گرفته شدند، زیرا روی قالب‌های تصویر دیسک (IMG/VHD) کار نمی‌کنند.</translation>
+        <translation>دستورهای &apos;--filesystem=%1&apos; و &apos;--boot=%2&apos; نادیده گرفته شدند، زیرا روی قالب‌های تصویر دیسک (IMG/VHD) کار نمی‌کنند.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>سیستم فایل ناشناختهٔ '%1'.</translation>
+        <translation>سیستم فایل ناشناختهٔ &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

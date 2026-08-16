@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>Über Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>Version %1 (Linux-Port)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - Das zuverlässige USB-Formatierungstool</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>Version %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>Offizielle Website: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Copyright © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Linux-Port von FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>Mitwirkende: Pete Batard (Autor des ursprünglichen Rufus), FoxOrange224 (Linux-Port)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>Übersetzungen: Arabisch, Chinesisch (vereinfacht), Englisch, Spanisch, Persisch, Französisch, Deutsch, Indonesisch, Japanisch, Koreanisch, Portugiesisch (Brasilien), Russisch, Türkisch, Vietnamesisch</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>Melde Fehler oder schlage Verbesserungen vor unter:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>Zusätzliche Copyright-Hinweise:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>Lizenz</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>Lizenzdatei nicht gefunden.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">Version %1 (Linux-Port)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>Erstellen Sie bootfähige USB-Laufwerke aus ISO/IMG-Dateien.
+        <translation type="vanished">Erstellen Sie bootfähige USB-Laufwerke aus ISO/IMG-Dateien.
 
 Ursprünglich erstellt von Pete Batard (Akeo)
 GNU-GPL-v3-Lizenz
@@ -29,17 +88,15 @@ GNU-GPL-v3-Lizenz
 Linux-Port mit Qt6 und C++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>Linux-Port auf GitHub</translation>
+        <translation type="vanished">Linux-Port auf GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>Original-Rufus (Windows) auf GitHub</translation>
+        <translation type="vanished">Original-Rufus (Windows) auf GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -69,7 +126,7 @@ Linux-Port mit Qt6 und C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>Prüfe auf gefälschten USB-Stick...</translation>
+        <translation>Gerät wird überprüft...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Linux-Port mit Qt6 und C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>Schreibe Image im DD-Modus...</translation>
+        <translation>Schreibe Image...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Linux-Port mit Qt6 und C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>Extrahiere ISO-Dateien auf USB...</translation>
+        <translation>Extrahiere ISO-Dateien...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>Extrahiere: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>Extrahiere: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>Die ISO konnte nicht extrahiert werden: %1 ist nicht installiert.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>Die ISO konnte nicht extrahiert werden.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Wende Win7-EFI-Boot-Fix an...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>Installiere ReactOS-Bootloader...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>Extrahiere zusätzliche Dateien...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>Die zusätzliche Datei konnte nicht extrahiert werden.
 Stellen Sie sicher, dass 7z installiert und das Archiv gültig ist.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Wende unbeaufsichtigte Windows-Installation an...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>Schreibe Partition-Boot-Record...</translation>
     </message>
@@ -304,7 +359,7 @@ Stellen Sie sicher, dass 7z installiert und das Archiv gültig ist.</translation
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>Wird abgebrochen - Bitte warten...</translation>
+        <translation>Wird abgebrochen, bitte warten...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>Wählen Sie das USB-Laufwerk für die Ausgabe.
 Standardmäßig werden nur Wechseldatenträger aufgelistet. Drücken Sie Strg+F oder aktivieren Sie
-'USB-Festplatten auflisten', um feste Laufwerke anzuzeigen.</translation>
+&apos;USB-Festplatten auflisten&apos;, um feste Laufwerke anzuzeigen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -749,7 +804,7 @@ Mehrere Durchgänge mit verschiedenen Mustern erkennen mehr Arten von NAND-Defek
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM (Compatibility Support Module) ist eine Komponente der UEFI-Firmware, die eine Legacy-BIOS-Umgebung emuliert, damit Betriebssysteme und Bootloader, die nur BIOS-Boot unterstützen, weiterhin auf UEFI-Rechnern laufen können.
 
-Wählen Sie 'BIOS (oder UEFI-CSM)' für Legacy-BIOS-Firmware oder für UEFI-Firmware mit aktiviertem CSM. Wählen Sie 'UEFI (ohne CSM)' für natives UEFI-Boot, z. B. auf für Windows 11 zertifizierten Rechnern oder wenn Secure Boot verwendet wird.</translation>
+Wählen Sie &apos;BIOS (oder UEFI-CSM)&apos; für Legacy-BIOS-Firmware oder für UEFI-Firmware mit aktiviertem CSM. Wählen Sie &apos;UEFI (ohne CSM)&apos; für natives UEFI-Boot, z. B. auf für Windows 11 zertifizierten Rechnern oder wenn Secure Boot verwendet wird.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -871,7 +926,7 @@ Trotzdem fortfahren?</translation>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 ist auf diesem System nicht installiert.
-Bitte installieren Sie das Paket '%2' und versuchen Sie es erneut.</translation>
+Bitte installieren Sie das Paket &apos;%2&apos; und versuchen Sie es erneut.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z ist auf diesem System nicht installiert.
 Es wird benötigt, um die zusätzliche Datei zu extrahieren.
-Bitte installieren Sie das Paket 'p7zip' und versuchen Sie es erneut.</translation>
+Bitte installieren Sie das Paket &apos;p7zip&apos; und versuchen Sie es erneut.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Bitte installieren Sie das Paket 'p7zip' und versuchen Sie es erneut.</translati
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>Um fortzufahren, wählen Sie bitte ein Image oder einen Datenträger (IMG oder anderes Format), oder wählen Sie, wenn Sie nur formatieren möchten, "Nicht bootfähig" in der Boot-Auswahl.</translation>
+        <translation>Um fortzufahren, wählen Sie bitte ein Image oder einen Datenträger (IMG oder anderes Format), oder wählen Sie, wenn Sie nur formatieren möchten, &quot;Nicht bootfähig&quot; in der Boot-Auswahl.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Bitte installieren Sie das Paket 'p7zip' und versuchen Sie es erneut.</translati
         <translation>Geräteinformationen konnten nicht gelesen werden.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>Bootloader ist MS-DOS: erzwinge FAT16-Dateisystem</translation>
+        <translation type="vanished">Bootloader ist MS-DOS: erzwinge FAT16-Dateisystem</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1334,17 +1388,17 @@ Um fortzufahren, wählen Sie bitte Ihre Sprache und drücken Sie Akzeptieren.</t
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>Gerät '%1' nicht gefunden.</translation>
+        <translation>Gerät &apos;%1&apos; nicht gefunden.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>Gerät '%1' ist schreibgeschützt.</translation>
+        <translation>Gerät &apos;%1&apos; ist schreibgeschützt.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>Gerät '%1' ist die Systemfestplatte und wird nicht überschrieben.</translation>
+        <translation>Gerät &apos;%1&apos; ist die Systemfestplatte und wird nicht überschrieben.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1354,12 +1408,12 @@ Um fortzufahren, wählen Sie bitte Ihre Sprache und drücken Sie Akzeptieren.</t
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>Die Anweisungen '--filesystem=%1' und '--boot=%2' wurden ignoriert, da sie bei Datenträgerimage-Formaten (IMG/VHD) nicht funktionieren.</translation>
+        <translation>Die Anweisungen &apos;--filesystem=%1&apos; und &apos;--boot=%2&apos; wurden ignoriert, da sie bei Datenträgerimage-Formaten (IMG/VHD) nicht funktionieren.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>Unbekanntes Dateisystem '%1'.</translation>
+        <translation>Unbekanntes Dateisystem &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

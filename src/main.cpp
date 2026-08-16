@@ -264,6 +264,21 @@ static void showFirstRunWelcome() {
 
     QObject::connect(accept, &QPushButton::clicked, &dlg, &QDialog::accept);
 
+    auto retranslate = [&dlg, text, accept]() {
+        dlg.setWindowTitle(QCoreApplication::translate("main", "Welcome to Rufus"));
+        text->setText(QCoreApplication::translate("main",
+            "Welcome to Rufus! Thank you for using this tool. We are thrilled that "
+            "you care about our work as much as we enjoy working on it.\n\n"
+            "Rufus requires administrator privileges to access storage devices.\n\n"
+            "To continue, please choose your language and press Accept."));
+        accept->setText(QCoreApplication::translate("main", "Accept"));
+    };
+    QObject::connect(lang, QOverload<int>::of(&QComboBox::currentIndexChanged),
+        &dlg, [&](int) {
+            Localization::setLanguage(lang->currentData().toString());
+            retranslate();
+        });
+
         if (dlg.exec() == QDialog::Accepted) {
             QString code = lang->currentData().toString();
             Localization::setLanguage(code);
@@ -464,7 +479,7 @@ int main(int argc, char *argv[]) {
             return 0;
         }
         if (strcmp(argv[i], "--version") == 0) {
-            printf("Rufus 1.0.2 - Create bootable USB drives\n");
+            printf("Rufus 1.0.3 - Create bootable USB drives\n");
             printf("Linux port using Qt6 and C++\n");
             printf("GNU GPL v3 License\n");
             return 0;
@@ -517,7 +532,7 @@ int main(int argc, char *argv[]) {
 
             QCoreApplication app(argc, argv);
             app.setApplicationName(QStringLiteral("Rufus"));
-            app.setApplicationVersion(QStringLiteral("1.0.2"));
+            app.setApplicationVersion(QStringLiteral("1.0.3"));
             app.setOrganizationName(QStringLiteral("Rufus"));
             app.setOrganizationDomain(QStringLiteral("rufus.ie"));
 
@@ -583,7 +598,7 @@ int main(int argc, char *argv[]) {
 
         QApplication app(argc, argv);
         app.setApplicationName(QStringLiteral("Rufus"));
-        app.setApplicationVersion(QStringLiteral("1.0.2"));
+        app.setApplicationVersion(QStringLiteral("1.0.3"));
         app.setOrganizationName(QStringLiteral("Rufus"));
         app.setOrganizationDomain(QStringLiteral("rufus.ie"));
         app.setQuitOnLastWindowClosed(true);
@@ -637,7 +652,7 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("Rufus"));
-    app.setApplicationVersion(QStringLiteral("1.0.2"));
+    app.setApplicationVersion(QStringLiteral("1.0.3"));
     app.setOrganizationName(QStringLiteral("Rufus"));
     app.setOrganizationDomain(QStringLiteral("rufus.ie"));
     app.setQuitOnLastWindowClosed(true);

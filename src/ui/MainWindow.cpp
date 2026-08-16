@@ -1547,7 +1547,7 @@ void MainWindow::onStartStop() {
     if (config.bootloaderType == QStringLiteral("msdos") &&
         config.filesystem == FileSystem::FAT32) {
         config.filesystem = FileSystem::FAT16;
-        Logger::warn(tr("Bootloader is MS-DOS: forcing FAT16 file system"));
+        Logger::warn(QStringLiteral("Bootloader is MS-DOS: forcing FAT16 file system"));
     }
 
     int targetIdx = m_targetSystemCombo->currentData().toInt();

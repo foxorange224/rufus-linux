@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>Tentang Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>Versi %1 (Port Linux)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - Alat Pemformatan USB yang Andal</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>Versi %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>Situs web resmi: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Hak cipta © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Port Linux oleh FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>Kredit: Pete Batard (penulis Rufus asli), FoxOrange224 (port Linux)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>Terjemahan: Arab, Tionghoa (Sederhana), Inggris, Spanyol, Persia, Prancis, Jerman, Indonesia, Jepang, Korea, Portugis (Brasil), Rusia, Turki, Vietnam</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>Laporkan bug atau minta penyempurnaan di:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>Hak cipta tambahan:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>Lisensi</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>File lisensi tidak ditemukan.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">Versi %1 (Port Linux)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>Buat drive USB yang dapat di-boot dari file ISO/IMG.
+        <translation type="vanished">Buat drive USB yang dapat di-boot dari file ISO/IMG.
 
 Awalnya dibuat oleh Pete Batard (Akeo)
 Lisensi GNU GPL v3
@@ -29,17 +88,15 @@ Lisensi GNU GPL v3
 Port Linux menggunakan Qt6 dan C++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>Port Linux di GitHub</translation>
+        <translation type="vanished">Port Linux di GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>Rufus asli (Windows) di GitHub</translation>
+        <translation type="vanished">Rufus asli (Windows) di GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>Tutup</translation>
     </message>
@@ -69,7 +126,7 @@ Port Linux menggunakan Qt6 dan C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>Memeriksa flash palsu...</translation>
+        <translation>Memeriksa perangkat...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Port Linux menggunakan Qt6 dan C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>Menulis citra dalam mode DD...</translation>
+        <translation>Menulis citra...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Port Linux menggunakan Qt6 dan C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>Mengekstrak file ISO ke USB...</translation>
+        <translation>Mengekstrak file ISO...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>Mengekstrak: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>Mengekstrak: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>ISO tidak dapat diekstrak: %1 tidak terpasang.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>ISO tidak dapat diekstrak.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Menerapkan perbaikan boot EFI Win7...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>Memasang bootloader ReactOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>Mengekstrak file tambahan...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>File tambahan tidak dapat diekstrak.
 Pastikan 7z terpasang dan arsipnya valid.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Menerapkan instalasi Windows tanpa pengawasan...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>Menulis rekaman boot partisi...</translation>
     </message>
@@ -258,7 +313,7 @@ Pastikan 7z terpasang dan arsipnya valid.</translation>
     <message>
         <location filename="../../src/ui/LogDialog.cpp" line="182"/>
         <source>Save log</source>
-        <translation>Simpan log</translation>
+        <translation>Simpan catatan peristiwa</translation>
     </message>
     <message>
         <location filename="../../src/ui/LogDialog.cpp" line="189"/>
@@ -278,7 +333,7 @@ Pastikan 7z terpasang dan arsipnya valid.</translation>
     <message>
         <location filename="../../src/ui/LogDialog.cpp" line="199"/>
         <source>Log saved to %1</source>
-        <translation>Log disimpan ke %1</translation>
+        <translation>Catatan peristiwa disimpan ke %1</translation>
     </message>
 </context>
 <context>
@@ -304,7 +359,7 @@ Pastikan 7z terpasang dan arsipnya valid.</translation>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>Membatalkan - Mohon tunggu...</translation>
+        <translation>Membatalkan, mohon tunggu...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>Pilih drive USB untuk ditulis.
 Secara default hanya drive USB yang dapat dilepas yang terdaftar. Tekan Ctrl+F atau centang
-'Daftarkan Hard Disk USB' untuk menampilkan drive tetap.</translation>
+&apos;Daftarkan Hard Disk USB&apos; untuk menampilkan drive tetap.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -684,7 +739,7 @@ Beberapa lintasan dengan pola berbeda mendeteksi lebih banyak jenis cacat NAND.<
         <location filename="../../src/ui/MainWindow.cpp" line="813"/>
         <location filename="../../src/ui/MainWindow.cpp" line="2910"/>
         <source>Open log window</source>
-        <translation>Buka jendela log</translation>
+        <translation>Buka jendela catatan</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="825"/>
@@ -749,7 +804,7 @@ Beberapa lintasan dengan pola berbeda mendeteksi lebih banyak jenis cacat NAND.<
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM (Compatibility Support Module) adalah komponen firmware UEFI yang meniru lingkungan BIOS lama, sehingga sistem operasi dan bootloader yang hanya mendukung boot BIOS tetap dapat berjalan di mesin UEFI.
 
-Pilih 'BIOS (atau UEFI-CSM)' untuk firmware BIOS lama, atau untuk firmware UEFI dengan CSM aktif. Pilih 'UEFI (non CSM)' untuk boot UEFI asli, misalnya pada mesin bersertifikat Windows 11 atau saat Secure Boot digunakan.</translation>
+Pilih &apos;BIOS (atau UEFI-CSM)&apos; untuk firmware BIOS lama, atau untuk firmware UEFI dengan CSM aktif. Pilih &apos;UEFI (non CSM)&apos; untuk boot UEFI asli, misalnya pada mesin bersertifikat Windows 11 atau saat Secure Boot digunakan.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -871,7 +926,7 @@ Tetap lanjutkan?</translation>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 tidak terpasang di sistem ini.
-Silakan pasang paket '%2' dan coba lagi.</translation>
+Silakan pasang paket &apos;%2&apos; dan coba lagi.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z tidak terpasang di sistem ini.
 Diperlukan untuk mengekstrak file tambahan.
-Silakan pasang paket 'p7zip' dan coba lagi.</translation>
+Silakan pasang paket &apos;p7zip&apos; dan coba lagi.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Silakan pasang paket 'p7zip' dan coba lagi.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>Untuk melanjutkan, silakan pilih citra atau disk (IMG atau format lain), atau jika Anda hanya ingin memformat, pilih "Non bootable" pada pilihan boot.</translation>
+        <translation>Untuk melanjutkan, silakan pilih citra atau disk (IMG atau format lain), atau jika Anda hanya ingin memformat, pilih &quot;Non bootable&quot; pada pilihan boot.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Silakan pasang paket 'p7zip' dan coba lagi.</translation>
         <translation>Tidak dapat membaca info perangkat.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>Bootloader adalah MS-DOS: memaksa sistem file FAT16</translation>
+        <translation type="vanished">Bootloader adalah MS-DOS: memaksa sistem file FAT16</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1042,12 +1096,12 @@ Gunakan drive asli dari merek ternama.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1971"/>
         <source>Disable the log window</source>
-        <translation>Nonaktifkan jendela log</translation>
+        <translation>Nonaktifkan jendela catatan</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1972"/>
         <source>Enable the log window</source>
-        <translation>Aktifkan jendela log</translation>
+        <translation>Aktifkan jendela catatan</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2045"/>
@@ -1335,17 +1389,17 @@ Untuk melanjutkan, silakan pilih bahasa Anda dan tekan Terima.</translation>
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>Perangkat '%1' tidak ditemukan.</translation>
+        <translation>Perangkat &apos;%1&apos; tidak ditemukan.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>Perangkat '%1' hanya baca.</translation>
+        <translation>Perangkat &apos;%1&apos; hanya baca.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>Perangkat '%1' adalah disk sistem dan tidak akan ditimpa.</translation>
+        <translation>Perangkat &apos;%1&apos; adalah disk sistem dan tidak akan ditimpa.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1355,12 +1409,12 @@ Untuk melanjutkan, silakan pilih bahasa Anda dan tekan Terima.</translation>
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>Instruksi '--filesystem=%1' dan '--boot=%2' diabaikan, karena tidak berfungsi pada format citra disk (IMG/VHD).</translation>
+        <translation>Instruksi &apos;--filesystem=%1&apos; dan &apos;--boot=%2&apos; diabaikan, karena tidak berfungsi pada format citra disk (IMG/VHD).</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>Sistem file tidak dikenal '%1'.</translation>
+        <translation>Sistem file tidak dikenal &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

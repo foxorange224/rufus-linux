@@ -15,23 +15,16 @@ jobs:
 
       - name: Install Qt6 dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools
-
-      - name: Configure
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+          sudo apt-get update > build.log
+          sudo apt-get install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools > build.log
 
       - name: Build
-        run: cmake --build build -j$(nproc)
+        run: sh start-build.sh > build.log
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
           name: rufus-linux
           path: |
-            build/src/rufus
-            build/src/translations/*.qm
-            build/src/freedos
-            build/src/mbr
-            build/src/syslinux
-            build/src/uefi-ntfs.img
+            rufus
+            build.log

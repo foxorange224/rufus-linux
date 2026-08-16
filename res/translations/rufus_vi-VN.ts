@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>Giới thiệu về Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>Phiên bản %1 (Bản Linux)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - Công cụ định dạng USB đáng tin cậy</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>Phiên bản %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>Trang web chính thức: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Bản quyền © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Bản port Linux bởi FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>Ghi công: Pete Batard (tác giả Rufus gốc), FoxOrange224 (bản port Linux)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>Bản dịch: tiếng Ả Rập, tiếng Trung (Giản thể), tiếng Anh, tiếng Tây Ban Nha, tiếng Ba Tư, tiếng Pháp, tiếng Đức, tiếng Indonesia, tiếng Nhật, tiếng Hàn, tiếng Bồ Đào Nha (Brazil), tiếng Nga, tiếng Thổ Nhĩ Kỳ, tiếng Việt</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>Báo lỗi hoặc đề xuất cải tiến tại:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>Bản quyền bổ sung:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>Giấy phép</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>Không tìm thấy tệp giấy phép.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">Phiên bản %1 (Bản Linux)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>Tạo ổ USB khởi động được từ tệp ISO/IMG.
+        <translation type="vanished">Tạo ổ USB khởi động được từ tệp ISO/IMG.
 
 Ban đầu được tạo bởi Pete Batard (Akeo)
 Giấy phép GNU GPL v3
@@ -29,17 +88,15 @@ Giấy phép GNU GPL v3
 Bản Linux dùng Qt6 và C++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>Bản Linux trên GitHub</translation>
+        <translation type="vanished">Bản Linux trên GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>Rufus gốc (Windows) trên GitHub</translation>
+        <translation type="vanished">Rufus gốc (Windows) trên GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>Đóng</translation>
     </message>
@@ -69,7 +126,7 @@ Bản Linux dùng Qt6 và C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>Đang kiểm tra flash giả...</translation>
+        <translation>Đang kiểm tra thiết bị...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Bản Linux dùng Qt6 và C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>Đang ghi ảnh ở chế độ DD...</translation>
+        <translation>Đang ghi ảnh...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Bản Linux dùng Qt6 và C++</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>Đang giải nén tệp ISO vào USB...</translation>
+        <translation>Đang giải nén tệp ISO...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>Đang giải nén: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>Đang giải nén: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>Không thể giải nén ISO: %1 chưa được cài đặt.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>Không thể giải nén ISO.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Đang áp dụng bản sửa khởi động Win7 EFI...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>Đang cài đặt bộ nạp khởi động ReactOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>Đang giải nén các tệp bổ sung...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>Không thể giải nén tệp bổ sung.
 Hãy đảm bảo 7z đã được cài đặt và kho lưu trữ hợp lệ.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Đang áp dụng cài đặt Windows tự động...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>Đang ghi bản ghi khởi động phân vùng...</translation>
     </message>
@@ -304,7 +359,7 @@ Hãy đảm bảo 7z đã được cài đặt và kho lưu trữ hợp lệ.</t
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>Đang hủy - Vui lòng đợi...</translation>
+        <translation>Đang hủy, vui lòng đợi...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>Chọn ổ USB cần ghi.
 Mặc định chỉ liệt kê ổ USB di động. Nhấn Ctrl+F hoặc chọn
-'Liệt kê Ổ cứng USB' để hiển thị ổ cố định.</translation>
+&apos;Liệt kê Ổ cứng USB&apos; để hiển thị ổ cố định.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -749,7 +804,7 @@ Nhiều lượt với các mẫu khác nhau phát hiện được nhiều loại
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM (Compatibility Support Module) là thành phần của firmware UEFI mô phỏng môi trường BIOS cũ, để các hệ điều hành và bộ nạp khởi động chỉ hỗ trợ khởi động BIOS vẫn có thể chạy trên máy UEFI.
 
-Chọn 'BIOS (hoặc UEFI-CSM)' cho firmware BIOS cũ hoặc firmware UEFI có bật CSM. Chọn 'UEFI (không CSM)' cho khởi động UEFI gốc, ví dụ trên máy chứng nhận Windows 11 hoặc khi dùng Secure Boot.</translation>
+Chọn &apos;BIOS (hoặc UEFI-CSM)&apos; cho firmware BIOS cũ hoặc firmware UEFI có bật CSM. Chọn &apos;UEFI (không CSM)&apos; cho khởi động UEFI gốc, ví dụ trên máy chứng nhận Windows 11 hoặc khi dùng Secure Boot.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -871,7 +926,7 @@ Vẫn tiếp tục?</translation>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 chưa được cài đặt trên hệ thống này.
-Vui lòng cài đặt gói '%2' và thử lại.</translation>
+Vui lòng cài đặt gói &apos;%2&apos; và thử lại.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z chưa được cài đặt trên hệ thống này.
 Cần nó để giải nén tệp bổ sung.
-Vui lòng cài đặt gói 'p7zip' và thử lại.</translation>
+Vui lòng cài đặt gói &apos;p7zip&apos; và thử lại.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Vui lòng cài đặt gói 'p7zip' và thử lại.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>Để tiếp tục, vui lòng chọn ảnh hoặc đĩa (IMG hoặc định dạng khác), hoặc nếu chỉ muốn định dạng, hãy chọn "Không khởi động" trong lựa chọn khởi động.</translation>
+        <translation>Để tiếp tục, vui lòng chọn ảnh hoặc đĩa (IMG hoặc định dạng khác), hoặc nếu chỉ muốn định dạng, hãy chọn &quot;Không khởi động&quot; trong lựa chọn khởi động.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Vui lòng cài đặt gói 'p7zip' và thử lại.</translation>
         <translation>Không thể đọc thông tin thiết bị.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>Bộ nạp khởi động là MS-DOS: buộc dùng hệ thống tệp FAT16</translation>
+        <translation type="vanished">Bộ nạp khởi động là MS-DOS: buộc dùng hệ thống tệp FAT16</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1335,17 +1389,17 @@ Rufus yêu cầu đặc quyền quản trị viên để truy cập các thiết
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>Không tìm thấy thiết bị '%1'.</translation>
+        <translation>Không tìm thấy thiết bị &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>Thiết bị '%1' ở chế độ chỉ đọc.</translation>
+        <translation>Thiết bị &apos;%1&apos; ở chế độ chỉ đọc.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>Thiết bị '%1' là đĩa hệ thống và sẽ không bị ghi đè.</translation>
+        <translation>Thiết bị &apos;%1&apos; là đĩa hệ thống và sẽ không bị ghi đè.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1355,12 +1409,12 @@ Rufus yêu cầu đặc quyền quản trị viên để truy cập các thiết
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>Các chỉ dẫn '--filesystem=%1' và '--boot=%2' đã bị bỏ qua vì chúng không hoạt động trên định dạng ảnh đĩa (IMG/VHD).</translation>
+        <translation>Các chỉ dẫn &apos;--filesystem=%1&apos; và &apos;--boot=%2&apos; đã bị bỏ qua vì chúng không hoạt động trên định dạng ảnh đĩa (IMG/VHD).</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>Hệ thống tệp không xác định '%1'.</translation>
+        <translation>Hệ thống tệp không xác định &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

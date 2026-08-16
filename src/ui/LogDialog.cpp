@@ -204,12 +204,6 @@ void LogDialog::onRefresh() {
     int count = entries.size();
 
     if (count > m_lastLogCount) {
-        // Save cursor state (so selection survives)
-        bool atBottom = (m_textEdit->verticalScrollBar()->value()
-                         >= m_textEdit->verticalScrollBar()->maximum() - 2);
-
-        // Only append new entries, colored by level (no timestamps: the
-        // GUI log shows plain messages only)
         for (int i = m_lastLogCount; i < count; ++i) {
             const LogEntry &entry = entries[i];
             QString color;
@@ -226,9 +220,7 @@ void LogDialog::onRefresh() {
 
         m_lastLogCount = count;
 
-        // If was at bottom, scroll to bottom; otherwise restore cursor
-        if (atBottom)
-            m_textEdit->verticalScrollBar()->setValue(
-                m_textEdit->verticalScrollBar()->maximum());
+        m_textEdit->verticalScrollBar()->setValue(
+            m_textEdit->verticalScrollBar()->maximum());
     }
 }

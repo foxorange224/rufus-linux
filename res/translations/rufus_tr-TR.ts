@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>Rufus Hakkında</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>Sürüm %1 (Linux Sürümü)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - Güvenilir USB Biçimlendirme Aracı</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>Sürüm %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>Resmî site: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>Telif hakkı © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>Linux sürümü: FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>Katkıda bulunanlar: Pete Batard (orijinal Rufus'un yazarı), FoxOrange224 (Linux sürümü)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>Çeviriler: Arapça, Çince (basitleştirilmiş), İngilizce, İspanyolca, Farsça, Fransızca, Almanca, Endonezce, Japonca, Korece, Portekizce (Brezilya), Rusça, Türkçe, Vietnamca</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>Hataları bildirin veya iyileştirme önerin:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>Ek telif hakları:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>Lisans</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>Tamam</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>Lisans dosyası bulunamadı.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">Sürüm %1 (Linux Sürümü)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>ISO/IMG dosyalarından önyüklenebilir USB sürücüleri oluşturun.
+        <translation type="vanished">ISO/IMG dosyalarından önyüklenebilir USB sürücüleri oluşturun.
 
 Orijinali Pete Batard (Akeo) tarafından oluşturulmuştur
 GNU GPL v3 Lisansı
@@ -29,17 +88,15 @@ GNU GPL v3 Lisansı
 Qt6 ve C++ kullanan Linux sürümü</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>GitHub'da Linux sürümü</translation>
+        <translation type="vanished">GitHub&apos;da Linux sürümü</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>GitHub'da orijinal Rufus (Windows)</translation>
+        <translation type="vanished">GitHub&apos;da orijinal Rufus (Windows)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
@@ -69,7 +126,7 @@ Qt6 ve C++ kullanan Linux sürümü</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>Sahte flash bellek kontrol ediliyor...</translation>
+        <translation>Cihaz kontrol ediliyor...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Qt6 ve C++ kullanan Linux sürümü</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>Görüntü DD modunda yazılıyor...</translation>
+        <translation>Görüntü yazılıyor...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Qt6 ve C++ kullanan Linux sürümü</translation>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>ISO dosyaları USB'ye çıkarılıyor...</translation>
+        <translation>ISO dosyaları çıkarılıyor...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>Çıkarılıyor: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>Çıkarılıyor: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>ISO çıkarılamadı: %1 kurulu değil.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>ISO çıkarılamadı.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>Win7 EFI önyükleme düzeltmesi uygulanıyor...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>ReactOS önyükleyicisi kuruluyor...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>Ek dosyalar çıkarılıyor...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>Ek dosya çıkarılamadı.
-7z'nin kurulu olduğundan ve arşivin geçerli olduğundan emin olun.</translation>
+7z&apos;nin kurulu olduğundan ve arşivin geçerli olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>Windows etkileşimsiz kurulumu uygulanıyor...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>Bölüm önyükleme kaydı yazılıyor...</translation>
     </message>
@@ -304,7 +359,7 @@ Make sure 7z is installed and the archive is valid.</source>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>İptal ediliyor - Lütfen bekleyin...</translation>
+        <translation>İptal ediliyor, lütfen bekleyin...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -331,8 +386,8 @@ Make sure 7z is installed and the archive is valid.</source>
 Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>Yazılacak USB sürücüsünü seçin.
-Varsayılan olarak yalnızca çıkarılabilir USB sürücüleri listelenir. Sabit sürücüleri göstermek için Ctrl+F'ye basın veya
-'USB Sabit Sürücülerini Listele' seçeneğini işaretleyin.</translation>
+Varsayılan olarak yalnızca çıkarılabilir USB sürücüleri listelenir. Sabit sürücüleri göstermek için Ctrl+F&apos;ye basın veya
+&apos;USB Sabit Sürücülerini Listele&apos; seçeneğini işaretleyin.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -410,7 +465,7 @@ Varsayılan olarak yalnızca çıkarılabilir USB sürücüleri listelenir. Sabi
 • Windows To Go: Run Windows from USB</source>
         <translation>Görüntü seçeneği:
 • Standart: Normal Windows kurulumu
-• Windows To Go: Windows'u USB'den çalıştır</translation>
+• Windows To Go: Windows&apos;u USB&apos;den çalıştır</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="553"/>
@@ -450,7 +505,7 @@ Varsayılan olarak yalnızca çıkarılabilir USB sürücüleri listelenir. Sabi
         <location filename="../../src/ui/MainWindow.cpp" line="575"/>
         <location filename="../../src/ui/MainWindow.cpp" line="2942"/>
         <source>UEFI (non CSM)</source>
-        <translation>UEFI (CSM'siz)</translation>
+        <translation>UEFI (CSM&apos;siz)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="577"/>
@@ -460,7 +515,7 @@ Varsayılan olarak yalnızca çıkarılabilir USB sürücüleri listelenir. Sabi
 • UEFI (non CSM): For native UEFI boot</source>
         <translation>Hedef sistem türü:
 • BIOS/UEFI-CSM: Eski BIOS veya CSM modunda UEFI için
-• UEFI (CSM'siz): Yerel UEFI önyüklemesi için</translation>
+• UEFI (CSM&apos;siz): Yerel UEFI önyüklemesi için</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="595"/>
@@ -486,13 +541,13 @@ Varsayılan olarak yalnızca çıkarılabilir USB sürücüleri listelenir. Sabi
         <location filename="../../src/ui/MainWindow.cpp" line="607"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3011"/>
         <source>Add fixes for old BIOSes (extra partition, align, etc.)</source>
-        <translation>Eski BIOS'lar için düzeltmeler ekle (ek bölüm, hizalama vb.)</translation>
+        <translation>Eski BIOS&apos;lar için düzeltmeler ekle (ek bölüm, hizalama vb.)</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="608"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3040"/>
         <source>Add an extra alignment partition and other fixes for old BIOS</source>
-        <translation>Eski BIOS'lar için ek hizalama bölümü ve diğer düzeltmeleri ekle</translation>
+        <translation>Eski BIOS&apos;lar için ek hizalama bölümü ve diğer düzeltmeleri ekle</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="612"/>
@@ -549,7 +604,7 @@ exFAT is good for large files without NTFS overhead.
 ext2/3/4 are Linux native filesystems.</source>
         <translation>USB sürücüsü için dosya sistemi türü.
 Maksimum uyumluluk için FAT32 önerilir.
-4GB'tan büyük dosyalar için NTFS gereklidir.
+4GB&apos;tan büyük dosyalar için NTFS gereklidir.
 exFAT, NTFS yükü olmadan büyük dosyalar için iyidir.
 ext2/3/4 Linux yerel dosya sistemleridir.</translation>
     </message>
@@ -709,7 +764,7 @@ Farklı desenlerle birden çok geçiş, daha fazla NAND kusuru türünü algıla
         <location filename="../../src/ui/MainWindow.cpp" line="833"/>
         <location filename="../../src/ui/MainWindow.cpp" line="3057"/>
         <source>Close Rufus</source>
-        <translation>Rufus'u kapat</translation>
+        <translation>Rufus&apos;u kapat</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="972"/>
@@ -749,7 +804,7 @@ Farklı desenlerle birden çok geçiş, daha fazla NAND kusuru türünü algıla
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM (Uyumluluk Destek Modülü), eski bir BIOS ortamını öykünen UEFI belleniminin bir bileşenidir; böylece yalnızca BIOS önyüklemesini destekleyen işletim sistemleri ve önyükleyiciler UEFI makinelerinde de çalışabilir.
 
-Eski BIOS bellenimi veya CSM etkin UEFI bellenimi için 'BIOS (veya UEFI-CSM)' öğesini seçin. Yerel UEFI önyüklemesi için, ör. Windows 11 sertifikalı makinelerde veya Secure Boot kullanıldığında 'UEFI (CSM'siz)' öğesini seçin.</translation>
+Eski BIOS bellenimi veya CSM etkin UEFI bellenimi için &apos;BIOS (veya UEFI-CSM)&apos; öğesini seçin. Yerel UEFI önyüklemesi için, ör. Windows 11 sertifikalı makinelerde veya Secure Boot kullanıldığında &apos;UEFI (CSM&apos;siz)&apos; öğesini seçin.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -831,8 +886,8 @@ Lütfen daha küçük bir küme boyutu veya farklı bir dosya sistemi seçin.</t
         <source>The image contains a file larger than 4GB.
 FAT32 does not support files larger than 4GB.
 Please select NTFS or exFAT.</source>
-        <translation>Görüntü 4GB'tan büyük bir dosya içeriyor.
-FAT32, 4GB'tan büyük dosyaları desteklemez.
+        <translation>Görüntü 4GB&apos;tan büyük bir dosya içeriyor.
+FAT32, 4GB&apos;tan büyük dosyaları desteklemez.
 Lütfen NTFS veya exFAT seçin.</translation>
     </message>
     <message>
@@ -871,7 +926,7 @@ Yine de devam edilsin mi?</translation>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 bu sistemde kurulu değil.
-Lütfen '%2' paketini kurun ve yeniden deneyin.</translation>
+Lütfen &apos;%2&apos; paketini kurun ve yeniden deneyin.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z bu sistemde kurulu değil.
 Ek dosyayı çıkarmak için gereklidir.
-Lütfen 'p7zip' paketini kurun ve yeniden deneyin.</translation>
+Lütfen &apos;p7zip&apos; paketini kurun ve yeniden deneyin.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Lütfen 'p7zip' paketini kurun ve yeniden deneyin.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>Devam etmek için lütfen bir görüntü veya disk seçin (IMG veya başka bir biçim); yalnızca biçimlendirmek istiyorsanız önyükleme seçiminde "Önyüklenebilir değil" seçeneğini seçin.</translation>
+        <translation>Devam etmek için lütfen bir görüntü veya disk seçin (IMG veya başka bir biçim); yalnızca biçimlendirmek istiyorsanız önyükleme seçiminde &quot;Önyüklenebilir değil&quot; seçeneğini seçin.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Lütfen 'p7zip' paketini kurun ve yeniden deneyin.</translation>
         <translation>Cihaz bilgileri okunamadı.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>Önyükleyici MS-DOS: FAT16 dosya sistemi zorlanıyor</translation>
+        <translation type="vanished">Önyükleyici MS-DOS: FAT16 dosya sistemi zorlanıyor</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1066,7 +1120,7 @@ Saygın bir markadan orijinal bir sürücü kullanın.</translation>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2271"/>
         <source>MS-DOS boot mode only supports FAT16.</source>
-        <translation>MS-DOS önyükleme modu yalnızca FAT16'yı destekler.</translation>
+        <translation>MS-DOS önyükleme modu yalnızca FAT16&apos;yı destekler.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="2515"/>
@@ -1144,9 +1198,9 @@ Rufus recommends using ISO image mode so that you have full access to the drive 
 If you experience problems with ISO mode, you can try rewriting the image in DD image mode.
 
 Please select the mode you would like to use to write this image:</source>
-        <translation>Seçtiğiniz görüntü bir ISOHybrid'dir; yani ISO görüntü modunda (önerilen) veya DD görüntü modunda yazılabilir.
+        <translation>Seçtiğiniz görüntü bir ISOHybrid&apos;dir; yani ISO görüntü modunda (önerilen) veya DD görüntü modunda yazılabilir.
 
-Rufus, biçimlendirmeden sonra Windows'ta sürücüye tam erişiminiz olması için ISO görüntü modunu önerir.
+Rufus, biçimlendirmeden sonra Windows&apos;ta sürücüye tam erişiminiz olması için ISO görüntü modunu önerir.
 
 ISO modunda sorun yaşarsanız, görüntüyü DD görüntü modunda yeniden yazmayı deneyebilirsiniz.
 
@@ -1297,7 +1351,7 @@ Bunları dağıtımınızla varsayılan olarak gelen paket yöneticisini kullana
     <message>
         <location filename="../../src/main.cpp" line="213"/>
         <source>Welcome to Rufus</source>
-        <translation>Rufus'a Hoş Geldiniz</translation>
+        <translation>Rufus&apos;a Hoş Geldiniz</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="228"/>
@@ -1306,11 +1360,11 @@ Bunları dağıtımınızla varsayılan olarak gelen paket yöneticisini kullana
 Rufus requires administrator privileges to access storage devices.
 
 To continue, please choose your language and press Accept.</source>
-        <translation>Rufus'a hoş geldiniz! Bu aracı kullandığınız için teşekkür ederiz. Çalışmamızı bizim keyif aldığımız kadar önemsemeniz bizi çok mutlu ediyor.
+        <translation>Rufus&apos;a hoş geldiniz! Bu aracı kullandığınız için teşekkür ederiz. Çalışmamızı bizim keyif aldığımız kadar önemsemeniz bizi çok mutlu ediyor.
 
 Rufus, depolama cihazlarına erişmek için yönetici ayrıcalıkları gerektirir.
 
-Devam etmek için lütfen dilinizi seçin ve Kabul Et'e basın.</translation>
+Devam etmek için lütfen dilinizi seçin ve Kabul Et&apos;e basın.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="260"/>
@@ -1335,17 +1389,17 @@ Devam etmek için lütfen dilinizi seçin ve Kabul Et'e basın.</translation>
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>'%1' cihazı bulunamadı.</translation>
+        <translation>&apos;%1&apos; cihazı bulunamadı.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>'%1' cihazı salt okunur.</translation>
+        <translation>&apos;%1&apos; cihazı salt okunur.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>'%1' cihazı sistem diskidir ve üzerine yazılmayacaktır.</translation>
+        <translation>&apos;%1&apos; cihazı sistem diskidir ve üzerine yazılmayacaktır.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1355,12 +1409,12 @@ Devam etmek için lütfen dilinizi seçin ve Kabul Et'e basın.</translation>
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>'--filesystem=%1' ve '--boot=%2' talimatları, disk görüntüsü biçimlerinde (IMG/VHD) çalışmadıkları için yok sayıldı.</translation>
+        <translation>&apos;--filesystem=%1&apos; ve &apos;--boot=%2&apos; talimatları, disk görüntüsü biçimlerinde (IMG/VHD) çalışmadıkları için yok sayıldı.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>Bilinmeyen dosya sistemi '%1'.</translation>
+        <translation>Bilinmeyen dosya sistemi &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>

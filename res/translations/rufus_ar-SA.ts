@@ -4,24 +4,83 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="39"/>
         <source>About Rufus</source>
         <translation>حول Rufus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
-        <source>Version %1 (Linux Port)</source>
-        <translation>الإصدار %1 (نسخة لينكس)</translation>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Rufus - The Reliable USB Formatting Utility</source>
+        <translation>Rufus - أداة تهيئة USB الموثوقة</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="68"/>
+        <source>Version %1</source>
+        <translation>الإصدار %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Official website: &lt;a href=&apos;https://rufus.ie&apos;&gt;https://rufus.ie&lt;/a&gt;</source>
+        <translation>الموقع الرسمي: &lt;a href='https://rufus.ie'&gt;https://rufus.ie&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="80"/>
+        <source>Copyright © 2011-2026 Pete Batard</source>
+        <translation>حقوق النشر © 2011-2026 Pete Batard</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="84"/>
+        <source>Linux port by FoxOrange224</source>
+        <translation>المنفذ إلى لينكس بواسطة FoxOrange224</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="88"/>
+        <source>Credits: Pete Batard (original Rufus author), FoxOrange224 (Linux port)</source>
+        <translation>الإسهامون: Pete Batard (مؤلف Rufus الأصلي)، FoxOrange224 (المنفذ إلى لينكس)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="93"/>
+        <source>Translations: Arabic, Chinese (Simplified), English, Spanish, Persian, French, German, Indonesian, Japanese, Korean, Portuguese (Brazil), Russian, Turkish, Vietnamese</source>
+        <translation>الترجمات: العربية، الصينية (المبسطة)، الإنجليزية، الإسبانية، الفارسية، الفرنسية، الألمانية، الإندونيسية، اليابانية، الكورية، البرتغالية (البرازيل)، الروسية، التركية، الفيتنامية</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="101"/>
+        <source>Report bugs or request enhancements at:</source>
+        <translation>أبلغ عن الأخطاء أو اطلب التحسينات على:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="116"/>
+        <source>Additional Copyrights:</source>
+        <translation>حقوق النشر الإضافية:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="153"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="217"/>
+        <source>License</source>
+        <translation>الترخيص</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="158"/>
+        <source>OK</source>
+        <translation>موافق</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="225"/>
+        <source>License file not found.</source>
+        <translation>لم يتم العثور على ملف الترخيص.</translation>
+    </message>
+    <message>
+        <source>Version %1 (Linux Port)</source>
+        <translation type="vanished">الإصدار %1 (نسخة لينكس)</translation>
+    </message>
+    <message>
         <source>Create bootable USB drives from ISO/IMG files.
 
 Originally created by Pete Batard (Akeo)
 GNU GPL v3 License
 
 Linux port using Qt6 and C++</source>
-        <translation>أنشئ أقراص USB قابلة للإقلاع من ملفات ISO/IMG.
+        <translation type="vanished">أنشئ أقراص USB قابلة للإقلاع من ملفات ISO/IMG.
 
 أنشأه بيت باتارد (Akeo) في الأصل
 رخصة GNU GPL v3
@@ -29,17 +88,15 @@ Linux port using Qt6 and C++</source>
 نسخة لينكس باستخدام Qt6 وC++</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
         <source>Linux port on GitHub</source>
-        <translation>نسخة لينكس على GitHub</translation>
+        <translation type="vanished">نسخة لينكس على GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
         <source>Original Rufus (Windows) on GitHub</source>
-        <translation>Rufus الأصلي (ويندوز) على GitHub</translation>
+        <translation type="vanished">Rufus الأصلي (ويندوز) على GitHub</translation>
     </message>
     <message>
-        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <location filename="../../src/ui/AboutDialog.cpp" line="227"/>
         <source>Close</source>
         <translation>إغلاق</translation>
     </message>
@@ -69,7 +126,7 @@ Linux port using Qt6 and C++</source>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
         <source>Checking for fake flash...</source>
-        <translation>فحص ذاكرة الفلاش المزيفة...</translation>
+        <translation>جارٍ فحص الجهاز...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
@@ -89,7 +146,7 @@ Linux port using Qt6 and C++</source>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
         <source>Writing image in DD mode...</source>
-        <translation>كتابة الصورة في وضع DD...</translation>
+        <translation>جارٍ كتابة الصورة...</translation>
     </message>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
@@ -164,59 +221,57 @@ Linux port using Qt6 and C++</source>
     <message>
         <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
         <source>Extracting ISO files to USB...</source>
-        <translation>استخراج ملفات ISO إلى USB...</translation>
+        <translation>جارٍ استخراج ملفات ISO...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="826"/>
         <source>Extracting: %1 (%2)</source>
         <translation>الاستخراج: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1029"/>
         <source>Extracting: %1</source>
         <translation>الاستخراج: %1</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="864"/>
         <source>Could not extract the ISO: %1 is not installed.</source>
         <translation>تعذر استخراج ISO: %1 غير مثبت.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="867"/>
         <source>Could not extract the ISO.</source>
         <translation>تعذر استخراج ISO.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="875"/>
         <source>Applying Win7 EFI boot fix...</source>
         <translation>تطبيق إصلاح إقلاع EFI لـWin7...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="895"/>
         <source>Installing ReactOS bootloader...</source>
         <translation>تثبيت محمل إقلاع ReactOS...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1021"/>
         <source>Extracting additional files...</source>
         <translation>استخراج ملفات إضافية...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1039"/>
         <source>Could not extract the additional file.
 Make sure 7z is installed and the archive is valid.</source>
         <translation>تعذر استخراج الملف الإضافي.
 تأكد من تثبيت 7z ومن صحة الأرشيف.</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1395"/>
         <source>Applying Windows unattended installation...</source>
         <translation>تطبيق تثبيت ويندوز التلقائي...</translation>
     </message>
     <message>
-        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1538"/>
         <source>Writing partition boot record...</source>
         <translation>كتابة سجل إقلاع القسم...</translation>
     </message>
@@ -304,7 +359,7 @@ Make sure 7z is installed and the archive is valid.</source>
         <location filename="../../src/ui/MainWindow.cpp" line="370"/>
         <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
         <source>Cancelling - Please wait...</source>
-        <translation>جارٍ الإلغاء - يرجى الانتظار...</translation>
+        <translation>جارٍ الإلغاء، يرجى الانتظار...</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="423"/>
@@ -332,7 +387,7 @@ Only removable USB drives are listed by default. Press Ctrl+F or check
 &apos;List USB Hard Drives&apos; to show fixed drives.</source>
         <translation>اختر قرص USB للكتابة إليه.
 يتم سرد أقراص USB القابلة للإزالة فقط افتراضيًا. اضغط Ctrl+F أو حدد
-"قائمة أقراص USB الصلبة" لعرض الأقراص الثابتة.</translation>
+&quot;قائمة أقراص USB الصلبة&quot; لعرض الأقراص الثابتة.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="474"/>
@@ -749,7 +804,7 @@ Multiple passes with different patterns detect more types of NAND defects.</sour
 Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
         <translation>UEFI-CSM (وحدة دعم التوافق) مكوّن من البرامج الثابتة UEFI يحاكي بيئة BIOS قديمة، بحيث يمكن لأنظمة التشغيل ومحملات الإقلاع التي تدعم إقلاع BIOS فقط أن تعمل على أجهزة UEFI.
 
-اختر "BIOS (أو UEFI-CSM)" للبرامج الثابتة BIOS القديمة، أو لبرامج UEFI الثابتة مع تفعيل CSM. اختر "UEFI (بدون CSM)" للإقلاع الأصلي عبر UEFI، مثل أجهزة Windows 11 المعتمدة أو عند استخدام Secure Boot.</translation>
+اختر &quot;BIOS (أو UEFI-CSM)&quot; للبرامج الثابتة BIOS القديمة، أو لبرامج UEFI الثابتة مع تفعيل CSM. اختر &quot;UEFI (بدون CSM)&quot; للإقلاع الأصلي عبر UEFI، مثل أجهزة Windows 11 المعتمدة أو عند استخدام Secure Boot.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
@@ -871,7 +926,7 @@ Continue anyway?</source>
         <source>%1 is not installed on this system.
 Please install the &apos;%2&apos; package and try again.</source>
         <translation>%1 غير مثبت على هذا النظام.
-يرجى تثبيت الحزمة '%2' والمحاولة مرة أخرى.</translation>
+يرجى تثبيت الحزمة &apos;%2&apos; والمحاولة مرة أخرى.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
@@ -880,7 +935,7 @@ It is needed to extract the additional file.
 Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>7z غير مثبت على هذا النظام.
 هو مطلوب لاستخراج الملف الإضافي.
-يرجى تثبيت الحزمة 'p7zip' والمحاولة مرة أخرى.</translation>
+يرجى تثبيت الحزمة &apos;p7zip&apos; والمحاولة مرة أخرى.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
@@ -895,7 +950,7 @@ Please install the &apos;p7zip&apos; package and try again.</source>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
         <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
-        <translation>للمتابعة، يرجى تحديد صورة أو قرص (IMG أو أي تنسيق آخر)، أو إذا كنت تريد التنسيق فقط، فاختر "غير قابل للإقلاع" في اختيار الإقلاع.</translation>
+        <translation>للمتابعة، يرجى تحديد صورة أو قرص (IMG أو أي تنسيق آخر)، أو إذا كنت تريد التنسيق فقط، فاختر &quot;غير قابل للإقلاع&quot; في اختيار الإقلاع.</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
@@ -903,9 +958,8 @@ Please install the &apos;p7zip&apos; package and try again.</source>
         <translation>تعذر قراءة معلومات الجهاز.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
         <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
-        <translation>محمل الإقلاع هو MS-DOS: فرض نظام ملفات FAT16</translation>
+        <translation type="vanished">محمل الإقلاع هو MS-DOS: فرض نظام ملفات FAT16</translation>
     </message>
     <message>
         <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
@@ -1335,17 +1389,17 @@ To continue, please choose your language and press Accept.</source>
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Device &apos;%1&apos; not found.</source>
-        <translation>الجهاز '%1' غير موجود.</translation>
+        <translation>الجهاز &apos;%1&apos; غير موجود.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Device &apos;%1&apos; is read only.</source>
-        <translation>الجهاز '%1' للقراءة فقط.</translation>
+        <translation>الجهاز &apos;%1&apos; للقراءة فقط.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="317"/>
         <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
-        <translation>الجهاز '%1' هو قرص النظام ولن تتم الكتابة فوقه.</translation>
+        <translation>الجهاز &apos;%1&apos; هو قرص النظام ولن تتم الكتابة فوقه.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
@@ -1355,12 +1409,12 @@ To continue, please choose your language and press Accept.</source>
     <message>
         <location filename="../../src/main.cpp" line="340"/>
         <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
-        <translation>تم تجاهل التعليمات '--filesystem=%1' و'--boot=%2'، لأنها لا تعمل مع تنسيقات صور الأقراص (IMG/VHD).</translation>
+        <translation>تم تجاهل التعليمات &apos;--filesystem=%1&apos; و&apos;--boot=%2&apos;، لأنها لا تعمل مع تنسيقات صور الأقراص (IMG/VHD).</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="362"/>
         <source>Unknown file system &apos;%1&apos;.</source>
-        <translation>نظام ملفات غير معروف '%1'.</translation>
+        <translation>نظام ملفات غير معروف &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="557"/>
