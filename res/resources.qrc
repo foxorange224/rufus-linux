@@ -19,5 +19,8 @@
         <file alias="rufus_es-ES.qm">translations/rufus_es-ES.qm</file>
         <file alias="rufus_pt-BR.qm">translations/rufus_pt-BR.qm</file>
         <file alias="rufus_ru-RU.qm">translations/rufus_ru-RU.qm</file>
+        <file alias="rufus_de-DE.qm">translations/rufus_de-DE.qm</file>
+        <file alias="rufus_fr-FR.qm">translations/rufus_fr-FR.qm</file>
+        <file alias="rufus_zh-CN.qm">translations/rufus_zh-CN.qm</file>
     </qresource>
 </RCC>
