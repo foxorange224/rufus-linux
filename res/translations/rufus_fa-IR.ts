@@ -1,0 +1,1414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fa_IR">
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="35"/>
+        <source>About Rufus</source>
+        <translation>دربارهٔ Rufus</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="53"/>
+        <source>Version %1 (Linux Port)</source>
+        <translation>نسخهٔ %1 (پورت لینوکس)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="60"/>
+        <source>Create bootable USB drives from ISO/IMG files.
+
+Originally created by Pete Batard (Akeo)
+GNU GPL v3 License
+
+Linux port using Qt6 and C++</source>
+        <translation>درایوهای USB قابل بوت از فایل‌های ISO/IMG بسازید.
+
+ساخته‌شده توسط پیت باتارد (Akeo)
+مجوز GNU GPL v3
+
+پورت لینوکس با استفاده از Qt6 و C++</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="72"/>
+        <source>Linux port on GitHub</source>
+        <translation>پورت لینوکس در GitHub</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="81"/>
+        <source>Original Rufus (Windows) on GitHub</source>
+        <translation>Rufus اصلی (ویندوز) در GitHub</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/AboutDialog.cpp" line="141"/>
+        <source>Close</source>
+        <translation>بستن</translation>
+    </message>
+</context>
+<context>
+    <name>FormatWorker</name>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="321"/>
+        <source>Working with the drive...</source>
+        <translation>در حال کار با درایو...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="323"/>
+        <source>Using image: %1</source>
+        <translation>در حال استفاده از تصویر: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="328"/>
+        <source>Unmounting partitions...</source>
+        <translation>در حال جدا کردن پارتیشن‌ها...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="340"/>
+        <source>Checking for bad blocks...</source>
+        <translation>در حال بررسی بلاک‌های خراب...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="353"/>
+        <source>Checking for fake flash...</source>
+        <translation>در حال بررسی فلش جعلی...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="381"/>
+        <source>Verifying written data...</source>
+        <translation>در حال تأیید داده‌های نوشته‌شده...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="449"/>
+        <source>Writing boot records...</source>
+        <translation>در حال نوشتن رکوردهای بوت...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="491"/>
+        <source>Running NTFS checkdisk...</source>
+        <translation>در حال اجرای بررسی‌دیسک NTFS...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="503"/>
+        <source>Writing image in DD mode...</source>
+        <translation>در حال نوشتن تصویر در حالت DD...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="573"/>
+        <source>Clearing device...</source>
+        <translation>در حال پاک کردن دستگاه...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="579"/>
+        <source>Creating partition table...</source>
+        <translation>در حال ایجاد جدول پارتیشن...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="590"/>
+        <source>Creating partitions...</source>
+        <translation>در حال ایجاد پارتیشن‌ها...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="623"/>
+        <source>Formatting main partition...</source>
+        <translation>در حال قالب‌بندی پارتیشن اصلی...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="660"/>
+        <source>Formatting persistence partition...</source>
+        <translation>در حال قالب‌بندی پارتیشن ماندگاری...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="709"/>
+        <source>Mounting and copying files...</source>
+        <translation>در حال سوار کردن و کپی فایل‌ها...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="715"/>
+        <source>The partition could not be created or detected.</source>
+        <translation>پارتیشن ایجاد یا شناسایی نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="724"/>
+        <source>Could not create a temporary mount point.</source>
+        <translation>نقطهٔ اتصال موقت ایجاد نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="745"/>
+        <source>Could not mount the formatted partition.</source>
+        <translation>پارتیشن قالب‌بندی‌شده سوار نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="766"/>
+        <source>Installing bootloader...</source>
+        <translation>در حال نصب بوت‌لودر...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="776"/>
+        <source>Remounting volume...</source>
+        <translation>در حال اتصال مجدد حجم...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="785"/>
+        <source>Could not remount the partition after installing the bootloader.</source>
+        <translation>پس از نصب بوت‌لودر، پارتیشن دوباره سوار نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="794"/>
+        <source>Installing MS-DOS...</source>
+        <translation>در حال نصب MS-DOS...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="801"/>
+        <source>Installing FreeDOS...</source>
+        <translation>در حال نصب FreeDOS...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="809"/>
+        <source>Extracting ISO files to USB...</source>
+        <translation>در حال استخراج فایل‌های ISO به USB...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="824"/>
+        <source>Extracting: %1 (%2)</source>
+        <translation>در حال استخراج: %1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="828"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1030"/>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1031"/>
+        <source>Extracting: %1</source>
+        <translation>در حال استخراج: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="866"/>
+        <source>Could not extract the ISO: %1 is not installed.</source>
+        <translation>ISO استخراج نشد: %1 نصب نیست.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="869"/>
+        <source>Could not extract the ISO.</source>
+        <translation>ISO استخراج نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="877"/>
+        <source>Applying Win7 EFI boot fix...</source>
+        <translation>در حال اعمال اصلاح بوت EFI ویندوز 7...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="897"/>
+        <source>Installing ReactOS bootloader...</source>
+        <translation>در حال نصب بوت‌لودر ReactOS...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1023"/>
+        <source>Extracting additional files...</source>
+        <translation>در حال استخراج فایل‌های اضافی...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1041"/>
+        <source>Could not extract the additional file.
+Make sure 7z is installed and the archive is valid.</source>
+        <translation>فایل اضافی استخراج نشد.
+مطمئن شوید 7z نصب است و آرشیو معتبر است.</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1397"/>
+        <source>Applying Windows unattended installation...</source>
+        <translation>در حال اعمال نصب خودکار ویندوز...</translation>
+    </message>
+    <message>
+        <location filename="../../src/worker/FormatWorker.cpp" line="1540"/>
+        <source>Writing partition boot record...</source>
+        <translation>در حال نوشتن رکورد بوت پارتیشن...</translation>
+    </message>
+</context>
+<context>
+    <name>LogDialog</name>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="23"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="76"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="95"/>
+        <source>Log</source>
+        <translation>گزارش</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="43"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="74"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="97"/>
+        <source>Detach from main window</source>
+        <translation>جدا کردن از پنجرهٔ اصلی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="47"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="93"/>
+        <source>Clear</source>
+        <translation>پاک کردن</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="51"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="94"/>
+        <source>Save</source>
+        <translation>ذخیره</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="73"/>
+        <location filename="../../src/ui/LogDialog.cpp" line="96"/>
+        <source>Attach to main window</source>
+        <translation>اتصال به پنجرهٔ اصلی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="182"/>
+        <source>Save log</source>
+        <translation>ذخیرهٔ گزارش</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="189"/>
+        <source>Error</source>
+        <translation>خطا</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="190"/>
+        <source>Cannot write to %1</source>
+        <translation>نمی‌توان در %1 نوشت</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="198"/>
+        <source>Saved</source>
+        <translation>ذخیره شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/LogDialog.cpp" line="199"/>
+        <source>Log saved to %1</source>
+        <translation>گزارش در %1 ذخیره شد</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="356"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1591"/>
+        <source>Confirm</source>
+        <translation>تأیید</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="357"/>
+        <source>Operation in progress. Cancel and exit?</source>
+        <translation>عملیات در حال اجراست. لغو و خارج شوید؟</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="368"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1439"/>
+        <source>ESPERE...</source>
+        <translation>لطفاً صبر کنید...</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="370"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1441"/>
+        <source>Cancelling - Please wait...</source>
+        <translation>در حال لغو - لطفاً صبر کنید...</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="423"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2885"/>
+        <source>Rufus %1</source>
+        <translation>Rufus %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="457"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2892"/>
+        <source>Drive Properties</source>
+        <translation>ویژگی‌های درایو</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="463"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2888"/>
+        <source>Device</source>
+        <translation>دستگاه</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="468"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2898"/>
+        <source>Select the USB drive to write to.
+Only removable USB drives are listed by default. Press Ctrl+F or check
+&apos;List USB Hard Drives&apos; to show fixed drives.</source>
+        <translation>درایو USB موردنظر برای نوشتن را انتخاب کنید.
+به‌طور پیش‌فرض فقط درایوهای USB قابل‌حذف فهرست می‌شوند. Ctrl+F را فشار دهید یا گزینهٔ
+'فهرست هاردهای USB' را علامت بزنید تا درایوهای ثابت نمایش داده شوند.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="474"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3020"/>
+        <source>Save current settings to INI file</source>
+        <translation>ذخیرهٔ تنظیمات فعلی در فایل INI</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="478"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2901"/>
+        <source>Refresh devices (F5)</source>
+        <translation>تازه‌سازی دستگاه‌ها (F5)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="489"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2904"/>
+        <source>Boot selection</source>
+        <translation>انتخاب بوت</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="492"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3028"/>
+        <source>Select the type of bootable USB to create.
+• Non bootable: Just format the drive
+• Disk or ISO image: Create from an ISO/IMG file
+• FreeDOS: Create a FreeDOS bootable drive
+• MS-DOS: Create an MS-DOS bootable drive</source>
+        <translation>نوع USB قابل بوت را برای ایجاد انتخاب کنید.
+• غیر قابل بوت: فقط قالب‌بندی درایو
+• تصویر دیسک یا ISO: ایجاد از فایل ISO/IMG
+• FreeDOS: ایجاد درایو قابل بوت FreeDOS
+• MS-DOS: ایجاد درایو قابل بوت MS-DOS</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="509"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3021"/>
+        <source>Compute MD5, SHA-1 and SHA-256 hashes for the selected image</source>
+        <translation>محاسبهٔ هش‌های MD5، SHA-1 و SHA-256 برای تصویر انتخابی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="515"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3022"/>
+        <source>SELECT</source>
+        <translation>انتخاب</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="520"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3023"/>
+        <source>Select a disk image (ISO, IMG, VHD, etc.)</source>
+        <translation>یک تصویر دیسک انتخاب کنید (ISO، IMG، VHD و غیره)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="536"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2935"/>
+        <source>Image option</source>
+        <translation>گزینهٔ تصویر</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="539"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2976"/>
+        <source>Standard Windows installation</source>
+        <translation>نصب استاندارد ویندوز</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="540"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2977"/>
+        <source>Windows To Go</source>
+        <translation>Windows To Go</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="541"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3031"/>
+        <source>Image option:
+• Standard: Regular Windows installation
+• Windows To Go: Run Windows from USB</source>
+        <translation>گزینهٔ تصویر:
+• استاندارد: نصب عادی ویندوز
+• Windows To Go: اجرای ویندوز از USB</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="553"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2927"/>
+        <source>Partition scheme</source>
+        <translation>طرح پارتیشن</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="557"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3033"/>
+        <source>Partition scheme:
+• MBR: Master Boot Record (compatible, BIOS + UEFI-CSM)
+• GPT: GUID Partition Table (modern, native UEFI)</source>
+        <translation>طرح پارتیشن:
+• MBR: رکورد اصلی بوت (سازگار، BIOS + UEFI-CSM)
+• GPT: جدول پارتیشن GUID (مدرن، UEFI بومی)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="567"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2890"/>
+        <source>Target system</source>
+        <translation>سیستم هدف</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="569"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2992"/>
+        <source>Click for information about UEFI-CSM (Compatibility Support Module)</source>
+        <translation>برای اطلاعات دربارهٔ UEFI-CSM (ماژول پشتیبانی سازگاری) کلیک کنید</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="574"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2941"/>
+        <source>BIOS (or UEFI-CSM)</source>
+        <translation>BIOS (یا UEFI-CSM)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="575"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2942"/>
+        <source>UEFI (non CSM)</source>
+        <translation>UEFI (بدون CSM)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="577"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3036"/>
+        <source>Target system type:
+• BIOS/UEFI-CSM: For legacy BIOS or UEFI in CSM mode
+• UEFI (non CSM): For native UEFI boot</source>
+        <translation>نوع سیستم هدف:
+• BIOS/UEFI-CSM: برای BIOS قدیمی یا UEFI در حالت CSM
+• UEFI (بدون CSM): برای بوت بومی UEFI</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="595"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2063"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2817"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2966"/>
+        <source>Show advanced drive properties</source>
+        <translation>نمایش ویژگی‌های پیشرفتهٔ درایو</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="602"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3009"/>
+        <source>List USB Hard Drives</source>
+        <translation>فهرست هاردهای USB</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="603"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3039"/>
+        <source>Also list USB hard drives (not just removable flash drives)</source>
+        <translation>همچنین هاردهای USB را فهرست کن (نه فقط فلش‌های قابل‌حذف)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="607"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3011"/>
+        <source>Add fixes for old BIOSes (extra partition, align, etc.)</source>
+        <translation>افزودن اصلاحات برای BIOSهای قدیمی (پارتیشن اضافی، ترازبندی و غیره)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="608"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3040"/>
+        <source>Add an extra alignment partition and other fixes for old BIOS</source>
+        <translation>افزودن پارتیشن ترازبندی اضافی و سایر اصلاحات برای BIOSهای قدیمی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="612"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3013"/>
+        <source>Enable runtime UEFI media validation</source>
+        <translation>فعال‌سازی اعتبارسنجی رسانهٔ UEFI در زمان اجرا</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="613"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3041"/>
+        <source>Validate UEFI boot media at runtime (may affect compatibility)</source>
+        <translation>اعتبارسنجی رسانهٔ بوت UEFI در زمان اجرا (ممکن است بر سازگاری تأثیر بگذارد)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="620"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2894"/>
+        <source>Format Options</source>
+        <translation>گزینه‌های قالب‌بندی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="624"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2933"/>
+        <source>Volume label</source>
+        <translation>برچسب حجم</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="628"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2906"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3003"/>
+        <source>None</source>
+        <translation>هیچ‌کدام</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="629"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3042"/>
+        <source>Volume label (up to 11 characters for FAT/FAT32,
+up to 32 characters for NTFS/exFAT)</source>
+        <translation>برچسب حجم (حداکثر ۱۱ کاراکتر برای FAT/FAT32،
+حداکثر ۳۲ کاراکتر برای NTFS/exFAT)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="636"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2929"/>
+        <source>File system</source>
+        <translation>سیستم فایل</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="638"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3044"/>
+        <source>File system type for the USB drive.
+FAT32 is recommended for maximum compatibility.
+NTFS is required for files larger than 4GB.
+exFAT is good for large files without NTFS overhead.
+ext2/3/4 are Linux native filesystems.</source>
+        <translation>نوع سیستم فایل برای درایو USB.
+FAT32 برای حداکثر سازگاری توصیه می‌شود.
+برای فایل‌های بزرگ‌تر از 4 گیگابایت NTFS لازم است.
+exFAT برای فایل‌های بزرگ بدون سربار NTFS مناسب است.
+ext2/3/4 سیستم‌های فایل بومی لینوکس هستند.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="650"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2931"/>
+        <source>Cluster size</source>
+        <translation>اندازهٔ کلاستر</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="652"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3047"/>
+        <source>Allocation unit size. Default is recommended.</source>
+        <translation>اندازهٔ واحد تخصیص. پیش‌فرض توصیه می‌شود.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="662"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2046"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2793"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2961"/>
+        <source>Show advanced format options</source>
+        <translation>نمایش گزینه‌های پیشرفتهٔ قالب‌بندی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="669"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2970"/>
+        <source>Quick format</source>
+        <translation>قالب‌بندی سریع</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="671"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3048"/>
+        <source>Quick format (just writes filesystem structures).
+Uncheck for full format (wipes all data)</source>
+        <translation>قالب‌بندی سریع (فقط ساختارهای سیستم فایل را می‌نویسد).
+برای قالب‌بندی کامل (پاک کردن همهٔ داده‌ها) علامت را بردارید</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="676"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2971"/>
+        <source>Create extended label and icon files</source>
+        <translation>ایجاد فایل‌های برچسب و آیکن توسعه‌یافته</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="678"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3050"/>
+        <source>Creates autorun.inf and icon files for the drive</source>
+        <translation>فایل‌های autorun.inf و آیکن را برای درایو ایجاد می‌کند</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="683"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2972"/>
+        <source>Check device for bad blocks</source>
+        <translation>بررسی بلاک‌های خراب دستگاه</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="684"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3051"/>
+        <source>Scan the device for bad blocks before writing.
+This can take a long time on large drives.</source>
+        <translation>قبل از نوشتن، دستگاه را برای بلاک‌های خراب اسکن کنید.
+این کار ممکن است روی درایوهای بزرگ زمان‌بر باشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="687"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2983"/>
+        <source>1 pass (default)</source>
+        <translation>۱ پاس (پیش‌فرض)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="688"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2984"/>
+        <source>2 passes (SLC pattern)</source>
+        <translation>۲ پاس (الگوی SLC)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="689"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2985"/>
+        <source>3 passes (MLC pattern)</source>
+        <translation>۳ پاس (الگوی MLC)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="690"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2986"/>
+        <source>4 passes (TLC pattern)</source>
+        <translation>۴ پاس (الگوی TLC)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="691"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2987"/>
+        <source>5 passes (TLC pattern)</source>
+        <translation>۵ پاس (الگوی TLC)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="693"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3053"/>
+        <source>Number of bad block scan passes.
+Multiple passes with different patterns detect more types of NAND defects.</source>
+        <translation>تعداد پاس‌های اسکن بلاک‌های خراب.
+پاس‌های متعدد با الگوهای مختلف انواع بیشتری از نقص‌های NAND را تشخیص می‌دهند.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="734"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2896"/>
+        <source>Status</source>
+        <translation>وضعیت</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="748"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3055"/>
+        <source>Operation progress</source>
+        <translation>پیشرفت عملیات</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="795"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2908"/>
+        <source>Select interface language</source>
+        <translation>انتخاب زبان رابط</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="800"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2909"/>
+        <source>About Rufus</source>
+        <translation>دربارهٔ Rufus</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="807"/>
+        <source>Preferences</source>
+        <translation>ترجیحات</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="813"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2910"/>
+        <source>Open log window</source>
+        <translation>باز کردن پنجرهٔ گزارش</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="825"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1879"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2912"/>
+        <source>START</source>
+        <translation>شروع</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="828"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3056"/>
+        <source>Start the USB formatting/writing operation</source>
+        <translation>شروع عملیات قالب‌بندی/نوشتن USB</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="831"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2913"/>
+        <source>CLOSE</source>
+        <translation>بستن</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="833"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3057"/>
+        <source>Close Rufus</source>
+        <translation>بستن Rufus</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="972"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2954"/>
+        <source>Default</source>
+        <translation>پیش‌فرض</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="986"/>
+        <source>Select image...</source>
+        <translation>انتخاب تصویر...</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="999"/>
+        <source>Clear</source>
+        <translation>پاک کردن</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1099"/>
+        <source>1 device found</source>
+        <translation>۱ دستگاه پیدا شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1100"/>
+        <source>%1 devices found</source>
+        <translation>%1 دستگاه پیدا شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1142"/>
+        <source>UEFI-CSM</source>
+        <translation>UEFI-CSM</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1143"/>
+        <source>UEFI-CSM (Compatibility Support Module) is a component of the UEFI firmware that emulates a legacy BIOS environment, so that operating systems and bootloaders that only support BIOS boot can still run on UEFI machines.
+
+Choose &apos;BIOS (or UEFI-CSM)&apos; for legacy BIOS firmware, or for UEFI firmware with CSM enabled. Choose &apos;UEFI (non CSM)&apos; for native UEFI boot, e.g. on Windows 11 certified machines or when Secure Boot is used.</source>
+        <translation>UEFI-CSM (ماژول پشتیبانی سازگاری) مؤلفه‌ای از سیستم‌عامل UEFI است که محیط BIOS قدیمی را شبیه‌سازی می‌کند، تا سیستم‌عامل‌ها و بوت‌لودرهایی که فقط بوت BIOS را پشتیبانی می‌کنند همچنان روی دستگاه‌های UEFI اجرا شوند.
+
+برای سیستم‌عامل BIOS قدیمی، یا سیستم‌عامل UEFI با CSM فعال، 'BIOS (یا UEFI-CSM)' را انتخاب کنید. برای بوت بومی UEFI، مثلاً روی دستگاه‌های تأییدشدهٔ ویندوز ۱۱ یا هنگام استفاده از Secure Boot، 'UEFI (بدون CSM)' را انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1162"/>
+        <source>Save Settings</source>
+        <translation>ذخیرهٔ تنظیمات</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1163"/>
+        <source>Settings saved.</source>
+        <translation>تنظیمات ذخیره شد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1174"/>
+        <source>Computing image hashes...</source>
+        <translation>در حال محاسبهٔ هش تصویر...</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1230"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="3060"/>
+        <source>No removable devices found</source>
+        <translation>هیچ دستگاه قابل‌حذفی پیدا نشد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1261"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1270"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1280"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1291"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1313"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1325"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1349"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1386"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1394"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1424"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1926"/>
+        <source>Error</source>
+        <translation>خطا</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1262"/>
+        <source>The selected file is not a valid disk image.
+Please select an ISO or IMG file.</source>
+        <translation>فایل انتخاب‌شده تصویر دیسک معتبری نیست.
+لطفاً یک فایل ISO یا IMG انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1271"/>
+        <source>WIM/ESD files are not supported.
+Please use an ISO or IMG file.</source>
+        <translation>فایل‌های WIM/ESD پشتیبانی نمی‌شوند.
+لطفاً از فایل ISO یا IMG استفاده کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1281"/>
+        <source>The image file is located on the target drive!
+Please copy the image to a different drive first.</source>
+        <translation>فایل تصویر روی درایو هدف قرار دارد!
+لطفاً ابتدا تصویر را به درایو دیگری کپی کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1292"/>
+        <source>The image is too large for this device!
+Image size: %1
+Device size: %2</source>
+        <translation>تصویر برای این دستگاه بیش‌ازحد بزرگ است!
+اندازهٔ تصویر: %1
+اندازهٔ دستگاه: %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1314"/>
+        <source>MS-DOS cannot boot from a drive with a 64KB cluster size.
+Please select a smaller cluster size or a different filesystem.</source>
+        <translation>MS-DOS نمی‌تواند از درایوی با اندازهٔ کلاستر 64KB بوت شود.
+لطفاً اندازهٔ کلاستر کوچک‌تری یا سیستم فایل دیگری انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1326"/>
+        <source>The image contains a file larger than 4GB.
+FAT32 does not support files larger than 4GB.
+Please select NTFS or exFAT.</source>
+        <translation>تصویر شامل فایلی بزرگ‌تر از 4 گیگابایت است.
+FAT32 از فایل‌های بزرگ‌تر از 4 گیگابایت پشتیبانی نمی‌کند.
+لطفاً NTFS یا exFAT را انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1337"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1358"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1917"/>
+        <source>Warning</source>
+        <translation>هشدار</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1338"/>
+        <source>The selected image does not appear to be UEFI-bootable.
+Continue anyway?</source>
+        <translation>به نظر می‌رسد تصویر انتخابی قابل بوت UEFI نیست.
+به هر حال ادامه می‌دهید؟</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1350"/>
+        <source>UEFI:NTFS requires NTFS or exFAT filesystem.</source>
+        <translation>UEFI:NTFS به سیستم فایل NTFS یا exFAT نیاز دارد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1359"/>
+        <source>The target device is in use by another application.
+Continuing may fail or corrupt data.
+
+Continue anyway?</source>
+        <translation>دستگاه هدف توسط برنامهٔ دیگری در حال استفاده است.
+ادامه ممکن است شکست بخورد یا داده‌ها را خراب کند.
+
+به هر حال ادامه می‌دهید؟</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1387"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="1425"/>
+        <source>%1 is not installed on this system.
+Please install the &apos;%2&apos; package and try again.</source>
+        <translation>%1 روی این سیستم نصب نیست.
+لطفاً بستهٔ '%2' را نصب کنید و دوباره تلاش کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1395"/>
+        <source>7z is not installed on this system.
+It is needed to extract the additional file.
+Please install the &apos;p7zip&apos; package and try again.</source>
+        <translation>7z روی این سیستم نصب نیست.
+برای استخراج فایل اضافی لازم است.
+لطفاً بستهٔ 'p7zip' را نصب کنید و دوباره تلاش کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1447"/>
+        <source>Please select a target device.</source>
+        <translation>لطفاً یک دستگاه هدف انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1458"/>
+        <source>No image selected</source>
+        <translation>تصویری انتخاب نشده است</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1459"/>
+        <source>To continue, please select an image or disk (IMG or other format), or if you only want to format, select &quot;Non bootable&quot; in the boot selection.</source>
+        <translation>برای ادامه، لطفاً یک تصویر یا دیسک (IMG یا قالب دیگر) انتخاب کنید، یا اگر فقط می‌خواهید قالب‌بندی کنید، در انتخاب بوت گزینهٔ "غیر قابل بوت" را انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1467"/>
+        <source>Could not read device info.</source>
+        <translation>اطلاعات دستگاه خوانده نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1550"/>
+        <source>Bootloader is MS-DOS: forcing FAT16 file system</source>
+        <translation>بوت‌لودر MS-DOS است: اعمال سیستم فایل FAT16</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1585"/>
+        <source>DD Image Write</source>
+        <translation>نوشتن تصویر DD</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1586"/>
+        <source>Format Only</source>
+        <translation>فقط قالب‌بندی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1587"/>
+        <source>Create Bootable</source>
+        <translation>ایجاد قابل بوت</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1588"/>
+        <source>ISO Mode</source>
+        <translation>حالت ISO</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1592"/>
+        <source>This will DESTROY ALL DATA on:
+%1 (%2)
+
+Mode: %3
+File system: %4
+Proceed?</source>
+        <translation>این کار همهٔ داده‌های روی %1 (%2) را از بین می‌برد:
+
+حالت: %3
+سیستم فایل: %4
+ادامه می‌دهید؟</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1611"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2912"/>
+        <source>CANCELAR</source>
+        <translation>لغو</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1658"/>
+        <source>Select bootable image</source>
+        <translation>انتخاب تصویر قابل بوت</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1660"/>
+        <source>Disk Images (*.iso *.img *.vhd *.vhdx *.wim *.esd *.gz *.bz2 *.xz *.zst);;All Files (*)</source>
+        <translation>تصاویر دیسک (*.iso *.img *.vhd *.vhdx *.wim *.esd *.gz *.bz2 *.xz *.zst);;همهٔ فایل‌ها (*)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1668"/>
+        <source>Devices refreshed</source>
+        <translation>دستگاه‌ها تازه‌سازی شدند</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1710"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2868"/>
+        <source>Disk or ISO image (Please select a file)</source>
+        <translation>تصویر دیسک یا ISO (لطفاً یک فایل انتخاب کنید)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1729"/>
+        <source>Analyzing image...</source>
+        <translation>در حال تحلیل تصویر...</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1791"/>
+        <source>Invalid Image</source>
+        <translation>تصویر نامعتبر</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1792"/>
+        <source>This file is not a valid disk image and cannot be written or booted.
+Please check your file!</source>
+        <translation>این فایل تصویر دیسک معتبری نیست و نمی‌توان آن را نوشت یا بوت کرد.
+لطفاً فایل خود را بررسی کنید!</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1797"/>
+        <source>Image not bootable</source>
+        <translation>تصویر قابل بوت نیست</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1798"/>
+        <source>This image has a defined partition scheme, but no bootloader, so it can only be written as a disk clone.</source>
+        <translation>این تصویر طرح پارتیشن مشخصی دارد، اما بوت‌لودر ندارد، بنابراین فقط می‌توان آن را به‌صورت کلون دیسک نوشت.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1851"/>
+        <source>Image hashes computed</source>
+        <translation>هش‌های تصویر محاسبه شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1852"/>
+        <source>Image Hashes</source>
+        <translation>هش‌های تصویر</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1885"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2517"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2920"/>
+        <source>PREPARED</source>
+        <translation>آماده</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1908"/>
+        <source>Rufus: Completed</source>
+        <translation>Rufus: تکمیل شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1908"/>
+        <source>Rufus: Failed</source>
+        <translation>Rufus: ناموفق</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1918"/>
+        <source>This device appears to be a fake flash drive:
+it reports more storage capacity than it actually has.
+Data written beyond the real capacity will be lost.
+Use a genuine drive from a reputable brand.</source>
+        <translation>به نظر می‌رسد این دستگاه فلش جعلی است:
+ظرفیت ذخیره‌سازی بیشتری نسبت به ظرفیت واقعی خود گزارش می‌دهد.
+داده‌های نوشته‌شده فراتر از ظرفیت واقعی از بین می‌روند.
+از یک فلش اصلی از یک برند معتبر استفاده کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1924"/>
+        <source>Cancelled</source>
+        <translation>لغو شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1971"/>
+        <source>Disable the log window</source>
+        <translation>غیرفعال‌سازی پنجرهٔ گزارش</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="1972"/>
+        <source>Enable the log window</source>
+        <translation>فعال‌سازی پنجرهٔ گزارش</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2045"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2808"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2960"/>
+        <source>Hide advanced format options</source>
+        <translation>پنهان‌سازی گزینه‌های پیشرفتهٔ قالب‌بندی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2062"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2820"/>
+        <location filename="../../src/ui/MainWindow.cpp" line="2965"/>
+        <source>Hide advanced drive properties</source>
+        <translation>پنهان‌سازی ویژگی‌های پیشرفتهٔ درایو</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2271"/>
+        <source>MS-DOS boot mode only supports FAT16.</source>
+        <translation>حالت بوت MS-DOS فقط از FAT16 پشتیبانی می‌کند.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2515"/>
+        <source>SELECT IMAGE</source>
+        <translation>انتخاب تصویر</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2633"/>
+        <source>Not applicable</source>
+        <translation>قابل اعمال نیست</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2864"/>
+        <source>Non bootable</source>
+        <translation>غیر قابل بوت</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2995"/>
+        <source>Verify written data (read back and hash)</source>
+        <translation>تأیید داده‌های نوشته‌شده (بازخوانی و هش)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="2998"/>
+        <source>Bootloader</source>
+        <translation>بوت‌لودر</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="3016"/>
+        <source>EFI System Partition (ESP)</source>
+        <translation>پارتیشن سیستم EFI (ESP)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="3018"/>
+        <source>UEFI:NTFS</source>
+        <translation>UEFI:NTFS</translation>
+    </message>
+</context>
+<context>
+    <name>PreferencesDialog</name>
+    <message>
+        <location filename="../../src/ui/PreferencesDialog.cpp" line="16"/>
+        <location filename="../../src/ui/PreferencesDialog.cpp" line="21"/>
+        <source>Preferences</source>
+        <translation>ترجیحات</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/PreferencesDialog.cpp" line="24"/>
+        <source>Interface theme:</source>
+        <translation>پوستهٔ رابط:</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../src/backend/PartitionManager.cpp" line="166"/>
+        <source>Default</source>
+        <translation>پیش‌فرض</translation>
+    </message>
+    <message>
+        <location filename="../../src/backend/PartitionManager.cpp" line="173"/>
+        <source>%1 (Default)</source>
+        <translation>%1 (پیش‌فرض)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="56"/>
+        <source>ISO image mode detected</source>
+        <translation>حالت تصویر ISO شناسایی شد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="60"/>
+        <source>The image you have selected is an ISOHybrid, which means it can be written in either ISO image mode (recommended) or DD image mode.
+
+Rufus recommends using ISO image mode so that you have full access to the drive in Windows after formatting.
+
+If you experience problems with ISO mode, you can try rewriting the image in DD image mode.
+
+Please select the mode you would like to use to write this image:</source>
+        <translation>تصویری که انتخاب کرده‌اید یک ISOHybrid است، یعنی می‌توان آن را یا در حالت تصویر ISO (توصیه‌شده) یا در حالت تصویر DD نوشت.
+
+Rufus استفاده از حالت تصویر ISO را توصیه می‌کند تا پس از قالب‌بندی دسترسی کامل به درایو در ویندوز داشته باشید.
+
+اگر با حالت ISO مشکل داشتید، می‌توانید تصویر را در حالت تصویر DD دوباره بنویسید.
+
+لطفاً حالتی را که می‌خواهید برای نوشتن این تصویر استفاده کنید انتخاب کنید:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="72"/>
+        <source>Write in ISO image mode (recommended if using Windows)</source>
+        <translation>نوشتن در حالت تصویر ISO (در صورت استفاده از ویندوز توصیه می‌شود)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="73"/>
+        <source>Write in DD image mode</source>
+        <translation>نوشتن در حالت تصویر DD</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="111"/>
+        <source>Windows User Experience</source>
+        <translation>تجربهٔ کاربری ویندوز</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="115"/>
+        <source>Customize Windows installation options.
+Hover over each option for details.</source>
+        <translation>گزینه‌های نصب ویندوز را سفارشی کنید.
+برای جزئیات، روی هر گزینه نگه دارید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="130"/>
+        <source>Bypass Secure Boot / TPM / 4GB+ RAM check</source>
+        <translation>دور زدن بررسی Secure Boot / TPM / رم 4 گیگابایت+</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="131"/>
+        <source>Disables compatibility checks during Windows 11 installation</source>
+        <translation>بررسی‌های سازگاری را هنگام نصب ویندوز ۱۱ غیرفعال می‌کند</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="135"/>
+        <source>Disable BitLocker automatic encryption</source>
+        <translation>غیرفعال‌سازی رمزگذاری خودکار BitLocker</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="136"/>
+        <source>Prevents automatic device encryption</source>
+        <translation>از رمزگذاری خودکار دستگاه جلوگیری می‌کند</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="142"/>
+        <source>Disable online account requirement (BypassNRO)</source>
+        <translation>غیرفعال‌سازی الزام حساب آنلاین (BypassNRO)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="143"/>
+        <source>Allows local account creation instead of Microsoft account</source>
+        <translation>ایجاد حساب محلی را به‌جای حساب مایکروسافت مجاز می‌کند</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="148"/>
+        <source>Create local user account</source>
+        <translation>ایجاد حساب کاربری محلی</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="149"/>
+        <source>Creates a local user account during installation</source>
+        <translation>در حین نصب، حساب کاربری محلی ایجاد می‌کند</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="153"/>
+        <source>Disable data collection (privacy)</source>
+        <translation>غیرفعال‌سازی جمع‌آوری داده‌ها (حریم خصوصی)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="154"/>
+        <source>Sets privacy settings to minimum</source>
+        <translation>تنظیمات حریم خصوصی را روی حداقل قرار می‌دهد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="174"/>
+        <source>Username:</source>
+        <translation>نام کاربری:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="176"/>
+        <source>Username</source>
+        <translation>نام کاربری</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="196"/>
+        <source>Missing username</source>
+        <translation>نام کاربری وجود ندارد</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/MainWindow.cpp" line="197"/>
+        <source>Please enter a username for the local user account.</source>
+        <translation>لطفاً یک نام کاربری برای حساب محلی وارد کنید.</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../../src/main.cpp" line="61"/>
+        <source>List of removable devices:</source>
+        <translation>فهرست دستگاه‌های قابل‌حذف:</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="64"/>
+        <source>No removable devices found</source>
+        <translation>هیچ دستگاه قابل‌حذفی پیدا نشد</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="79"/>
+        <source> (read only)</source>
+        <translation> (فقط‌خواندنی)</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="197"/>
+        <source>Rufus - Missing optional dependencies</source>
+        <translation>Rufus - وابستگی‌های اختیاری موجود نیست</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="198"/>
+        <source>Some optional dependencies are missing from your system.
+
+Missing:
+%1
+
+Rufus can still run, but the following operations will not be available:
+- syslinux: BIOS bootloader installation
+- grub-install: GRUB bootloader installation
+- 7z: extraction of compressed (ZIP/7z) images
+- fuseiso: ISO extraction
+
+Install them using the package manager that comes by default with your distribution.</source>
+        <translation>برخی وابستگی‌های اختیاری در سیستم شما موجود نیست.
+
+موجود نیست:
+%1
+
+Rufus همچنان می‌تواند اجرا شود، اما عملیات زیر در دسترس نخواهند بود:
+- syslinux: نصب بوت‌لودر BIOS
+- grub-install: نصب بوت‌لودر GRUB
+- 7z: استخراج تصاویر فشرده (ZIP/7z)
+- fuseiso: استخراج ISO
+
+آن‌ها را با مدیر بسته‌ای که به‌طور پیش‌فرض با توزیع شما ارائه می‌شود نصب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="213"/>
+        <source>Welcome to Rufus</source>
+        <translation>به Rufus خوش آمدید</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="228"/>
+        <source>Welcome to Rufus! Thank you for using this tool. We are thrilled that you care about our work as much as we enjoy working on it.
+
+Rufus requires administrator privileges to access storage devices.
+
+To continue, please choose your language and press Accept.</source>
+        <translation>به Rufus خوش آمدید! از اینکه از این ابزار استفاده می‌کنید سپاسگزاریم. ما خوشحالیم که به کار ما اهمیت می‌دهید همان‌طور که ما از کار کردن روی آن لذت می‌بریم.
+
+Rufus برای دسترسی به دستگاه‌های ذخیره‌سازی به امتیازات مدیر نیاز دارد.
+
+برای ادامه، لطفاً زبان خود را انتخاب کنید و دکمهٔ پذیرش را بزنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="260"/>
+        <source>Accept</source>
+        <translation>پذیرش</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="284"/>
+        <source>Please specify a device with --device (e.g. --device=sdc).</source>
+        <translation>لطفاً دستگاهی را با --device مشخص کنید (مثلاً --device=sdc).</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="289"/>
+        <source>Please specify an image with --image.</source>
+        <translation>لطفاً تصویری را با --image مشخص کنید.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="294"/>
+        <source>Image not found: %1</source>
+        <translation>تصویر پیدا نشد: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="307"/>
+        <source>Device &apos;%1&apos; not found.</source>
+        <translation>دستگاه '%1' پیدا نشد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="312"/>
+        <source>Device &apos;%1&apos; is read only.</source>
+        <translation>دستگاه '%1' فقط‌خواندنی است.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="317"/>
+        <source>Device &apos;%1&apos; is the system disk and will not be overwritten.</source>
+        <translation>دستگاه '%1' دیسک سیستم است و بازنویسی نخواهد شد.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="326"/>
+        <source>Using image: %1...</source>
+        <translation>در حال استفاده از تصویر: %1...</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="340"/>
+        <source>The &apos;--filesystem=%1&apos; and &apos;--boot=%2&apos; instructions were ignored, as they do not work on disk image formats (IMG/VHD).</source>
+        <translation>دستورهای '--filesystem=%1' و '--boot=%2' نادیده گرفته شدند، زیرا روی قالب‌های تصویر دیسک (IMG/VHD) کار نمی‌کنند.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="362"/>
+        <source>Unknown file system &apos;%1&apos;.</source>
+        <translation>سیستم فایل ناشناختهٔ '%1'.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="557"/>
+        <source>The Rufus command line requires administrator privileges.
+Please run with sudo:
+  sudo %1</source>
+        <translation>خط فرمان Rufus به امتیازات مدیر نیاز دارد.
+لطفاً با sudo اجرا کنید:
+  sudo %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="596"/>
+        <location filename="../../src/main.cpp" line="606"/>
+        <location filename="../../src/main.cpp" line="616"/>
+        <source>Rufus - Administrator Required</source>
+        <translation>Rufus - مدیر لازم است</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="597"/>
+        <source>The administrator authentication was cancelled or failed.
+
+Please run with sudo:
+  sudo %1</source>
+        <translation>احراز هویت مدیر لغو شد یا ناموفق بود.
+
+لطفاً با sudo اجرا کنید:
+  sudo %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="607"/>
+        <source>Cannot run Rufus without administrator privileges, and pkexec is not installed to request them.
+
+Please run with sudo:
+  sudo %1</source>
+        <translation>بدون امتیازات مدیر نمی‌توان Rufus را اجرا کرد و pkexec برای درخواست آن‌ها نصب نیست.
+
+لطفاً با sudo اجرا کنید:
+  sudo %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="617"/>
+        <source>Rufus needs administrator privileges to write to USB drives.
+An authentication window will open.
+
+Continue?</source>
+        <translation>Rufus برای نوشتن روی درایوهای USB به امتیازات مدیر نیاز دارد.
+یک پنجرهٔ احراز هویت باز می‌شود.
+
+ادامه می‌دهید؟</translation>
+    </message>
+</context>
+</TS>
