@@ -858,10 +858,6 @@ void MainWindow::setupUi() {
     QString currentLang = Localization::currentLanguage();
     currentLang.replace(QChar('_'), QChar('-'));
 
-    // Only a few languages are shipped for now
-    const QStringList supportedLangs = {QStringLiteral("en"), QStringLiteral("es-ES"),
-                                        QStringLiteral("pt-BR"), QStringLiteral("ru-RU")};
-
     if (availableLocales.isEmpty()) {
         // Fallback: minimal set
         struct LangEntry { const char *label; const char *code; };
@@ -879,8 +875,6 @@ void MainWindow::setupUi() {
         }
     } else {
         for (const QString &code : availableLocales) {
-            if (!supportedLangs.contains(code))
-                continue;
             QLocale loc(code);
             QString label = QStringLiteral("%1 (%2)").arg(loc.nativeLanguageName()).arg(code);
             auto *action = m_langMenu->addAction(label);

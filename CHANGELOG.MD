@@ -36,6 +36,8 @@ o Version 1.0.2 (2026.08.15):
       * XDG_RUNTIME_DIR handled when started via sudo/pkexec
       * Theme diagnostic line in the log (style, palette, config dirs)
       * Translations updated (es-ES, pt-BR, ru-RU)
+      * Language menu lists every shipped language dynamically (no
+        hardcoded filter); all shipped translations are 100% complete
 
 o Version 1.0.1 (2026.08.11):
     Alpha release
