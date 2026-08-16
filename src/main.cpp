@@ -17,6 +17,7 @@
 #include <QDir>
 #include <QStyle>
 #include <QStyleFactory>
+#include <QStandardPaths>
 #include <unistd.h>
 #include <QDialog>
 #include <QVBoxLayout>
@@ -397,6 +398,50 @@ static int cliWrite(const QString &imagePath, const QString &bootOpt,
     return success ? 0 : 1;
 }
 
+// Re-runs the current process as root through pkexec, which pops the
+// polkit authentication window of the desktop session. The caller's
+// environment is passed explicitly because pkexec sanitizes it (DISPLAY
+// and XAUTHORITY are preserved by pkexec itself, but the others are not,
+// and being explicit keeps the elevated instance identical). Returns
+// false when pkexec is not available. The parent exits right after; the
+// pkexec child owns the elevated instance.
+static bool tryElevate(int argc, char *argv[]) {
+    const QString envBin = QStandardPaths::findExecutable(QStringLiteral("env"));
+    if (envBin.isEmpty())
+        return false;
+
+    QStringList args;
+    const char *vars[] = {"DISPLAY", "XAUTHORITY", "WAYLAND_DISPLAY",
+                          "LANG", "LC_ALL", "XDG_RUNTIME_DIR",
+                          "QT_QPA_PLATFORMTHEME", "XDG_CURRENT_DESKTOP",
+                          "KDE_FULL_SESSION", "KDE_SESSION_VERSION",
+                          "XDG_SESSION_DESKTOP", "XDG_SESSION_TYPE"};
+    for (const char *name : vars) {
+        const QByteArray value = qgetenv(name);
+        if (!value.isEmpty())
+            args << QStringLiteral("%1=%2").arg(QLatin1String(name),
+                                                 QString::fromLocal8Bit(value));
+    }
+    args << QCoreApplication::applicationFilePath();
+    for (int i = 1; i < argc; i++)
+        args << QString::fromLocal8Bit(argv[i]);
+    if (!args.contains(QStringLiteral("--elevated")))
+        args << QStringLiteral("--elevated");
+
+    return QProcess::startDetached(QStringLiteral("pkexec"),
+                                   QStringList{envBin} + args);
+}
+
+// True when the current invocation carries the internal --elevated flag,
+// i.e. it is (or claims to be) the re-exec launched by tryElevate().
+static bool hasElevatedFlag(int argc, char *argv[]) {
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "--elevated") == 0)
+            return true;
+    }
+    return false;
+}
+
 int main(int argc, char *argv[]) {
     bool welcomeDone = false;
     for (int i = 1; i < argc; i++) {
@@ -449,36 +494,11 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (geteuid() != 0) {
-        // Not running as root - show error and exit
-        userConfigDir = getOriginalUserHomeDir();
-        if (!userConfigDir.isEmpty()) {
-            userConfigDir += QStringLiteral("/.config");
-        }
-
-        QApplication app(argc, argv);
-        app.setApplicationName(QStringLiteral("Rufus"));
-        app.setApplicationVersion(QStringLiteral("1.0.2"));
-        app.setOrganizationName(QStringLiteral("Rufus"));
-        app.setOrganizationDomain(QStringLiteral("rufus.ie"));
-        app.setQuitOnLastWindowClosed(true);
-
-        // Initialize localization with system language for the error dialog
-        Localization::init(QApplication::applicationDirPath());
-
-        QString msg = QCoreApplication::translate("main",
-            "Cannot run Rufus without administrator privileges.\n\n"
-            "Please run with sudo:\n  sudo %1").arg(QApplication::applicationFilePath());
-
-        QMessageBox::critical(nullptr,
-            QCoreApplication::translate("main", "Rufus - Administrator Required"),
-            msg);
-        return 1;
-    }
-
     // Headless CLI mode: --image (write), --list-devices/--devices (list).
     // Detected before QApplication so no display is required; runs the
     // same write pipeline as the GUI and prints progress to stdout.
+    // Detected before the root check so --list-devices works without
+    // privileges, and a non-root --image gets a clear "use sudo" message.
     {
         bool cliMode = false;
         for (int i = 1; i < argc; i++) {
@@ -533,6 +553,13 @@ int main(int argc, char *argv[]) {
             if (parser.isSet(QStringLiteral("list-devices")) ||
                 parser.isSet(QStringLiteral("devices")))
                 return listDevices();
+            if (geteuid() != 0) {
+                fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+                    "The Rufus command line requires administrator privileges.\n"
+                    "Please run with sudo:\n  sudo %1")
+                    .arg(QCoreApplication::applicationFilePath())));
+                return 1;
+            }
             if (parser.isSet(QStringLiteral("image")))
                 return cliWrite(parser.value(QStringLiteral("image")),
                     parser.value(QStringLiteral("boot")),
@@ -541,6 +568,63 @@ int main(int argc, char *argv[]) {
             parser.showHelp(0);
             return 0;
         }
+    }
+
+    if (geteuid() != 0) {
+        // Not running as root. When the --elevated marker is present the
+        // pkexec re-exec failed or was cancelled, or the flag was passed
+        // manually: refuse without prompting again (no endless loop).
+        // Otherwise re-run through pkexec, which pops the polkit
+        // authentication window of the desktop session.
+        userConfigDir = getOriginalUserHomeDir();
+        if (!userConfigDir.isEmpty()) {
+            userConfigDir += QStringLiteral("/.config");
+        }
+
+        QApplication app(argc, argv);
+        app.setApplicationName(QStringLiteral("Rufus"));
+        app.setApplicationVersion(QStringLiteral("1.0.2"));
+        app.setOrganizationName(QStringLiteral("Rufus"));
+        app.setOrganizationDomain(QStringLiteral("rufus.ie"));
+        app.setQuitOnLastWindowClosed(true);
+
+        // Initialize localization with system language for the dialogs
+        Localization::init(QApplication::applicationDirPath());
+
+        if (hasElevatedFlag(argc, argv)) {
+            QMessageBox::critical(nullptr,
+                QCoreApplication::translate("main", "Rufus - Administrator Required"),
+                QCoreApplication::translate("main",
+                    "The administrator authentication was cancelled or failed.\n\n"
+                    "Please run with sudo:\n  sudo %1")
+                    .arg(QApplication::applicationFilePath()));
+            return 1;
+        }
+
+        if (QStandardPaths::findExecutable(QStringLiteral("pkexec")).isEmpty()) {
+            QMessageBox::critical(nullptr,
+                QCoreApplication::translate("main", "Rufus - Administrator Required"),
+                QCoreApplication::translate("main",
+                    "Cannot run Rufus without administrator privileges, and pkexec "
+                    "is not installed to request them.\n\n"
+                    "Please run with sudo:\n  sudo %1")
+                    .arg(QApplication::applicationFilePath()));
+            return 1;
+        }
+
+        QMessageBox::StandardButton ret = MsgBox::question(nullptr,
+            QCoreApplication::translate("main", "Rufus - Administrator Required"),
+            QCoreApplication::translate("main",
+                "Rufus needs administrator privileges to write to USB drives.\n"
+                "An authentication window will open.\n\n"
+                "Continue?"),
+            QMessageBox::Yes | QMessageBox::No);
+        if (ret != QMessageBox::Yes)
+            return 1;
+
+        if (!tryElevate(argc, argv))
+            return 1;
+        return 0;
     }
 
     // Running as root - use original user's config directory
@@ -637,6 +721,8 @@ int main(int argc, char *argv[]) {
     window.show();
 
     debugLog(QStringLiteral("Rufus started (uid=%1)").arg(geteuid()));
+    if (parser.isSet(QStringLiteral("elevated")))
+        debugLog(QStringLiteral("Rufus started through pkexec elevation (--elevated)"));
 
     int ret = app.exec();
 

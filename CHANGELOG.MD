@@ -26,9 +26,15 @@ o Version 1.0.2 (2026.08.15):
       * --list-devices / --devices: list removable drives
       * IMG/VHD disk images ignore --boot/--filesystem with a notice
       * Translated messages (es-ES) and log-style output to stdout
+    - Elevation:
+      * Running the GUI without root shows a confirmation and opens the
+        session's polkit password dialog (pkexec) instead of failing
+      * CLI mode still requires sudo; --list-devices works without root
+      * Internal --elevated flag prevents re-elevation loops
     - Diagnostics:
       * Logger filters debug messages to --debug mode
       * XDG_RUNTIME_DIR handled when started via sudo/pkexec
+      * Theme diagnostic line in the log (style, palette, config dirs)
       * Translations updated (es-ES, pt-BR, ru-RU)
 
 o Version 1.0.1 (2026.08.11):

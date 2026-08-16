@@ -258,6 +258,23 @@ MainWindow::MainWindow(QWidget *parent)
     // Follow live desktop theme changes (KDE / LXQt color scheme).
     m_themeWatcher = new ThemeWatcher(this);
     m_themeWatcher->applyNow();
+
+    // Theme diagnostics: helps comparing the sudo and pkexec-launched
+    // instances (palette + style + config dirs that drive the look).
+    {
+        const QPalette pal = QApplication::palette();
+        Logger::info(QStringLiteral("Theme: style=%1 window=%2 button=%3 view=%4 "
+                                    "highlight=%5 home=%6 XDG_CONFIG_HOME=%7 "
+                                    "XDG_CURRENT_DESKTOP=%8")
+            .arg(QApplication::style()->objectName(),
+                 pal.color(QPalette::Window).name(),
+                 pal.color(QPalette::Button).name(),
+                 pal.color(QPalette::Base).name(),
+                 pal.color(QPalette::Highlight).name(),
+                 QDir::homePath(),
+                 qEnvironmentVariable("XDG_CONFIG_HOME"),
+                 qEnvironmentVariable("XDG_CURRENT_DESKTOP")));
+    }
     m_autoRefreshTimer = new QTimer(this);
     m_autoRefreshTimer->setInterval(3000);
     connect(m_autoRefreshTimer, &QTimer::timeout, this, &MainWindow::onAutoRefresh);
